@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg25"
+   width="1231.6309"
+   height="240.67917"
+   viewBox="0 0 1231.6309 240.67918"
+   sodipodi:docname="Alphasoft.svg"
+   inkscape:export-filename="../3c497afd/Alphasoft2.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="1.2.1 (1:1.2.1+202210291243+9c6d41e410)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs29">
+    <linearGradient
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="0"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(41.449951,0,0,-41.449951,121.39003,407.60822)"
+       spreadMethod="pad"
+       id="linearGradient65">
+      <stop
+         style="stop-opacity:1;stop-color:#4a72d8"
+         offset="0"
+         id="stop61" />
+      <stop
+         style="stop-opacity:1;stop-color:#83e2d1"
+         offset="1"
+         id="stop63" />
+    </linearGradient>
+    <linearGradient
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="0"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(15.450012,0,0,-15.450012,164.03999,358.63501)"
+       spreadMethod="pad"
+       id="linearGradient85">
+      <stop
+         style="stop-opacity:1;stop-color:#4a72d8"
+         offset="0"
+         id="stop81" />
+      <stop
+         style="stop-opacity:1;stop-color:#83e2d1"
+         offset="1"
+         id="stop83" />
+    </linearGradient>
+    <linearGradient
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="0"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(99.545128,0,0,-99.545128,74.944878,393.01001)"
+       spreadMethod="pad"
+       id="linearGradient105">
+      <stop
+         style="stop-opacity:1;stop-color:#4a72d8"
+         offset="0"
+         id="stop101" />
+      <stop
+         style="stop-opacity:1;stop-color:#83e2d1"
+         offset="1"
+         id="stop103" />
+    </linearGradient>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Color Shift"
+       id="filter1709"
+       x="0"
+       y="0"
+       width="1"
+       height="1">
+      <feColorMatrix
+         type="hueRotate"
+         values="292"
+         result="color1"
+         id="feColorMatrix1705" />
+      <feColorMatrix
+         type="saturate"
+         values="1"
+         result="color2"
+         id="feColorMatrix1707" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Color Shift"
+       id="filter1715"
+       x="0"
+       y="0"
+       width="1"
+       height="1">
+      <feColorMatrix
+         type="hueRotate"
+         values="292"
+         result="color1"
+         id="feColorMatrix1711" />
+      <feColorMatrix
+         type="saturate"
+         values="1"
+         result="color2"
+         id="feColorMatrix1713" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Color Shift"
+       id="filter1721"
+       x="0"
+       y="0"
+       width="1"
+       height="1">
+      <feColorMatrix
+         type="hueRotate"
+         values="292"
+         result="color1"
+         id="feColorMatrix1717" />
+      <feColorMatrix
+         type="saturate"
+         values="1"
+         result="color2"
+         id="feColorMatrix1719" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Tritone"
+       id="filter3362"
+       x="-0.0001703012"
+       y="-0.00020418236"
+       width="1.0003406"
+       height="1.0004084">
+      <feColorMatrix
+         type="hueRotate"
+         values="0"
+         result="colormatrix1"
+         id="feColorMatrix3326" />
+      <feColorMatrix
+         in="colormatrix1"
+         type="matrix"
+         values="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1 "
+         result="colormatrix2"
+         id="feColorMatrix3328" />
+      <feColorMatrix
+         in="colormatrix1"
+         type="matrix"
+         values="0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 "
+         result="colormatrix3"
+         id="feColorMatrix3330" />
+      <feColorMatrix
+         in="colormatrix1"
+         type="matrix"
+         values="0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 1 "
+         result="colormatrix4"
+         id="feColorMatrix3332" />
+      <feBlend
+         in="colormatrix2"
+         in2="colormatrix3"
+         mode="darken"
+         result="blend1"
+         id="feBlend3334" />
+      <feBlend
+         in="blend1"
+         in2="colormatrix4"
+         mode="darken"
+         result="blend2"
+         id="feBlend3336" />
+      <feBlend
+         in="colormatrix2"
+         in2="colormatrix3"
+         mode="lighten"
+         result="blend3"
+         id="feBlend3338" />
+      <feBlend
+         in="blend3"
+         in2="colormatrix4"
+         mode="lighten"
+         result="blend4"
+         id="feBlend3340" />
+      <feComponentTransfer
+         in="blend4"
+         result="componentTransfer"
+         id="feComponentTransfer3344">
+        <feFuncR
+           type="linear"
+           slope="0"
+           id="feFuncR3342" />
+      </feComponentTransfer>
+      <feBlend
+         in="blend2"
+         in2="componentTransfer"
+         mode="lighten"
+         result="blend5"
+         id="feBlend3346" />
+      <feColorMatrix
+         in="blend5"
+         type="matrix"
+         values="-1 1 0 0 0 -1 1 0 0 0 -1 1 0 0 0 0 0 0 0 1 "
+         result="colormatrix5"
+         id="feColorMatrix3348" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(255,0,0)"
+         result="flood"
+         id="feFlood3350" />
+      <feComposite
+         in="colormatrix5"
+         in2="flood"
+         operator="arithmetic"
+         k1="1"
+         result="composite1"
+         id="feComposite3352"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feGaussianBlur
+         stdDeviation="0.01"
+         result="blur"
+         id="feGaussianBlur3354" />
+      <feBlend
+         in2="blur"
+         mode="normal"
+         result="blend6"
+         id="feBlend3356" />
+      <feComposite
+         in="blend2"
+         in2="blend6"
+         operator="arithmetic"
+         k1="0"
+         k2="1"
+         k3="1.57008"
+         k4="0"
+         result="composite2"
+         id="feComposite3358" />
+      <feComposite
+         in2="SourceGraphic"
+         operator="in"
+         result="composite3"
+         id="feComposite3360" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="namedview27"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="0.56533186"
+     inkscape:cx="596.99448"
+     inkscape:cy="200.76703"
+     inkscape:window-width="1366"
+     inkscape:window-height="738"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g33"
+     showguides="false" />
+  <g
+     id="g33"
+     inkscape:groupmode="layer"
+     inkscape:label="Page 1"
+     transform="matrix(1.7377426,0,0,-1.7377426,68.571154,821.90876)">
+    <text
+       xml:space="preserve"
+       transform="scale(1,-1)"
+       style="font-variant:normal;font-weight:600;font-stretch:normal;font-size:50px;font-family:'Poppins SemiBold';-inkscape-font-specification:Poppins-SemiBold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="text43"
+       x="122.22309"
+       y="-365.47711"><tspan
+         sodipodi:role="line"
+         id="tspan41"
+         x="122.22309"
+         y="-365.47711"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:50px;font-family:Aclonica;-inkscape-font-specification:'Aclonica Bold';fill:#000000"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:130px;font-family:Aclonica;-inkscape-font-specification:Aclonica;fill:#000000"
+           id="tspan1749">⍺</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:100px;font-family:Aclonica;-inkscape-font-specification:Aclonica;fill:#000000"
+           id="tspan1763">lphasoft</tspan></tspan></text>
+    <g
+       id="g1501"
+       transform="matrix(1.1783113,0,0,1.1783113,-14.382739,-84.33676)"
+       style="filter:url(#filter3362)">
+      <g
+         id="g49"
+         style="filter:url(#filter1709)"
+         transform="matrix(1.3480049,0,0,1.3480049,-122.30891,-115.80932)">
+        <g
+           id="g51">
+          <g
+             id="g57">
+            <g
+               id="g59">
+              <path
+                 d="m 121.39,436.435 c 2.16,-0.6 4.12,-2 5.39,-4.21 v 0 l 19.91,-34.48 11.15,-19.309 h 5 l -11.15,19.309 -19.91,34.48 c -1.756,3.035 -4.822,4.557 -7.886,4.557 v 0 c -0.844,0 -1.688,-0.116 -2.504,-0.347"
+                 style="fill:url(#linearGradient65);stroke:none"
+                 id="path67" />
+            </g>
+          </g>
+        </g>
+      </g>
+      <g
+         id="g69"
+         style="filter:url(#filter1715)"
+         transform="matrix(1.3480049,0,0,1.3480049,-122.30891,-115.80932)">
+        <g
+           id="g71">
+          <g
+             id="g77">
+            <g
+               id="g79">
+              <path
+                 d="m 164.04,367.685 10.45,-18.1 h 5 l -10.45,18.1 z"
+                 style="fill:url(#linearGradient85);stroke:none"
+                 id="path87" />
+            </g>
+          </g>
+        </g>
+      </g>
+      <g
+         id="g89"
+         style="filter:url(#filter1721)"
+         transform="matrix(1.3480049,0,0,1.3480049,-122.30891,-115.80932)">
+        <g
+           id="g91">
+          <g
+             id="g97">
+            <g
+               id="g99">
+              <path
+                 d="m 116,432.225 -19.91,-34.48 -19.91,-34.49 c -3.509,-6.08 0.88,-13.67 7.89,-13.67 v 0 h 90.42 l -10.45,18.1 H 99.32 l 12.28,21.28 9.79,16.94 2.5,4.33 12.28,-21.27 6.08,-10.529 h 15.59 l -11.15,19.309 -19.91,34.48 c -1.27,2.21 -3.23,3.61 -5.39,4.21 v 0 c -2.15,-0.6 -4.11,-2 -5.39,-4.21"
+                 style="fill:url(#linearGradient105);stroke:none"
+                 id="path107" />
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
