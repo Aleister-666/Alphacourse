@@ -1,24 +1,24 @@
-# README
+# Alphacourse
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Sistema tutorial para el aprendizaje del uso educactivo de la plataforma moodle para profesores. Creado con Ruby on Rails + Turbo + Stimulus
 
-Things you may want to cover:
+### Caracteristicas
+* Administrador:
+	- Crear Secciones
+	- Crear Cursos
+	- Crear Pruebas
+	- Crear y Eliminar Usuarios(Admin y estudiante)
+	- Control Total
+* Usuario Normal:
+	- Crear cuenta de Estudiante
+	- Incribirse a los cursos
+	- Presentar Pruebas
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Requisitos
+* Ruby version: 3.1+
+* Postgresql: 15+
+* vips
+* Gemas:
+	- haml
+	- annotate
+	- devise

@@ -14,4 +14,4 @@
 
 .turbo-progress-bar {
   @apply bg-purple-500;
-}
+}@import 'actiontext.css';
