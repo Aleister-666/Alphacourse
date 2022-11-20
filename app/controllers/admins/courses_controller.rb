@@ -4,35 +4,34 @@ class Admins::CoursesController < ApplicationController
   
   before_action :set_course, only: %i[ show edit update destroy ]
 
-  # GET /courses or /courses.json
+  # GET admins/courses
   def index
     @courses = Course.all
   end
 
-  # GET /courses/1 or /courses/1.json
+  # GET admins/courses/1
   def show
   end
 
-  # GET /courses/new
+  # GET admins/courses/new
   def new
     @course = Course.new
   end
 
-  # GET /courses/1/edit
+  # GET admins/courses/1/edit
   def edit
   end
 
-  # POST /courses or /courses.json
+  # POST admins/courses
   def create
     @course = Course.new(course_params)
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to admins_courses_path, notice: "Course was successfully created." }
-        format.json { render :show, status: :created, location: @course }
+        format.html { redirect_to admins_courses_path, notice: t('actions.create.notice') }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,11 +40,9 @@ class Admins::CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to admins_course_url(@course), notice: "Course was successfully updated." }
-        format.json { render :show, status: :ok, location: @course }
+        format.html { redirect_to admins_course_url(@course), notice: t('actions.update.notice') }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,8 +52,7 @@ class Admins::CoursesController < ApplicationController
     @course.destroy
 
     respond_to do |format|
-      format.html { redirect_to admins_course_path, notice: "Course was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to admins_course_path, notice: t('actions.destroy.notice') }
     end
   end
 

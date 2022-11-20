@@ -1,0 +1,8 @@
+es:
+  actions:
+    create:
+      notice: Curso creado correctamente
+    update:
+      notice: Curso Actualizado correctamente
+    destroy:
+      notice: Curso Borrado

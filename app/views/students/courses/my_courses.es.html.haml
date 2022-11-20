@@ -1,0 +1,8 @@
+.w-full
+	%section.my-5
+		%h1.text-2xl Mis Cursos
+
+	%section.grid.grid-cols-2.md:grid-cols-3.lg:grid-cols-4.gap-5
+		= @courses.each do |course|
+			.flex.flex-col.space-between.items-center.p-12.bg-gray-200.rounded
+				= link_to course.name, students_course_path(course)

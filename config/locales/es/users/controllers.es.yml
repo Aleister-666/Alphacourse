@@ -1,9 +1,0 @@
-es:
-  sessions:
-    welcome: Bienvenido a Alphacourse
-    msg: Accede con tu cuenta
-    dont_account: No tienes una cuenta?
-  registrations:
-    welcome: Bienvenido registrate para ingresar
-    msg: Crea una nueva cuenta de Estudiante
-    do_account: Ya tienes una cuenta?

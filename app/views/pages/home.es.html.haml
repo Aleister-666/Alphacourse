@@ -1,5 +1,5 @@
 !!!
-%html{:lang => "en"}
+%html{:lang => "es"}
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title Alphacourse
@@ -36,26 +36,26 @@
               %li.mr-3
                 %h2.text-purple= "Bienvenido #{current_user.username}"
               %li.mr-3
-                = link_to t('activerecord.models.courses.other'), determine_courses_from_role, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-gray-100 hover:text-purple-600'
+                = link_to 'Cursos', determine_courses_from_role, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-gray-300 hover:text-purple-600'
             - else
               %li.mr-3
-                = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-gray-100 hover:text-purple-600'
+                = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-gray-300 hover:text-purple-600'
 
               %li.mr-3
-                = link_to t('devise.registrations.new.sign_up'), new_user_registration_path, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-gray-100 hover:text-rose-600'
+                = link_to t('devise.registrations.new.sign_up'), new_user_registration_path, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-gray-300 hover:text-rose-600'
       %hr.border-b.border-gray-100.opacity-25.my-0.py-0/
     / Hero
     .pt-24
       .container.px-3.mx-auto.flex.flex-wrap.flex-col.md:flex-row.items-center
         / Left Col
         .flex.flex-col.w-full.justify-center.items-start.text-center.md:text-left{:class => "md:w-2/5"}
-          %p.uppercase.tracking-loose.w-full= t('home.text')
+          %p.uppercase.tracking-loose.w-full Que quieres aprender hoy?
           %h1.my-4.text-5xl.font-bold.leading-tight
-            = t('home.text2')
+            El Aprendizaje espera por ti
           %p.leading-normal.text-2xl.mb-8
-            = t('home.text3')
+            Aprende lo que quieras y cuando quieras
           %button.mx-auto.lg:mx-0.hover:underline.bg-white.text-gray-800.font-bold.rounded-full.my-6.py-4.px-8.shadow-lg.focus:outline-none.focus:shadow-outline.transform.transition.hover:scale-105.duration-300.ease-in-out
-            = t('home.text4')
+            Comenzar
         / Right Col
         .w-full.py-6.text-center{:class => "md:w-3/5"}
           = image_tag 'home/image1.png', class: 'w-full md:w-4/5 z-50', alt: 'image 1 lading page'
@@ -71,18 +71,18 @@
     %section.bg-white.border-b.py-8
       .container.max-w-5xl.mx-auto.m-8
         %h2.w-full.my-2.text-5xl.font-bold.leading-tight.text-center.text-gray-800
-          = t('home.text5')
+          Cursos
         .w-full.mb-4
           .h-1.mx-auto.gradient.w-64.opacity-25.my-0.py-0.rounded-t
         .flex.flex-wrap
           .p-6{:class => "w-5/6 sm:w-1/2"}
             %h3.text-3xl.text-gray-800.font-bold.leading-none.mb-3
-              = t('home.text6')
+              En cualquier lugar
             %p.text-gray-600.mb-8
-              = t('home.text7')
+              Desde tu casa, mientras viajas o desde las montañas. Aprende sin obstaculos
               %br/
               %br/
-              Images from:
+              Imagenes desde:
               %a.text-pink-500.underline{:href => "https://undraw.co/"} undraw.co
           .w-full.p-6{:class => "sm:w-1/2"}
             %svg.w-full.sm:h-64.mx-auto{:viewbox => "0 0 1177 598.5", :xmlns => "http://www.w3.org/2000/svg"}
@@ -174,9 +174,9 @@
           .w-full.p-6.mt-6{:class => "sm:w-1/2"}
             .align-middle
               %h3.text-3xl.text-gray-800.font-bold.leading-none.mb-3
-                = t('home.text8')
+                El internet te conecta
               %p.text-gray-600.mb-8
-                = t('home.text9')
+                Investiga, aprende en la web y utiliza lo aprendido
                 %br/
                 %br/
                 Images from:
