@@ -8,4 +8,10 @@ class ApplicationController < ActionController::Base
 			user_params.permit(:username, :email, :password, :password_confirmation)
 		end
 	end
+
+	def authenticate_admin!
+		unless current_user.admin?
+			redirect_to root_path, alert: 'Acceso Denegado'
+		end
+	end
 end

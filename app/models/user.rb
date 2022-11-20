@@ -19,6 +19,9 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
+  has_many :courses_users, dependent: :destroy
+  has_many :courses, through: :courses_users
+  
   enum :role, { admin: 0, student: 1 }, default: :student
   
   # Include default devise modules. Others available are:
@@ -28,4 +31,8 @@ class User < ApplicationRecord
 
 
   validates :username, presence: true
+
+  def course_inscript?(course)
+    return self.courses.exists?(course.id)
+  end
 end

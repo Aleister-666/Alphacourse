@@ -1,0 +1,18 @@
+es:
+  activerecord:
+    attributes:
+      course:
+        name: Nombre
+        visible: Visible
+        description: Descripcion
+    errors:
+      models:
+        course:
+          attributes:
+            name:
+              blank: no puede estar en blanco
+              taken: debe ser unico
+    models:
+      course:
+        one: Curso
+        other: Cursos

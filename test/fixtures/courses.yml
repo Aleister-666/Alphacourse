@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: courses
+#
+#  id         :bigint           not null, primary key
+#  name       :string           not null
+#  visible    :boolean          default(TRUE), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_courses_on_name  (name) UNIQUE
+#
+
+one:
+  name: MyString
+  visible: false
+
+two:
+  name: MyString
+  visible: false

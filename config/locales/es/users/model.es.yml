@@ -35,6 +35,7 @@ es:
               blank: no puede estar en blanco
             email:
               blank: no puede estar en blanco
+              invalid: invalido
             password:
               blank: no puede estar en blanco
               too_short: muy corta

@@ -1,0 +1,14 @@
+.w-full
+  .flex.flex-col
+    %h1.font-bold.text-4xl Courses
+    .my-4
+      
+      = render 'components/modal',
+       title: 'Crear Curso',
+       button_handler: { text: 'Nuevo Curso' , klass: 'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm' } do
+        = render "form", course: Course.new
+
+  .min-w-full.grid.grid-col-2.md:grid-col-3.lg:grid-col-4
+    - @courses.each do |course|
+      .p-12.bg-purple-200.rounded.flex.flex-col.hover:bg-purple-400
+        = link_to course.name, admins_course_path(course), class: 'text-purple-600 hover:underline hover:text-purple-800'
