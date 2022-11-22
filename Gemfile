@@ -82,3 +82,6 @@ gem "haml", "~> 6.0"
 
 # Models documentation estructure
 gem "annotate", "~> 3.2"
+
+# Rails Internacionalitation
+gem 'rails-i18n', '~> 7.0', '>= 7.0.6'

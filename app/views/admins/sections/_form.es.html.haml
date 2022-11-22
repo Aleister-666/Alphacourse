@@ -1,0 +1,15 @@
+= form_with(model: [:admins, course, section]) do |f|
+  - if section.errors.any?
+    #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
+      %h2
+        = pluralize(section.errors.count, "error")
+        prohibited this section from being saved:
+      %ul
+        - section.errors.each do |error|
+          %li= error.full_message
+
+  .my-4
+    = f.label :title
+    = f.text_field :title
+
+  = f.submit

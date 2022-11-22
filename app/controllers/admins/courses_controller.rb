@@ -28,8 +28,8 @@ class Admins::CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to admins_courses_path, notice: t('actions.create.notice') }
-        format.turbo_stream
+        format.html { redirect_to admins_courses_path }
+        format.turbo_stream { flash.now[:notice] = t('courses.actions.create.notice') }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -40,7 +40,7 @@ class Admins::CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to admins_course_url(@course), notice: t('actions.update.notice') }
+        format.html { redirect_to admins_course_path(@course) }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -52,7 +52,8 @@ class Admins::CoursesController < ApplicationController
     @course.destroy
 
     respond_to do |format|
-      format.html { redirect_to admins_course_path, notice: t('actions.destroy.notice') }
+      format.html { redirect_to admins_courses_path, alert: t('courses.actions.destroy.alert') }
+
     end
   end
 

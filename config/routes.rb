@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'pages#home'
   namespace :admins do
-    resources :courses
+    resources :courses do
+      resources :sections, except: [ :show ]
+    end
   end
 
   namespace :students do

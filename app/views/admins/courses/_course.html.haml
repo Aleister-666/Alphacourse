@@ -1,14 +1,2 @@
-%div{:id => "#{dom_id course}"}
-  %p.my-5
-    %strong.block.font-medium.mb-1 Name:
-    = course.name
-  %p.my-5
-    %strong.block.font-medium.mb-1 Description:
-    = course.description
-  %p.my-5
-    %strong.block.font-medium.mb-1 Visible:
-    = course.visible
-  - if action_name != "show"
-    = link_to "Show this course", course, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
-    = link_to 'Edit this course', edit_course_path(course), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
-    %hr.mt-6/
+.p-12.bg-purple-200.rounded.flex.flex-col.hover:bg-purple-400{ id: dom_id(course) }
+  = link_to course.name, admins_course_path(course), class: 'text-purple-600 hover:underline hover:text-purple-800'

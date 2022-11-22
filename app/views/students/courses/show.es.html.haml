@@ -4,5 +4,7 @@
     - if current_user.course_inscript?(@course)
       .inline-block.ml-2
         = button_to 'Retirar Inscripcion', students_course_inscriptions_path(@course, current_user), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-red-200 font-medium"
+      .my-4
+        = render @course.sections
 
     = link_to 'Regresar', students_courses_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

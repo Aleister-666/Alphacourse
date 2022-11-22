@@ -1,0 +1,3 @@
+= turbo_stream.update dom_id(Section.new), ''
+= turbo_stream.append 'sections', partial: 'admins/sections/section', locals: { section: @section }
+= render_flash_messages

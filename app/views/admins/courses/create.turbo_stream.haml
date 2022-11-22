@@ -1,1 +1,3 @@
-= turbo_stream.replace dom_id(Course.new), ''
+= turbo_stream.update dom_id(Course.new), ''
+= turbo_stream.prepend 'courses', partial: 'admins/courses/course', locals: { course: @course }
+= render_flash_messages

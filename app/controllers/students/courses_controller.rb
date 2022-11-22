@@ -1,5 +1,6 @@
 class Students::CoursesController < ApplicationController
   before_action :authenticate_user!
+  layout 'workstation'
 
   # GET students/courses
   def index

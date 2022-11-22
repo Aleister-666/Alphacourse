@@ -7,7 +7,7 @@
   .my-4
     = turbo_frame_tag dom_id(Course.new)
     
-  .min-w-full.grid.grid-cols-2.md:grid-cols-3.lg:grid-cols-4.gap-4
+  #courses.min-w-full.grid.grid-cols-1.md:grid-cols-3.lg:grid-cols-4.gap-4
     - @courses.each do |course|
       .p-12.bg-purple-200.rounded.flex.flex-col.hover:bg-purple-400
-        = link_to course.name, admins_course_path(course), class: 'text-purple-600 hover:underline hover:text-purple-800'
+        = link_to course.name, admins_course_path(course), class: 'text-purple-600 hover:underline hover:text-purple-800 text-center'

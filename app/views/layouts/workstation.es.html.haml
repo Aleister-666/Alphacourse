@@ -1,0 +1,105 @@
+!!!
+%html{:lang => "es"}
+  %head
+  %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %title Alphacourse
+  %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+  = csrf_meta_tags
+  = csp_meta_tag
+  = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+  = stylesheet_link_tag "application", "data-turbo-track": "reload"
+  = javascript_importmap_tags
+  %body
+    :css
+      ul.breadcrumb li+li::before {
+        content: "\276F";
+        padding-left: 8px;
+        padding-right: 4px;
+        color: inherit;
+      }
+
+      ul.breadcrumb li span {
+        opacity: 60%;
+      }
+
+      #sidebar {
+        -webkit-transition: all 300ms cubic-bezier(0, 0.77, 0.58, 1);
+        transition: all 300ms cubic-bezier(0, 0.77, 0.58, 1);
+      }
+
+      #sidebar.show {
+        transform: translateX(0);
+      }
+
+      #sidebar ul li a.active {
+        background: #1f2937;
+        background-color: #1f2937;
+      }
+
+
+
+    #flash
+      = render 'shared/flash'
+
+
+    %section{ data: { controller: 'simple-navbar' } }
+      / Navbar start
+      %nav.fixed.top-0.z-40.flex.w-full.flex-row.justify-end.bg-gray-700.px-4.sm:justify-between{ data: { 'simple-navbar-target': 'navbar' } }
+        %ul.breadcrumb.hidden.flex-row.items-center.py-4.text-lg.text-white.sm:flex
+          %li.inline
+            %a{:href => "#"} ALPHACOURSE
+          %li.inline
+            %span Area de Trabajo
+        %button.py-4.text-2xl.text-white.hover:text-gray-200{ type: "button", data: { 'simple-navbar-target': 'button', action: 'click->simple-navbar#handler' } }
+          %svg#navClosed.h-8.w-8{fill: "none", stroke: "currentColor", "stroke-width": "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", data: { 'simple-navbar-target': 'closed' }}
+            %path{:d => "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+          %svg#navOpen.hidden.h-8.w-8{fill: "none", stroke: "currentColor", "stroke-width": "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", data: { 'simple-navbar-target': 'open' }}
+            %path{:d => "M6 18L18 6M6 6l12 12", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+
+      / Navbar end
+      / Sidebar start
+      #containerSidebar.z-40
+        .navbar-menu.relative.z-40
+          %nav#sidebar.fixed.left-0.bottom-0.flex.-translate-x-full.flex-col.overflow-y-auto.bg-gray-700.pt-6.pb-8.sm:max-w-xs.lg:w-80{ class: "w-3/4", data: { 'simple-navbar-target': 'sidebar' } }
+            / one category / navigation group
+            .px-4.pb-6
+              %h3.mb-2.text-xs.font-medium.uppercase.text-gray-500
+                Principales
+              %ul.mb-8.text-sm.font-medium
+                %li
+                  = link_to students_my_courses_path, class: 'active flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                    %span.select-none Mis Cursos
+                %li
+                  = link_to students_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                    %span.select-none Cursos
+            / navigation group end
+
+            / example copies start
+            .px-4.pb-6
+              %h3.mb-2.text-xs.font-medium.uppercase.text-gray-500
+                Legal
+              %ul.mb-8.text-sm.font-medium
+                %li
+                  %a.flex.items-center.rounded.py-3.pl-3.pr-4.text-gray-50.hover:bg-gray-600{:href => "#tc"}
+                    %span.select-none Terms and Condition
+                %li
+                  %a.flex.items-center.rounded.py-3.pl-3.pr-4.text-gray-50.hover:bg-gray-600{:href => "#privacy"}
+                    %span.select-none Privacy policy
+                %li
+                  %a.flex.items-center.rounded.py-3.pl-3.pr-4.text-gray-50.hover:bg-gray-600{:href => "#imprint"}
+                    %span.select-none Imprint
+            
+            .px-4.pb-6
+              %h3.mb-2.text-xs.font-medium.uppercase.text-gray-500
+                Otros
+              %ul.mb-8.text-sm.font-medium
+                %li
+                  = link_to root_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                    %span.select-none Inicio
+                %li
+                  = link_to destroy_user_session_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                    %span.select-none Cerrar Session
+            / example copies end
+        .mx-auto.lg:ml-80
+      / Sidebar end
+    %main.container.mx-auto.mt-28.px-5.flex.flex-col= yield

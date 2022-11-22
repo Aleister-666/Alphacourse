@@ -10,8 +10,9 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body
-    = render 'shared/flash'
+    #flash
+      = render 'shared/flash'
     - if user_signed_in?
       = button_to 'Cerrar Session', destroy_user_session_path, { class: 'rounded-lg py-3 px-5 bg-red-600 text-white block font-medium cursor-pointer', method: :delete }
-    %main.container.mx-auto.mt-28.px-5.flex
+    %main.container.mx-auto.mt-28.px-5.flex.flex-col
       = yield

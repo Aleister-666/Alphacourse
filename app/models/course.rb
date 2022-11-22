@@ -13,11 +13,18 @@
 #  index_courses_on_name  (name) UNIQUE
 #
 class Course < ApplicationRecord
+  ################ USERS RELATIONS#################
   has_many :courses_users, dependent: :destroy
   has_many :users, through: :courses_users
   
+  ############### SECTIONS RELATIONS###############
+  has_many :sections, dependent: :destroy
+
+  ############### ACTION TEXT#####################
   has_rich_text :description
 
+  ############### VALIDATIONS #############################
   validates :name, presence: true, uniqueness: true
   validates :visible, presence: true, inclusion: { in: [true, false] }
+  
 end

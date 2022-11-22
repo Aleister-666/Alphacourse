@@ -7,4 +7,9 @@ module ApplicationHelper
 			students_courses_path
 		end
 	end
+
+
+	def render_flash_messages
+		turbo_stream.update 'flash', partial: 'shared/flash'
+	end
 end

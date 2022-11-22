@@ -5,4 +5,10 @@ module ComponentsHelper
 			content.call if content
 		end
 	end
+
+	def build_accordion(title:, h_classes: '', &content)
+		render 'components/accordion', title: title, classes: h_classes  do
+			content.call if content
+		end
+	end
 end

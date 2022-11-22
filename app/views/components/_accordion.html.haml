@@ -1,0 +1,7 @@
+%div{ data: { controller: 'simple-accordion' } }
+  .transition.flex.space-x-5.px-5.items-center.h-16.rounded{ class: classes, data: { 'simple-accordion-target': 'header', action: 'click->simple-accordion#handler' } }
+    %i.fas.fa-plus
+    %h5= title
+
+  .px-5.pt-0.overflow-hidden.max-h-0.rounded{ class: '[transition:max-height_.3s_ease-out,padding_.3s_ease]', data: { 'simple-accordion-target': 'content' } }
+    = yield
