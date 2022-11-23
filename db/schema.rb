@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_20_220859) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_23_181827) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_220859) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "course_modules", force: :cascade do |t|
+    t.integer "position"
+    t.string "instanceable_type", null: false
+    t.bigint "instanceable_id", null: false
+    t.bigint "course_id", null: false
+    t.bigint "section_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_modules_on_course_id"
+    t.index ["instanceable_type", "instanceable_id"], name: "index_course_modules_on_instanceable"
+    t.index ["section_id"], name: "index_course_modules_on_section_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "visible", default: true, null: false
@@ -67,6 +80,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_220859) do
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_courses_users_on_course_id"
     t.index ["user_id"], name: "index_courses_users_on_user_id"
+  end
+
+  create_table "module_pages", force: :cascade do |t|
+    t.string "title", null: false
+    t.bigint "section_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["section_id"], name: "index_module_pages_on_section_id"
   end
 
   create_table "sections", force: :cascade do |t|
@@ -93,7 +114,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_220859) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "course_modules", "courses", on_delete: :cascade
+  add_foreign_key "course_modules", "sections", on_delete: :cascade
   add_foreign_key "courses_users", "courses", on_delete: :cascade
   add_foreign_key "courses_users", "users", on_delete: :cascade
+  add_foreign_key "module_pages", "sections", on_delete: :cascade
   add_foreign_key "sections", "courses", on_delete: :cascade
 end

@@ -4,6 +4,8 @@ class Admins::CoursesController < ApplicationController
   
   before_action :set_course, only: %i[ show edit update destroy ]
 
+  layout 'workstation'
+
   # GET admins/courses
   def index
     @courses = Course.all

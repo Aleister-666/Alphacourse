@@ -1,7 +1,7 @@
 class Admins::SectionsController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_admin!
-  before_action :set_course
+  before_action :set_course, only: %i[ new create ]
   before_action :set_section, only: %i[ edit update destroy ]
 
 
@@ -28,7 +28,7 @@ class Admins::SectionsController < ApplicationController
   def update
     respond_to do |format|
       if @section.update(sections_params)
-        format.html { redirect_to admins_course_path(@course) }
+        format.html { redirect_to admins_course_path(@section.course_id) }
         format.turbo_stream { flash.now[:notice] = t('sections.actions.create.notice') }
       else
         format.html { render :edit, status: :unprocessable_entity }

@@ -20,6 +20,9 @@ class Course < ApplicationRecord
   ############### SECTIONS RELATIONS###############
   has_many :sections, dependent: :destroy
 
+  ############## MODULES RELATIONS ################
+  has_many :courses_modules, dependent: :destroy
+
   ############### ACTION TEXT#####################
   has_rich_text :description
 

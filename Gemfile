@@ -85,3 +85,6 @@ gem "annotate", "~> 3.2"
 
 # Rails Internacionalitation
 gem 'rails-i18n', '~> 7.0', '>= 7.0.6'
+
+# Extension provides the capabilities for sorting and reordering a number of objects in a list
+gem "acts_as_list", "~> 1.0", ">= 1.0"

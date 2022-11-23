@@ -17,7 +17,14 @@
 #  fk_rails_...  (course_id => courses.id) ON DELETE => cascade
 #
 class Section < ApplicationRecord
+  ############### COURSES RELATION #####################
   belongs_to :course
+
+  ################ COURSES MODULES RELATION #################
+  has_many :course_modules, dependent: :destroy
+
+  ################ ACTIVITIES PAGES RELATION ###################
+  has_many :module_pages, dependent: :destroy
 
   validates :title, presence: true
 end
