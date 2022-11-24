@@ -17,7 +17,7 @@
 #  fk_rails_...  (section_id => sections.id) ON DELETE => cascade
 #
 class ModulePage < ApplicationRecord
-  has_one :course_module, as: :instanceable
+  has_one :course_module, as: :instanceable, dependent: :destroy
   belongs_to :section
   has_rich_text :content
 

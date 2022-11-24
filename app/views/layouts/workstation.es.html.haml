@@ -1,14 +1,14 @@
 !!!
 %html{:lang => "es"}
   %head
-  %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-  %title Alphacourse
-  %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
-  = csrf_meta_tags
-  = csp_meta_tag
-  = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
-  = stylesheet_link_tag "application", "data-turbo-track": "reload"
-  = javascript_importmap_tags
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Alphacourse
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
   %body
     :css
       ul.breadcrumb li+li::before {
@@ -35,11 +35,6 @@
         background: #1f2937;
         background-color: #1f2937;
       }
-
-
-
-    #flash
-      = render 'shared/flash'
 
 
     %section{ data: { controller: 'simple-navbar' } }
@@ -97,9 +92,13 @@
                   = link_to root_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
                     %span.select-none Inicio
                 %li
-                  = link_to destroy_user_session_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                  = link_to destroy_user_session_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600', data: { turbo_method: :delete } do
                     %span.select-none Cerrar Session
             / example copies end
         .mx-auto.lg:ml-80
       / Sidebar end
-    %main.container.mx-auto.mt-28.px-5.flex.flex-col= yield
+    %main.container.mx-auto.mt-28.px-5.flex.flex-col
+      #flash
+        = render 'shared/flash'
+
+      = yield

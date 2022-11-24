@@ -4,9 +4,12 @@
 			.flex.flex-col.gap-4.m-4
 
 				- section.course_modules.each do |mod|
-					= link_to mod.instanceable.title, admins_courses_modules_page_path(mod.instanceable_id), class: 'w-full py-4 rounded bg-purple-800 text-white text-center'
+					.flex.flex-col.gap-4
+						= link_to mod.instanceable.title, admins_courses_modules_page_path(mod.instanceable_id), class: 'w-full py-4 rounded bg-purple-800 text-white text-center'
+						= link_to 'Editar', edit_admins_courses_modules_page_path(mod.instanceable_id), class: 'w-full py-4 rounded bg-rose-800 text-white text-center'
+						= button_to 'Delete', admins_courses_modules_page_path(mod.instanceable_id), { class: 'w-full py-4 rounded bg-red-500 text-white text-center', method: :delete }
 
-				.flex.flex-col.gap-4.my-4.bg-gray-700
+				.flex.flex-col.gap-4.my-8.bg-gray-700
 					= link_to 'New Page', new_admins_courses_modules_section_page_path(section), class: 'w-full py-4 rounded bg-purple-500 text-center'
 
 					= link_to 'edit', edit_admins_section_path(section), class: 'w-full py-4 rounded bg-yellow-500 text-center'

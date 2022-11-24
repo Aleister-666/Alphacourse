@@ -26,4 +26,6 @@ class CourseModule < ApplicationRecord
   belongs_to :instanceable, polymorphic: true
   belongs_to :course
   belongs_to :section
+
+  acts_as_list
 end
