@@ -42,9 +42,9 @@
       %nav.fixed.top-0.z-40.flex.w-full.flex-row.justify-end.bg-gray-700.px-4.sm:justify-between{ data: { 'simple-navbar-target': 'navbar' } }
         %ul.breadcrumb.hidden.flex-row.items-center.py-4.text-lg.text-white.sm:flex
           %li.inline
-            %a{:href => "#"} ALPHACOURSE
+            %a{:href => "#"} ALPHASOFT
           %li.inline
-            %span Area de Trabajo
+            %span ALPHACOURSE
         %button.py-4.text-2xl.text-white.hover:text-gray-200{ type: "button", data: { 'simple-navbar-target': 'button', action: 'click->simple-navbar#handler' } }
           %svg#navClosed.h-8.w-8{fill: "none", stroke: "currentColor", "stroke-width": "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", data: { 'simple-navbar-target': 'closed' }}
             %path{:d => "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
@@ -61,12 +61,16 @@
               %h3.mb-2.text-xs.font-medium.uppercase.text-gray-500
                 Principales
               %ul.mb-8.text-sm.font-medium
-                %li
-                  = link_to students_my_courses_path, class: 'active flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
-                    %span.select-none Mis Cursos
-                %li
-                  = link_to students_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                - if current_user.admin?
+                  = link_to admins_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
                     %span.select-none Cursos
+                - else
+                  %li
+                    = link_to students_my_courses_path, class: 'active flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                      %span.select-none Mis Cursos
+                  %li
+                    = link_to students_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                      %span.select-none Cursos
             / navigation group end
 
             / example copies start
@@ -97,7 +101,7 @@
             / example copies end
         .mx-auto.lg:ml-80
       / Sidebar end
-    %main.container.mx-auto.mt-28.px-5.flex.flex-col
+    %main.mt-28
       #flash
         = render 'shared/flash'
 

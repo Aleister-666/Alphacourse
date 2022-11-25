@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	def after_sign_in_path_for(resource)
+		helpers.determine_courses_from_role
+	end
+
 	def authenticate_admin!
 		unless current_user.admin?
 			redirect_to root_path, alert: 'Acceso Denegado'

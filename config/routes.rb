@@ -16,8 +16,11 @@ Rails.application.routes.draw do
       resources :sections, except: %i[ show index ], shallow: true
     end
 
+
     namespace :courses do
       namespace :modules do
+        patch ':id/move', to: 'course_modules#move', as: :move
+
         resources :sections, only: [] do
           resources :pages, except: %i[ index ], shallow: true
         end

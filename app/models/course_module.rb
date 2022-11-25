@@ -27,5 +27,9 @@ class CourseModule < ApplicationRecord
   belongs_to :course
   belongs_to :section
 
-  acts_as_list
+  acts_as_list scope: [:section_id]
+
+  def type_name
+    self.instanceable_type.sub('Module', '')
+  end
 end

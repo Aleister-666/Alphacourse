@@ -46,7 +46,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
 # Use Sass to process CSS
-# gem "sassc-rails"
+gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
@@ -88,3 +88,7 @@ gem 'rails-i18n', '~> 7.0', '>= 7.0.6'
 
 # Extension provides the capabilities for sorting and reordering a number of objects in a list
 gem "acts_as_list", "~> 1.0", ">= 1.0"
+
+gem "requestjs-rails", "~> 0.0.10"
+
+gem "font-awesome-sass", "~> 6.2"
