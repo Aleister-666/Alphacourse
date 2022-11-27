@@ -1,0 +1,20 @@
+es:
+  activerecord:
+    attributes:
+      question_answers:
+        answer: Respuesta
+        feedback: Retroalimentacion
+        fraction: Valor
+
+    errors:
+      models:
+        question_answer:
+          attributes:
+            answer:
+              blank: no puede estar en blanco
+            feedback:
+            fraction:
+    models:
+      question_answer:
+        one: Respuesta
+        other: Respuestas

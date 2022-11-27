@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_23_181827) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_27_000713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -90,6 +90,35 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_181827) do
     t.index ["section_id"], name: "index_module_pages_on_section_id"
   end
 
+  create_table "module_quizzes", force: :cascade do |t|
+    t.string "title", null: false
+    t.decimal "value", precision: 12, scale: 7, default: "100.0"
+    t.decimal "sum_values", precision: 12, scale: 7, default: "0.0"
+    t.bigint "section_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["section_id"], name: "index_module_quizzes_on_section_id"
+  end
+
+  create_table "question_answers", force: :cascade do |t|
+    t.decimal "fraction", precision: 12, scale: 7, default: "0.0"
+    t.bigint "quiz_question_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_question_id"], name: "index_question_answers_on_quiz_question_id"
+  end
+
+  create_table "quiz_questions", force: :cascade do |t|
+    t.string "title", null: false
+    t.decimal "score", precision: 12, scale: 7, default: "0.0"
+    t.integer "position"
+    t.integer "question_type", default: 1, null: false
+    t.bigint "module_quiz_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["module_quiz_id"], name: "index_quiz_questions_on_module_quiz_id"
+  end
+
   create_table "sections", force: :cascade do |t|
     t.string "title", null: false
     t.bigint "course_id", null: false
@@ -119,5 +148,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_181827) do
   add_foreign_key "courses_users", "courses", on_delete: :cascade
   add_foreign_key "courses_users", "users", on_delete: :cascade
   add_foreign_key "module_pages", "sections", on_delete: :cascade
+  add_foreign_key "module_quizzes", "sections", on_delete: :cascade
+  add_foreign_key "question_answers", "quiz_questions", on_delete: :cascade
+  add_foreign_key "quiz_questions", "module_quizzes", on_delete: :cascade
   add_foreign_key "sections", "courses", on_delete: :cascade
 end

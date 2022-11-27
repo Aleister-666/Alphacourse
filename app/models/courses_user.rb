@@ -19,6 +19,15 @@
 #  fk_rails_...  (user_id => users.id) ON DELETE => cascade
 #
 class CoursesUser < ApplicationRecord
+  ################## COURSE RELATION #########################
   belongs_to :course
+
+  ################## USER RELATION ###########################
   belongs_to :user
+
+
+  ################## VALIDATIONS #############################
+  validates :course, presence: true
+  validates :user, presence: true
+  
 end

@@ -20,9 +20,21 @@ Rails.application.routes.draw do
     namespace :courses do
       namespace :modules do
         patch ':id/move', to: 'course_modules#move', as: :move
+        delete ':id/destroy', to: 'course_modules#destroy'
 
         resources :sections, only: [] do
           resources :pages, except: %i[ index ], shallow: true
+          resources :quizzes, except: %i[ index ], shallow: true
+        end
+
+
+        resources :quizzes, only: [], module: 'quizzes' do
+          resources :questions, except: %i[ index ], shallow: true
+        end
+
+
+        scope :questions, module: 'quizzes' do
+          patch ":id/move", to: 'questions#move', as: :move_question
         end
       end
     end

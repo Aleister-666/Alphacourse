@@ -54,8 +54,7 @@
             El Aprendizaje espera por ti
           %p.leading-normal.text-2xl.mb-8
             Aprende lo que quieras y cuando quieras
-          %button.mx-auto.lg:mx-0.hover:underline.bg-white.text-gray-800.font-bold.rounded-full.my-6.py-4.px-8.shadow-lg.focus:outline-none.focus:shadow-outline.transform.transition.hover:scale-105.duration-300.ease-in-out
-            Comenzar
+          = link_to 'Comenzar', students_courses_path, class: 'mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'
         / Right Col
         .w-full.py-6.text-center{:class => "md:w-3/5"}
           = image_tag 'home/image1.png', class: 'w-full md:w-4/5 z-50', alt: 'image 1 lading page'
@@ -229,7 +228,7 @@
     %section.bg-gray-100.py-8
       .container.mx-auto.px-2.pt-4.pb-12.text-gray-800
         %h2.w-full.my-2.text-5xl.font-bold.leading-tight.text-center.text-gray-800
-          Pruebas
+          Pruebas Online
         .w-full.mb-4
           .h-1.mx-auto.gradient.w-64.opacity-25.my-0.py-0.rounded-t
 
@@ -237,11 +236,10 @@
           .flex.flex-col.mx-auto{class: "lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4 w-5/6 lg:w-1/4", data: { controller: 'simple-quiz', "max-score": 100 }}
             .flex-1.bg-white.text-gray-600.rounded-t.rounded-b-none.overflow-hidden.shadow
               .p-8.text-xl.font-bold.text-center.border-b-4
-                ¿Cuantos dias tiene un año?
+                ¿La UNERG es una universidad?
               %ul.w-full.text-center.text-sm
-                %li.border-b.py-4{data: { action: 'click->simple-quiz#select_option', "simple-quiz-target": 'answer', score: '0' } } 30
-                %li.border-b.py-4{data: { action: 'click->simple-quiz#select_option', "simple-quiz-target": 'answer correct_answer', score: '100' } } 365
-                %li.border-b.py-4{data: { action: 'click->simple-quiz#select_option', "simple-quiz-target": 'answer', score: '20' } } 150
+                %li.border-b.py-4{data: { action: 'click->simple-quiz#select_option', "simple-quiz-target": 'answer', score: '0' } } Falso
+                %li.border-b.py-4{data: { action: 'click->simple-quiz#select_option', "simple-quiz-target": 'answer correct_answer', score: '100' } } Verdadero
             .flex-none.mt-auto.bg-white.rounded-b.rounded-t-none.overflow-hidden.shadow.p-6
               .w-full.pt-6.text-3xl.text-gray-600.font-bold.text-center{ data: { "simple-quiz-target": 'pointer' } }
                 Selecciona una respuesta
@@ -292,13 +290,14 @@
               %path{:d => "M1046,51.6521276 C1130.83045,29.328812 1279.08318,17.607883 1439,40.1656806 L1439,120 C1271.17211,77.9435312 1140.17211,55.1609071 1046,51.6521276 Z", :opacity => "0.200000003"}
     %section.container.mx-auto.text-center.py-6.mb-12
       %h2.w-full.my-2.text-5xl.font-bold.leading-tight.text-center.text-white
-        Call to Action
+        Alphacourse
       .w-full.mb-4
         .h-1.mx-auto.bg-white.opacity-25.my-0.py-0.rounded-t{:class => "w-1/6"}
       %h3.my-4.text-3xl.leading-tight
-        Main Hero Message to sell yourself!
-      %button.mx-auto.lg:mx-0.hover:underline.bg-white.text-gray-800.font-bold.rounded-full.my-6.py-4.px-8.shadow-lg.focus:outline-none.focus:shadow-outline.transform.transition.hover:scale-105.duration-300.ease-in-out
-        Action!
+        Un Producto Creado por Alphasoft
+        
+      -# %button.mx-auto.lg:mx-0.hover:underline.bg-white.text-gray-800.font-bold.rounded-full.my-6.py-4.px-8.shadow-lg.focus:outline-none.focus:shadow-outline.transform.transition.hover:scale-105.duration-300.ease-in-out
+      -#   Action!
     / Footer
     %footer.bg-white
       .container.mx-auto.px-8

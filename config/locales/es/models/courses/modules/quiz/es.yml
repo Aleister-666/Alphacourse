@@ -1,0 +1,21 @@
+es:
+  activerecord:
+    attributes:
+      module_quiz:
+        title: Titulo
+        description: Descripcion
+        value: Valor
+        sum_values: Valor Total Actual
+    errors:
+      models:
+        module_quiz:
+          attributes:
+            title:
+              blank: no puede estar en blanco
+            description:
+            value:
+            sum_values:
+    models:
+      module_quiz:
+        one: Cuestionario
+        other: Cuestionarios

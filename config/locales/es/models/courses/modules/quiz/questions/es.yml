@@ -1,0 +1,24 @@
+es:
+  activerecord:
+    attributes:
+      quiz_question:
+        title: Titulo
+        description: Descripcion
+        position: Posicion
+        score: Puntaje
+        question_type: Tipo de Pregunta
+
+    errors:
+      models:
+        quiz_question:
+          attributes:
+            title:
+              blank: no puede estar en blanco
+            description:
+            position:
+            score:
+            question_type:
+    models:
+      quiz_question:
+        one: Pregunta
+        other: Preguntas

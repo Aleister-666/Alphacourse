@@ -1,0 +1,17 @@
+es:
+  activerecord:
+    attributes:
+      module_page:
+        title: Titulo
+        content: Contenido
+    errors:
+      models:
+        module_page:
+          attributes:
+            title:
+              blank: no puede estar en blanco
+            content:
+    models:
+      module_page:
+        one: Pagina
+        other: Paginas

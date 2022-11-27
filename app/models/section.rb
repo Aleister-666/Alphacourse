@@ -23,8 +23,14 @@ class Section < ApplicationRecord
   ################ COURSES MODULES RELATION #################
   has_many :course_modules, dependent: :destroy
 
-  ################ ACTIVITIES PAGES RELATION ###################
+  ################ MODULE PAGES RELATION ###################
   has_many :module_pages, dependent: :destroy
 
+  ################ MODULE QUIZZES RELATION #################
+  has_many :module_quizzes, dependent: :destroy
+
+
+  ############### VALIDATIONS #########################
   validates :title, presence: true
+  validates :course, presence: true
 end

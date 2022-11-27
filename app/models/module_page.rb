@@ -17,9 +17,18 @@
 #  fk_rails_...  (section_id => sections.id) ON DELETE => cascade
 #
 class ModulePage < ApplicationRecord
-  has_one :course_module, as: :instanceable, dependent: :destroy
+  ####################### SECTION RELATION #######################
   belongs_to :section
+
+  ####################### COURSE MODULE RELATION #################
+  has_one :course_module, as: :instanceable, dependent: :destroy
+
+  ####################### ACTION TEXT MODULE #####################
   has_rich_text :content
 
+
+  ###################### VALIDATIONS #############################
   validates :title, presence: true
+  validates :section, presence: true
+
 end

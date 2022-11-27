@@ -1,0 +1,7 @@
+.flex.border.border-purple-600.rounded{ id: dom_id(question), data: { item_id: question.id, move_url: admins_courses_modules_move_question_path(question) } }
+	%i.fa-solid.fa-up-down-left-right.text-xl
+
+	= question.title
+
+	= link_to edit_admins_courses_modules_question_path(question), class: 'text-purple-600 hover:text-purple-800' do
+		%i.fa-regular.fa-pen-to-square.text-xl

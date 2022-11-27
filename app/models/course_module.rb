@@ -23,13 +23,27 @@
 #  fk_rails_...  (section_id => sections.id) ON DELETE => cascade
 #
 class CourseModule < ApplicationRecord
+  ############### INSTANCEABLE PYLYMORPHIC RELATION ###################
   belongs_to :instanceable, polymorphic: true
+
+  ############### COURSE RELATION #####################################
   belongs_to :course
+
+  ############### SECTION RELATION ####################################
   belongs_to :section
 
+  ############### LIST DEFINITION #####################################
   acts_as_list scope: [:section_id]
 
+
+  ############### VALIDATIONS #########################################
+  validates :course, presence: true
+  validates :section, presence: true
+
+
+  ############### PUBLIC METHODS #############
   def type_name
     self.instanceable_type.sub('Module', '')
   end
+  
 end

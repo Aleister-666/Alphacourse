@@ -1,0 +1,38 @@
+= form_with(model: model, url: url, class: "p-4") do |form|
+  - if model.errors.any?
+    #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
+      %h2
+        Hay problemas que impiden registrar la pregunta:
+      %ul
+        - model.errors.each do |error|
+          %li= error.full_message
+
+  .flex.flex-col.my-16.bg-gray-100
+    .my-5
+      = form.label :title
+      = form.text_field :title, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"
+    .my-5
+      = form.label :description
+      = form.rich_text_area :description, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full bg-white"
+
+  .my-16.border-2.border-black
+    %h2.font-bold.text-2xl.mb-8 Respuestas
+    = form.fields_for :question_answers do |answer|
+
+      .flex.flex-col.gap-8
+        %div
+          = answer.label :answer
+          = answer.rich_text_area :answer, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full'
+
+        %div
+          = answer.label :feedback
+          = answer.rich_text_area :feedback, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full'
+
+        %div
+
+          = answer.label :fraction
+          = answer.text_field :fraction, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full'
+
+    
+  .inline
+    = form.submit class: "rounded-lg py-3 px-5 bg-purple-600 text-white inline-block font-medium cursor-pointer"
