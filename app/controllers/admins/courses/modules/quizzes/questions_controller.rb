@@ -9,22 +9,48 @@ class Admins::Courses::Modules::Quizzes::QuestionsController < ApplicationContro
 	def new
 		@question = @quiz.quiz_questions.build
 
-		3.times { @question.question_answers.build }
+		5.times { @question.question_answers.build }
 	end
 
 	def create
 		@question = @quiz.quiz_questions.build(questions_params)
-
 		respond_to do |format|
+
 			if @question.save
 				format.html {
 					redirect_to admins_courses_modules_quiz_path(@quiz), notice: 'Pregunta de Cuestionario: Creada'
 				}				
 			else
+				format.html { render :new, status: :unprocessable_entity }
+			end
+			
+		end
+	end
+
+	def edit
+	end
+
+	def update
+		respond_to do |format|
+			if @question.update(questions_params)
 				format.html {
-					render :new, status: :unprocessable_entity
+					redirect_to admins_courses_modules_quiz_path(@question.module_quiz_id), alert: 'Pregunta de Cuestionario: Actualizada'
+				}
+			else
+				format.html {
+					render :edit, status: :unprocessable_entity
 				}
 			end
+		end
+	end
+
+	def destroy
+		@question.destroy
+
+		respond_to do |format|
+			format.html {
+				redirect_to admins_courses_modules_quiz_path(@question.module_quiz_id), alert: 'Pregunta de Cuestionario: Eliminada'
+			}
 		end
 	end
 
@@ -49,6 +75,7 @@ class Admins::Courses::Modules::Quizzes::QuestionsController < ApplicationContro
 		params.require(:quiz_question).permit(
 			:title,
 			:description,
+			:score,
 			question_answers_attributes: [:id, :answer, :feedback, :fraction]
 		)
 	end

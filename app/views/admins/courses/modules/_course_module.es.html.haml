@@ -1,12 +1,11 @@
 .border.border-purple-600.rounded.flex.flex-col{ id: dom_id(mod), data: { item_id: mod.id, move_url: admins_courses_modules_move_path(mod) } }
-	.flex.justify-end.m-2.relative
-		%i.fa-solid.fa-gear.text-black.text-xl.hover:text-purple-600
+	.flex.justify-end.m-2
+		= build_dropdown(icon_classes: 'fa-solid fa-gear text-black text-xl hover:text-purple-600', box_style: 'right-0 top-5 w-28 border border-purple-600 rounded bg-white ') do
 
-		.absolute.right-6.top-6.border.border-purple-600.rounded.flex.bg-gray-200
-			.flex.justify-between.items-center.hover:bg-red-500.hover:text-white
-				%i.fa-solid.fa-trash.text-md
-				= button_to 'Delete', admins_courses_modules_path(mod), { method: :delete }
-
+			.flex.flex-col.justify-center.items-center.w-full
+				.flex.justify-center.items-center.gap-2.hover:bg-purple-500.hover:text-white.w-full
+					%i.fa-solid.fa-trash.text-sm
+					= button_to 'Borrar', admins_courses_modules_path(mod), { method: :delete, class: 'cursor-pointer text-sm' }
 
 	- if mod.type_name.eql?('Page')
 		.flex.justify-start.items-start.gap-4.mb-4.mx-4

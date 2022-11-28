@@ -6,8 +6,6 @@ class Admins::Courses::Modules::QuizzesController < ApplicationController
 
 	layout 'workstation'
 
-
-
 	def new
 		@quiz = @section.module_quizzes.build
 	end
@@ -18,7 +16,7 @@ class Admins::Courses::Modules::QuizzesController < ApplicationController
 
 		respond_to do |format|
 			if @quiz.save
-				format.html { redirect_to admins_course_path(@section.course_id), notice: 'Modulo Cuestionario: Creado' }				
+				format.html { redirect_to admins_courses_modules_quiz_path(@quiz), notice: 'Modulo Cuestionario: Creado' }				
 			else
 				format.html { render :new, status: :unprocessable_entity }
 			end

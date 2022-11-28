@@ -41,26 +41,35 @@ class QuizQuestion < ApplicationRecord
   ############### VALIDATIONS ####################################
   validates :title, presence: true
   validates :description, presence: true
-  validates :score, numericality: true
+  validates :score, presence: true, numericality: true
+  validates :module_quiz, presence: true
+  validates :question_answers, presence: true
+
+  validate :required_one_correct_answer, :only_one_correct_answer
 
   ################ PUBLIC METHODS ################################
-  def select_correct_choice(choice)
-    
-    if self.multichoice?
-      answers = self.question_answers
-
-      selected = answers.select { |e| e.id == choice }.first
-
-      if selected.fraction == 1
-        return "Respuesta correcta"
-      else
-        return "respuesta incorrecta"
-      end
-    end
-  end
-
   def max_point_answer
     QuestionAnswer.where(quiz_question: self.id).order(fraction: :desc).first
   end
+
+  private
+
+  def required_one_correct_answer
+    filtered = question_answers.select { |e| e.fraction == 1.0 }
+
+    if filtered.size == 0
+      errors.add(:question_answers, 'Al menos 1 respuesta debe valer 100')
+    end
+  end
+
+  def only_one_correct_answer
+    filtered = question_answers.select { |e| e.fraction == 1.0 }
+
+    if filtered.size > 1
+      errors.add(:question_answers, 'Solo una respuesta puede valer 100')
+      
+    end
+  end
+
 
 end

@@ -11,4 +11,10 @@ module ComponentsHelper
 			content.call if content
 		end
 	end
+
+	def build_dropdown(icon_classes:, box_style: '', &content)
+		render 'components/dropdown', fa_icon_classes: icon_classes, box_style: box_style do
+			content.call if content
+		end
+	end
 end
