@@ -3,6 +3,7 @@
 # Table name: module_quizzes
 #
 #  id         :bigint           not null, primary key
+#  min_value  :decimal(12, 7)   default(0.0)
 #  sum_values :decimal(12, 7)   default(0.0)
 #  title      :string           not null
 #  value      :decimal(12, 7)   default(100.0)

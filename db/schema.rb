@@ -93,6 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_27_000713) do
   create_table "module_quizzes", force: :cascade do |t|
     t.string "title", null: false
     t.decimal "value", precision: 12, scale: 7, default: "100.0"
+    t.decimal "min_value", precision: 12, scale: 7, default: "0.0"
     t.decimal "sum_values", precision: 12, scale: 7, default: "0.0"
     t.bigint "section_id", null: false
     t.datetime "created_at", null: false

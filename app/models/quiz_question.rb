@@ -20,6 +20,9 @@
 #  fk_rails_...  (module_quiz_id => module_quizzes.id) ON DELETE => cascade
 #
 class QuizQuestion < ApplicationRecord
+  ################# Callbacks #####################################
+  after_save :update_sum_total
+  after_destroy :update_sum_total
   ################# MODULE QUIZ RELATION ##########################
   belongs_to :module_quiz
   
@@ -29,7 +32,6 @@ class QuizQuestion < ApplicationRecord
 
   ################ ACTION TEXT MODULE ############################
   has_rich_text :description
-
 
   ################ LIST DEFINITION ###############################
   acts_as_list scope: [:module_quiz_id]
@@ -52,13 +54,15 @@ class QuizQuestion < ApplicationRecord
     QuestionAnswer.where(quiz_question: self.id).order(fraction: :desc).first
   end
 
+  ################ PRIVATE METHODS ###############################
+
   private
 
   def required_one_correct_answer
     filtered = question_answers.select { |e| e.fraction == 1.0 }
 
     if filtered.size == 0
-      errors.add(:question_answers, 'Al menos 1 respuesta debe valer 100')
+      errors.add(:question_answers, I18n.t('activerecord.errors.models.quiz_question.attributes.question_answers.required_one'))
     end
   end
 
@@ -66,9 +70,15 @@ class QuizQuestion < ApplicationRecord
     filtered = question_answers.select { |e| e.fraction == 1.0 }
 
     if filtered.size > 1
-      errors.add(:question_answers, 'Solo una respuesta puede valer 100')
+      errors.add(:question_answers, I18n.t('activerecord.errors.models.quiz_question.attributes.question_answers.only_one'))
       
     end
+  end
+
+  def update_sum_total
+    quiz = self.module_quiz
+    quiz.sum_values = quiz.quiz_questions.map(&:score).sum
+    quiz.save
   end
 
 

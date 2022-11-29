@@ -22,3 +22,8 @@ Sistema tutorial para el aprendizaje del uso educactivo de la plataforma moodle 
 	- haml
 	- annotate
 	- devise
+	- sassc-rails
+	- rails-i18n
+	- acts_as_list
+	- requestjs-rails
+	- font-awesome-sass

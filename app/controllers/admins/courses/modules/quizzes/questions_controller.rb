@@ -9,7 +9,7 @@ class Admins::Courses::Modules::Quizzes::QuestionsController < ApplicationContro
 	def new
 		@question = @quiz.quiz_questions.build
 
-		5.times { @question.question_answers.build }
+		4.times { @question.question_answers.build }
 	end
 
 	def create

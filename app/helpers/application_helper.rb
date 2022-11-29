@@ -1,6 +1,7 @@
 module ApplicationHelper
 
-	def determine_courses_from_role
+	def determine_courses_way
+		return students_courses_path unless user_signed_in?
 		if current_user.admin?
 			admins_courses_path
 		else

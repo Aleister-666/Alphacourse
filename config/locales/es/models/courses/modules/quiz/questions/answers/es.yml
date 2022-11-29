@@ -1,7 +1,7 @@
 es:
   activerecord:
     attributes:
-      question_answers:
+      question_answer:
         answer: Respuesta
         feedback: Retroalimentacion
         fraction: Valor

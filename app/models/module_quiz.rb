@@ -3,6 +3,7 @@
 # Table name: module_quizzes
 #
 #  id         :bigint           not null, primary key
+#  min_value  :decimal(12, 7)   default(0.0)
 #  sum_values :decimal(12, 7)   default(0.0)
 #  title      :string           not null
 #  value      :decimal(12, 7)   default(100.0)
@@ -35,7 +36,20 @@ class ModuleQuiz < ApplicationRecord
   ##################### VALIDATIONS ##################################
   validates :title, presence: true
   validates :value, numericality: true
+  validates :min_value, numericality: true
   validates :sum_values, numericality: true
   validates :section, presence: true
-  
+
+  validate :max_value
+
+
+  #################### PRIVATE METHODS ################################
+
+  private
+
+  def max_value
+    if self.min_value > self.value
+      errors.add(:min_value, I18n.t('activerecord.errors.models.module_quiz.attributes.min_value.derbording'))      
+    end
+  end
 end

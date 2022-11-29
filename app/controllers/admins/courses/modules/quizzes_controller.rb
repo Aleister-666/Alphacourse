@@ -64,6 +64,6 @@ class Admins::Courses::Modules::QuizzesController < ApplicationController
 	end
 
 	def quizzes_params
-    params.require(:module_quiz).permit(:title, :description)
+    params.require(:module_quiz).permit(:title, :description, :min_value)
   end
 end

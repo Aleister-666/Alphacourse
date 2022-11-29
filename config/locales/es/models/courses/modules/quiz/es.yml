@@ -6,6 +6,7 @@ es:
         description: Descripcion
         value: Valor
         sum_values: Valor Total Actual
+        min_value: Valor Minimo Aprobatorio
     errors:
       models:
         module_quiz:
@@ -15,6 +16,8 @@ es:
             description:
             value:
             sum_values:
+            min_value:
+              derbording: no puede ser superior al valor del cuestionario
     models:
       module_quiz:
         one: Cuestionario

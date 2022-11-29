@@ -36,7 +36,7 @@
               %li.mr-3
                 %h2.text-purple= "Bienvenido #{current_user.username}"
               %li.mr-3
-                = link_to 'Cursos', determine_courses_from_role, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-gray-300 hover:text-purple-600'
+                = link_to 'Cursos', determine_courses_way, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-gray-300 hover:text-purple-600'
             - else
               %li.mr-3
                 = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-gray-300 hover:text-purple-600'
@@ -54,7 +54,7 @@
             El Aprendizaje espera por ti
           %p.leading-normal.text-2xl.mb-8
             Aprende lo que quieras y cuando quieras
-          = link_to 'Comenzar', students_courses_path, class: 'mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'
+          = link_to 'Comenzar', determine_courses_way, class: 'mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'
         / Right Col
         .w-full.py-6.text-center{:class => "md:w-3/5"}
           = image_tag 'home/image1.png', class: 'w-full md:w-4/5 z-50', alt: 'image 1 lading page'
@@ -183,48 +183,48 @@
     %section.bg-white.border-b.py-8
       .container.mx-auto.flex.flex-wrap.pt-4.pb-12
         %h2.w-full.my-2.text-5xl.font-bold.leading-tight.text-center.text-gray-800
-          Title
+          Caracteristicas
         .w-full.mb-4
           .h-1.mx-auto.gradient.w-64.opacity-25.my-0.py-0.rounded-t
         .w-full.p-6.flex.flex-col.flex-grow.flex-shrink{:class => "md:w-1/3"}
           .flex-1.bg-white.rounded-t.rounded-b-none.overflow-hidden.shadow
             %a.flex.flex-wrap.no-underline.hover:no-underline{:href => "#"}
               %p.w-full.text-gray-600.text-xs.md:text-sm.px-6
-                xGETTING STARTED
+                Cursos
               .w-full.font-bold.text-xl.text-gray-800.px-6
-                Lorem ipsum dolor sit amet.
+                Incripciones
               %p.text-gray-800.text-base.px-6.mb-5
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                Podras inscribirte en los cursos que quieras, sin anuncios, sin restricciones, sin barreras. Solo registrandote tendras acceso a todos los cursos disponibles y sus contenidos.
           .flex-none.mt-auto.bg-white.rounded-b.rounded-t-none.overflow-hidden.shadow.p-6
             .flex.items-center.justify-start
-              %button.mx-auto.lg:mx-0.hover:underline.gradient.text-white.font-bold.rounded-full.my-6.py-4.px-8.shadow-lg.focus:outline-none.focus:shadow-outline.transform.transition.hover:scale-105.duration-300.ease-in-out
-                Action
+              -# %button.mx-auto.lg:mx-0.hover:underline.gradient.text-white.font-bold.rounded-full.my-6.py-4.px-8.shadow-lg.focus:outline-none.focus:shadow-outline.transform.transition.hover:scale-105.duration-300.ease-in-out
+              -#   Action
         .w-full.p-6.flex.flex-col.flex-grow.flex-shrink{:class => "md:w-1/3"}
           .flex-1.bg-white.rounded-t.rounded-b-none.overflow-hidden.shadow
             %a.flex.flex-wrap.no-underline.hover:no-underline{:href => "#"}
               %p.w-full.text-gray-600.text-xs.md:text-sm.px-6
-                xGETTING STARTED
+                Cursos
               .w-full.font-bold.text-xl.text-gray-800.px-6
-                Lorem ipsum dolor sit amet.
+                Contenidos Diversos
               %p.text-gray-800.text-base.px-6.mb-5
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                Diversos tipos de contenidos te esperan, texto, imagenes, videos. Para que puedas aprender mas facilmente.
           .flex-none.mt-auto.bg-white.rounded-b.rounded-t-none.overflow-hidden.shadow.p-6
             .flex.items-center.justify-center
-              %button.mx-auto.lg:mx-0.hover:underline.gradient.text-white.font-bold.rounded-full.my-6.py-4.px-8.shadow-lg.focus:outline-none.focus:shadow-outline.transform.transition.hover:scale-105.duration-300.ease-in-out
-                Action
+              -# %button.mx-auto.lg:mx-0.hover:underline.gradient.text-white.font-bold.rounded-full.my-6.py-4.px-8.shadow-lg.focus:outline-none.focus:shadow-outline.transform.transition.hover:scale-105.duration-300.ease-in-out
+              -#   Action
         .w-full.p-6.flex.flex-col.flex-grow.flex-shrink{:class => "md:w-1/3"}
           .flex-1.bg-white.rounded-t.rounded-b-none.overflow-hidden.shadow
             %a.flex.flex-wrap.no-underline.hover:no-underline{:href => "#"}
               %p.w-full.text-gray-600.text-xs.md:text-sm.px-6
-                xGETTING STARTED
+                Cursos
               .w-full.font-bold.text-xl.text-gray-800.px-6
-                Lorem ipsum dolor sit amet.
+                Pruebas Online
               %p.text-gray-800.text-base.px-6.mb-5
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                Podras realizar pruebas para fortalecer lo aprendido, sin restricciones de intentos, tiempo, o prelaciones. Realiza las pruebas las veces que quieras hasta que estes satisfecho/a con tus conocimientos.
           .flex-none.mt-auto.bg-white.rounded-b.rounded-t-none.overflow-hidden.shadow.p-6
             .flex.items-center.justify-end
-              %button.mx-auto.lg:mx-0.hover:underline.gradient.text-white.font-bold.rounded-full.my-6.py-4.px-8.shadow-lg.focus:outline-none.focus:shadow-outline.transform.transition.hover:scale-105.duration-300.ease-in-out
-                Action
+              -# %button.mx-auto.lg:mx-0.hover:underline.gradient.text-white.font-bold.rounded-full.my-6.py-4.px-8.shadow-lg.focus:outline-none.focus:shadow-outline.transform.transition.hover:scale-105.duration-300.ease-in-out
+              -#   Action
     %section.bg-gray-100.py-8
       .container.mx-auto.px-2.pt-4.pb-12.text-gray-800
         %h2.w-full.my-2.text-5xl.font-bold.leading-tight.text-center.text-gray-800
