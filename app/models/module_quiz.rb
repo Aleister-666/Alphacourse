@@ -29,6 +29,9 @@ class ModuleQuiz < ApplicationRecord
   ###################### QUIZ QUESTION RELATIONS #####################
   has_many :quiz_questions, dependent: :destroy
 
+  ##################### QUIZ ATTEMPT RELATION ########################
+  has_many :quiz_attempts, dependent: :destroy
+
   ###################### ACTION TEXT MODULE ##########################
   has_rich_text :description
 

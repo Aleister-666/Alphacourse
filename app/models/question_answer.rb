@@ -21,6 +21,9 @@ class QuestionAnswer < ApplicationRecord
   ################### QUIZ QUESTION RELATION ##########################
   belongs_to :quiz_question
 
+  ################## QUESTION ATTEMPT RELATION ########################
+  has_many :question_attempts, dependent: :destroy
+  
   ################## ACTION TEXT MODULE ###############################
   has_rich_text :answer
   has_rich_text :feedback

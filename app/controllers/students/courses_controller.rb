@@ -9,7 +9,7 @@ class Students::CoursesController < ApplicationController
 
   # GET students/courses/1
   def show
-    @course = Course.find(params[:id])
+    @course = Course.includes(sections: {course_modules: :instanceable}).where(id: params[:id]).first
   end
 
   # GET students/my_courses

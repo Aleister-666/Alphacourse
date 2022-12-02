@@ -1,0 +1,4 @@
+= turbo_stream.update dom_id(@course_module) do
+	= button_to 'Descompletar', students_courses_modules_course_module_completations_path(@course_module), { method: :patch, class: 'w-full flex-0 border border-gray-800 rounded hover:bg-gray-400 text-center cursor-pointer p-1 text-sm' }
+
+= render_flash_messages

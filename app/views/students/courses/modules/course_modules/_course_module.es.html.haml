@@ -1,0 +1,39 @@
+.border.border-purple-600.rounded.flex
+
+  - if course_module.type_name.eql?('Page')
+    .flex.flex-col.justify-between.gap-4.m-4
+
+      .p-4.md:p-8.flex.justify-center.items-center.flex-1.rounded.bg-purple-700.text-white
+        %i.fa-regular.fa-file-lines.text-3xl
+      = turbo_frame_tag dom_id(course_module) do
+        - if current_user.completation_create?(course_module)
+
+          - if current_user.module_completation?(course_module)
+            = button_to 'Descompletar', students_courses_modules_course_module_completations_path(course_module), { method: :patch, class: 'w-full flex-0 border border-gray-800 rounded hover:bg-gray-400 text-center cursor-pointer p-1 text-sm' }
+          - else
+            = button_to 'Completar', students_courses_modules_course_module_completations_path(course_module), { method: :patch, class: 'w-full flex-0 border border-gray-800 rounded hover:bg-gray-400 text-center cursor-pointer p-1 text-sm' }
+        - else
+          = button_to 'Completar', students_courses_modules_course_module_completations_path(course_module), { method: :post, class: 'w-full flex-0 border border-gray-800 rounded hover:bg-gray-400 text-center cursor-pointer p-1 text-sm' }
+
+    .flex.flex-col
+      %h4.font-bold= course_module.type_name
+      = link_to course_module.instanceable.title, students_courses_modules_page_path(course_module.instanceable_id), class: 'text-purple-600 hover:text-purple-800 visited:text-rose-700 text-sm break-all'
+
+  - else
+
+    .flex.flex-col.justify-between.gap-4.m-4
+      .p-4.md:p-8.flex.justify-center.items-center.flex-1.rounded.bg-purple-700.text-white
+        %i.fa-solid.fa-file-pen.text-3xl
+      = turbo_frame_tag dom_id(course_module) do
+        - if current_user.completation_create?(course_module)
+
+          - if current_user.module_completation?(course_module)
+            = button_to 'Descompletar', students_courses_modules_course_module_completations_path(course_module), { method: :patch, class: 'w-full flex-0 border border-gray-800 rounded hover:bg-gray-400 text-center cursor-pointer p-1 text-sm' }
+          - else
+            = button_to 'Completar', students_courses_modules_course_module_completations_path(course_module), { method: :patch, class: 'w-full flex-0 border border-gray-800 rounded hover:bg-gray-400 text-center cursor-pointer p-1 text-sm' }
+        - else
+          = button_to 'Completar', students_courses_modules_course_module_completations_path(course_module), { method: :post, class: 'w-full flex-0 border border-gray-800 rounded hover:bg-gray-400 text-center cursor-pointer p-1 text-sm' }
+
+    .flex.flex-col
+      %h4.font-bold= course_module.type_name
+      = link_to course_module.instanceable.title, students_courses_modules_quiz_path(course_module.instanceable_id), class: 'text-purple-600 hover:text-purple-800 visited:text-rose-700 text-sm break-all'

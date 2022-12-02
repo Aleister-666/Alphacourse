@@ -32,6 +32,13 @@ class CourseModule < ApplicationRecord
   ############### SECTION RELATION ####################################
   belongs_to :section
 
+
+  ################# COURSE MODULE COMPLETATION RELATIONS ##################
+  has_many :course_module_completations, dependent: :destroy
+  
+  has_many :users, through: :course_module_completations
+
+
   ############### LIST DEFINITION #####################################
   acts_as_list scope: [:section_id]
 

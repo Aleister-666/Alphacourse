@@ -1,0 +1,21 @@
+.m-4
+
+  %h1.font-bold.text-2xl.text-purple-800 Cuestionario
+
+  = form_with(url: students_courses_quiz_finish_path(@quiz)) do |form|
+
+    - @questions.each_with_index do |question, index|
+
+      .my-10
+        = form.hidden_field "responses[quiz_attempts_attributes][#{index}][quiz_question_id]", value: question.id 
+
+        %h5.my-4.bg-purple-600.text-white= question.title
+
+        .my-8
+          = question.description
+
+        = form.collection_radio_buttons "responses[quiz_attempts_attributes][#{index}][question_answer_id]", question.question_answers, :id, :answer, { checked: question.question_answers.first.id }
+
+
+
+    = form.submit 'Enviar Cuestionario', class: 'rounded-lg py-3 px-5 bg-purple-600 inline-block font-medium text-white'

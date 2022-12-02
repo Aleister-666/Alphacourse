@@ -19,11 +19,20 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
-  ################# COURSE VALIDATION ######################
-  has_many :courses, through: :courses_users
-
   ################# COURSE USER RELATIONS ##################
   has_many :courses_users, dependent: :destroy
+  has_many :courses, through: :courses_users
+  
+
+
+  ################# COURSE MODULE COMPLETATION RELATIONS ##################
+  has_many :course_module_completations, dependent: :destroy
+  
+  has_many :course_modules, through: :course_module_completations
+
+
+  ################ QUIZ ATTEMPT RELATION ##################################
+  has_many :quiz_attempts, dependent: :destroy
 
   ###################### DEVISE MODULES ####################
   # Include default devise modules. Others available are:
@@ -42,5 +51,13 @@ class User < ApplicationRecord
 
   def course_inscript?(course)
     return self.courses.exists?(course.id)
+  end
+
+  def module_completation?(course_module)
+    return self.course_module_completations.exists?(course_module_id: course_module.id, complete: true)
+  end
+
+  def completation_create?(course_module)
+    return self.course_module_completations.exists?(course_module_id: course_module.id)
   end
 end

@@ -40,9 +40,30 @@ Rails.application.routes.draw do
     end
   end
 
-
   ######################### STUDENTS ROUTES ###############################
-  namespace :students do
+  namespace :students do 
+
+    namespace :courses do
+      namespace :modules do
+        resources :pages, only: %i[ show ]
+        resources :quizzes, only: %i[ show ] do
+        end
+
+        resources :course_modules, only: [] do
+          post :completations, to: 'course_module_completions#create'
+          patch :completations, to: 'course_module_completions#update'
+        end
+      end
+
+      resources :quizzes, module: :quiz, only: [] do
+        get :start, to: 'attempts#start'
+        post :finish, to: 'attempts#finish'
+        get "attempts/:quiz_attempt_id/results", to: 'attempts#results', as: :results_attempt
+
+      end
+
+    end
+    
     resources :courses, only: %i[ index show ] do
       post 'inscriptions/:user_id', to: 'inscriptions#create', as: :inscriptions
       delete 'inscriptions/:user_id', to: 'inscriptions#destroy'

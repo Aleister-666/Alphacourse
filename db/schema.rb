@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_27_000713) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_01_214247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_27_000713) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "course_module_completations", force: :cascade do |t|
+    t.bigint "course_module_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "complete", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_module_id"], name: "index_course_module_completations_on_course_module_id"
+    t.index ["user_id"], name: "index_course_module_completations_on_user_id"
   end
 
   create_table "course_modules", force: :cascade do |t|
@@ -109,6 +119,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_27_000713) do
     t.index ["quiz_question_id"], name: "index_question_answers_on_quiz_question_id"
   end
 
+  create_table "question_attempts", force: :cascade do |t|
+    t.decimal "max_score", precision: 12, scale: 7
+    t.decimal "fraction", precision: 12, scale: 7
+    t.bigint "quiz_attempt_id", null: false
+    t.bigint "quiz_question_id", null: false
+    t.bigint "question_answer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_answer_id"], name: "index_question_attempts_on_question_answer_id"
+    t.index ["quiz_attempt_id"], name: "index_question_attempts_on_quiz_attempt_id"
+    t.index ["quiz_question_id"], name: "index_question_attempts_on_quiz_question_id"
+  end
+
+  create_table "quiz_attempts", force: :cascade do |t|
+    t.decimal "sum_scores", precision: 12, scale: 7
+    t.bigint "module_quiz_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["module_quiz_id"], name: "index_quiz_attempts_on_module_quiz_id"
+    t.index ["user_id"], name: "index_quiz_attempts_on_user_id"
+  end
+
   create_table "quiz_questions", force: :cascade do |t|
     t.string "title", null: false
     t.decimal "score", precision: 12, scale: 7, default: "0.0"
@@ -144,6 +177,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_27_000713) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "course_module_completations", "course_modules", on_delete: :cascade
+  add_foreign_key "course_module_completations", "users", on_delete: :cascade
   add_foreign_key "course_modules", "courses", on_delete: :cascade
   add_foreign_key "course_modules", "sections", on_delete: :cascade
   add_foreign_key "courses_users", "courses", on_delete: :cascade
@@ -151,6 +186,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_27_000713) do
   add_foreign_key "module_pages", "sections", on_delete: :cascade
   add_foreign_key "module_quizzes", "sections", on_delete: :cascade
   add_foreign_key "question_answers", "quiz_questions", on_delete: :cascade
+  add_foreign_key "question_attempts", "question_answers", on_delete: :cascade
+  add_foreign_key "question_attempts", "quiz_attempts", on_delete: :cascade
+  add_foreign_key "question_attempts", "quiz_questions", on_delete: :cascade
+  add_foreign_key "quiz_attempts", "module_quizzes", on_delete: :cascade
+  add_foreign_key "quiz_attempts", "users", on_delete: :cascade
   add_foreign_key "quiz_questions", "module_quizzes", on_delete: :cascade
   add_foreign_key "sections", "courses", on_delete: :cascade
 end

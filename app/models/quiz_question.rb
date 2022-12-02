@@ -36,6 +36,9 @@ class QuizQuestion < ApplicationRecord
   ################ LIST DEFINITION ###############################
   acts_as_list scope: [:module_quiz_id]
 
+  ############### QUESTION ATTEMPT RELATION ######################
+  has_many :question_attempts, dependent: :destroy
+  
   ################ QUESTION TYPE ENUM DEFINITION #################
   enum :question_type, { multichoice: 1, truefalse: 2 }, default: :multichoice
 

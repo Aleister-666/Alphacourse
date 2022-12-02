@@ -1,5 +1,6 @@
 .my-4
 	= build_accordion(title: section.title, h_classes: 'bg-purple-800 text-white text-bold') do
 		.flex.flex-col.gap-4.m-4
-			%h5.py-4.bg-purple-600.rounded.text-bold.text-white Pagina/Recurso
-			%h5.py-4.bg-rose-600.rounded.text-bold.text-white Prueba
+
+			%div{ class: 'flex flex-col gap-4'}
+				= render partial: 'students/courses/modules/course_modules/course_module', collection: section.course_modules, as: :course_module
