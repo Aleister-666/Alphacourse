@@ -99,6 +99,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.11.0)
     ffi (1.15.5)
     font-awesome-sass (6.2.1)
@@ -260,6 +264,7 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.8)
+  dotenv-rails
   font-awesome-sass (~> 6.2)
   haml (~> 6.0)
   image_processing (~> 1.2)
