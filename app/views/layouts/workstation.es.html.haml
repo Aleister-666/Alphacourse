@@ -9,7 +9,7 @@
     = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
-  %body
+
     :css
       ul.breadcrumb li+li::before {
         content: "\276F";
@@ -37,12 +37,14 @@
       }
 
 
+  %body
+
     %section{ data: { controller: 'simple-navbar' } }
       / Navbar start
       %nav.fixed.top-0.z-40.flex.w-full.flex-row.justify-end.bg-gray-700.px-4.sm:justify-between{ data: { 'simple-navbar-target': 'navbar' } }
         %ul.breadcrumb.hidden.flex-row.items-center.py-4.text-lg.text-white.sm:flex
           %li.inline
-            %a{:href => "#"} ALPHASOFT
+            = link_to 'ALPHASOFT', about_path, class: 'hover:text-purple-600'
           %li.inline
             %span ALPHACOURSE
         %button.py-4.text-2xl.text-white.hover:text-gray-200{ type: "button", data: { 'simple-navbar-target': 'button', action: 'click->simple-navbar#handler' } }

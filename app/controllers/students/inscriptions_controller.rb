@@ -5,12 +5,12 @@ class Students::InscriptionsController < ApplicationController
     course = Course.find(params[:course_id])
 
     if course
-      course.courses_users.build(user_id: params[:user_id])
+      course.courses_users.build(user: current_user)
 
       if course.save
-        redirect_to students_courses_path, notice: 'Inscrito en el Curso'
+        redirect_to students_course_path(course), notice: 'Inscrito en el Curso'
       else
-        redirect_to students_courses_path, alert: 'Inscripcion Fallida'
+        redirect_to students_course_path(course), alert: 'Inscripcion Fallida'
       end
       
     else
@@ -19,11 +19,13 @@ class Students::InscriptionsController < ApplicationController
   end
 
   def destroy
-    inscription = CoursesUser.find_by(course_id: params[:course_id], user_id: params[:user_id])
+    course = Course.find(params[:course_id])
 
-    if inscription
-      inscription.destroy
+
+    if current_user.desinscription_course(course)
       redirect_to students_courses_path, alert: 'Inscripcion Eliminada'
     end
+
+
   end
 end

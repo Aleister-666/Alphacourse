@@ -1,2 +1,2 @@
-.p-12.bg-purple-200.rounded.flex.flex-col.hover:bg-purple-400{ id: dom_id(course) }
-  = link_to course.name, admins_course_path(course), class: 'text-purple-600 hover:underline hover:text-purple-800'
+= link_to students_courses_path(course), class: 'flex flex-col p-12 rounded bg-purple-200 hover:bg-purple-400', id: dom_id(course) do
+  %span= course.name

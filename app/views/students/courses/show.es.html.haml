@@ -2,11 +2,14 @@
   .mx-auto
     %h1= @course.name
     = @course.description
+
     
     - if current_user.course_inscript?(@course)
       .inline-block.ml-2
-        = button_to 'Retirar Inscripcion', students_course_inscriptions_path(@course, current_user), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-red-200 font-medium"
+        = button_to 'Retirar Inscripcion', students_course_inscriptions_path(@course), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-red-200 font-medium", form: { data: { turbo_confirm: 'Si te retiras del curso se borarran todos tus progresos. ¿Seguro que quieres continuar?' } }
       .my-4
         = render @course.sections
+    - else
+      = button_to 'Inscribir', students_course_inscriptions_path(@course), { class: 'rounded-lg py-3 px-5 bg-purple-600 text-white block font-medium' }
 
     = link_to 'Regresar', students_courses_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

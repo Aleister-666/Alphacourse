@@ -60,4 +60,16 @@ class User < ApplicationRecord
   def completation_create?(course_module)
     return self.course_module_completations.exists?(course_module_id: course_module.id)
   end
+
+  def desinscription_course(course)
+    inscripcion = CoursesUser.find_by(user_id: self.id, course: course)
+    modules_completations = self.course_module_completations
+    quiz_attempts = self.quiz_attempts
+
+    if inscripcion.destroy && modules_completations.destroy_all && quiz_attempts.destroy_all
+      true
+    else
+      false
+    end
+  end
 end

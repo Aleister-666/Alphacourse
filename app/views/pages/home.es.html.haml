@@ -19,7 +19,7 @@
     %nav#header.fixed.w-full.z-30.top-0.text-white
       .w-full.container.mx-auto.flex.flex-wrap.items-center.justify-between.mt-0.py-2
         .pl-4.flex.items-center
-          %a.toggleColour.text-white.no-underline.hover:no-underline.font-bold.text-2xl.lg:text-4xl{:href => "#"}
+          = link_to root_path, class: 'toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl' do
             / Icon from: http://www.potlabicons.com/
             %svg.h-8.fill-current.inline{:viewbox => "0 0 512.005 512.005", :xmlns => "http://www.w3.org/2000/svg"}
               %rect{:fill => "#2a2a31", :height => "50.502", :transform => "matrix(1,0,0,1,0,0)", :width => "479.767", :x => "16.539", :y => "425.626"}
@@ -57,7 +57,7 @@
           = link_to 'Comenzar', determine_courses_way, class: 'mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'
         / Right Col
         .w-full.py-6.text-center{:class => "md:w-3/5"}
-          = image_tag 'home/image1.png', class: 'w-full md:w-4/5 z-50', alt: 'image 1 lading page'
+          = image_tag 'pages/image1.png', class: 'w-full md:w-4/5 z-50', alt: 'image 1 lading page'
     .relative.-mt-12.lg:-mt-24
       %svg{:version => "1.1", :viewbox => "0 0 1428 174", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink"}
         %g{:fill => "none", "fill-rule" => "evenodd", :stroke => "none", "stroke-width" => "1"}
@@ -186,9 +186,9 @@
           Caracteristicas
         .w-full.mb-4
           .h-1.mx-auto.gradient.w-64.opacity-25.my-0.py-0.rounded-t
-        .w-full.p-6.flex.flex-col.flex-grow.flex-shrink{:class => "md:w-1/3"}
+        .w-full.p-6.flex.flex-col.flex-grow.flex-shrink.hover:bg-gray-100{:class => "md:w-1/3"}
           .flex-1.bg-white.rounded-t.rounded-b-none.overflow-hidden.shadow
-            %a.flex.flex-wrap.no-underline.hover:no-underline{:href => "#"}
+            .flex.flex-wrap.no-underline.hover:no-underline{:href => "#"}
               %p.w-full.text-gray-600.text-xs.md:text-sm.px-6
                 Cursos
               .w-full.font-bold.text-xl.text-gray-800.px-6
@@ -199,9 +199,9 @@
             .flex.items-center.justify-start
               -# %button.mx-auto.lg:mx-0.hover:underline.gradient.text-white.font-bold.rounded-full.my-6.py-4.px-8.shadow-lg.focus:outline-none.focus:shadow-outline.transform.transition.hover:scale-105.duration-300.ease-in-out
               -#   Action
-        .w-full.p-6.flex.flex-col.flex-grow.flex-shrink{:class => "md:w-1/3"}
+        .w-full.p-6.flex.flex-col.flex-grow.flex-shrink.hover:bg-gray-100{:class => "md:w-1/3"}
           .flex-1.bg-white.rounded-t.rounded-b-none.overflow-hidden.shadow
-            %a.flex.flex-wrap.no-underline.hover:no-underline{:href => "#"}
+            .flex.flex-wrap.no-underline.hover:no-underline{:href => "#"}
               %p.w-full.text-gray-600.text-xs.md:text-sm.px-6
                 Cursos
               .w-full.font-bold.text-xl.text-gray-800.px-6
@@ -212,9 +212,9 @@
             .flex.items-center.justify-center
               -# %button.mx-auto.lg:mx-0.hover:underline.gradient.text-white.font-bold.rounded-full.my-6.py-4.px-8.shadow-lg.focus:outline-none.focus:shadow-outline.transform.transition.hover:scale-105.duration-300.ease-in-out
               -#   Action
-        .w-full.p-6.flex.flex-col.flex-grow.flex-shrink{:class => "md:w-1/3"}
+        .w-full.p-6.flex.flex-col.flex-grow.flex-shrink.hover:bg-gray-100{:class => "md:w-1/3"}
           .flex-1.bg-white.rounded-t.rounded-b-none.overflow-hidden.shadow
-            %a.flex.flex-wrap.no-underline.hover:no-underline{:href => "#"}
+            .flex.flex-wrap.no-underline.hover:no-underline{:href => "#"}
               %p.w-full.text-gray-600.text-xs.md:text-sm.px-6
                 Cursos
               .w-full.font-bold.text-xl.text-gray-800.px-6
@@ -319,38 +319,30 @@
               %li.mt-2.inline-block.mr-2.md:block.md:mr-0
                 %a.no-underline.hover:underline.text-gray-800.hover:text-pink-500{:href => "#"} Support
           .flex-1
-            %p.uppercase.text-gray-500.md:mb-6 Legal
-            %ul.list-reset.mb-6
-              %li.mt-2.inline-block.mr-2.md:block.md:mr-0
-                %a.no-underline.hover:underline.text-gray-800.hover:text-pink-500{:href => "#"} Terms
-              %li.mt-2.inline-block.mr-2.md:block.md:mr-0
-                %a.no-underline.hover:underline.text-gray-800.hover:text-pink-500{:href => "#"} Privacy
-          .flex-1
             %p.uppercase.text-gray-500.md:mb-6 Social
             %ul.list-reset.mb-6
               %li.mt-2.inline-block.mr-2.md:block.md:mr-0
-                %a.no-underline.hover:underline.text-gray-800.hover:text-pink-500{:href => "#"} Facebook
+                = link_to 'Github', 'https://github.com/Aleister-666', class: 'no-underline hover:underline text-gray-800 hover:text-pink-500'
               %li.mt-2.inline-block.mr-2.md:block.md:mr-0
-                %a.no-underline.hover:underline.text-gray-800.hover:text-pink-500{:href => "#"} Linkedin
+                = link_to 'Gitlab', 'https://gitlab.com/Aleister-666', class: 'no-underline hover:underline text-gray-800 hover:text-pink-500'
               %li.mt-2.inline-block.mr-2.md:block.md:mr-0
-                %a.no-underline.hover:underline.text-gray-800.hover:text-pink-500{:href => "#"} Twitter
+                = link_to 'Linkedin', 'https://www.linkedin.com/in/junior-rengifo-2418b9214', class: 'no-underline hover:underline text-gray-800 hover:text-pink-500'
           .flex-1
             %p.uppercase.text-gray-500.md:mb-6 Company
-            = image_tag 'home/Alphasoft.svg', alt: 'Alphasoft', class: 'w-full text-black'
+            = image_tag 'pages/Alphasoft.svg', alt: 'Alphasoft', class: 'w-full text-black'
             %ul.list-reset.mb-6
               %li.mt-2.inline-block.mr-2.md:block.md:mr-0
-                %a.no-underline.hover:underline.text-gray-800.hover:text-pink-500{:href => "#"} Official Blog
-              %li.mt-2.inline-block.mr-2.md:block.md:mr-0
-                %a.no-underline.hover:underline.text-gray-800.hover:text-pink-500{:href => "#"} About Us
+                = link_to 'About Us', about_path, class: 'no-underline hover:underline text-gray-800 hover:text-pink-500'
               %li.mt-2.inline-block.mr-2.md:block.md:mr-0
                 %a.no-underline.hover:underline.text-gray-800.hover:text-pink-500{:href => "#"} Contact
+
     :javascript
-      let scrollpos = window.scrollY;
-      let header = document.getElementById("header");
-      let navcontent = document.getElementById("nav-content");
-      let navlinks = navcontent.querySelectorAll('a'); 
-      let brandname = document.getElementById("brandname");
-      let toToggle = document.querySelectorAll(".toggleColour");
+      var scrollpos = window.scrollY;
+      var header = document.getElementById("header");
+      var navcontent = document.getElementById("nav-content");
+      var navlinks = navcontent.querySelectorAll('a'); 
+      var brandname = document.getElementById("brandname");
+      var toToggle = document.querySelectorAll(".toggleColour");
 
       document.addEventListener("scroll", function () {
         /*Apply classes for slide in bar*/

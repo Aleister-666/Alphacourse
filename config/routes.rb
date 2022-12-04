@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   }
 
 
-
   ####################### ADMINDS ROUTES ###############################
   namespace :admins do
     resources :courses do
@@ -65,12 +64,16 @@ Rails.application.routes.draw do
     end
     
     resources :courses, only: %i[ index show ] do
-      post 'inscriptions/:user_id', to: 'inscriptions#create', as: :inscriptions
-      delete 'inscriptions/:user_id', to: 'inscriptions#destroy'
+      post 'inscriptions', to: 'inscriptions#create', as: :inscriptions
+      delete 'inscriptions', to: 'inscriptions#destroy'
     end
     get :my_courses, to: 'courses#my_courses'
 
   end
+
+  ######################### PAGES ROUTES ###################################
+
+  get :about, to: "pages#about"
 
 
 end

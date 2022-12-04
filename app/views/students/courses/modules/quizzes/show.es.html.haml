@@ -9,11 +9,14 @@
 .bg-gray-100
 	= @quiz.description
 
+- if @quiz.quiz_questions.any?
+	= link_to 'Hacer Prueba', students_courses_quiz_start_path(@quiz), class: 'font-bold text-xl my-4 hover:text-purple-600'
+- else
+	.bg-red-400
+		%p.font-bold.text-md.text-red-600 Este cuestionario aun no tiene preguntas
 
-= link_to 'Hacer Prueba', students_courses_quiz_start_path(@quiz), class: 'font-bold text-xl my-4 hover:text-purple-600'
 
-
-%p.mb-8= "Califiacion para aprobar: #{@quiz.min_value}/#{@quiz.value}"
+%p.mb-8= "Calificacion para aprobar: #{@quiz.min_value}/#{@quiz.value}"
 
 - if @user_attempts.size >= 1
 	%p.font-bold.text-xl.mx-auto.my-8 Resumen de Intentos Previos

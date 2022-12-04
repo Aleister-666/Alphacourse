@@ -24,7 +24,7 @@ class QuizAttempt < ApplicationRecord
   belongs_to :module_quiz
   belongs_to :user
 
-  has_many :question_attempts, dependent: :destroy
+  has_many :question_attempts, dependent: :delete_all
 
   def set_sum_scores
     result = self.question_attempts.map(&:real_score).sum
@@ -38,6 +38,6 @@ class QuizAttempt < ApplicationRecord
     quiz_value = self.module_quiz.value
     quiz_questions_value = self.module_quiz.sum_values
 
-    return ((questions_score * quiz_value) / quiz_questions_value).floor(3)
+    return ((questions_score * quiz_value) / quiz_questions_value).floor(2)
   end
 end

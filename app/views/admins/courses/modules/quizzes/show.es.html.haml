@@ -9,8 +9,10 @@
 	Valor Minimo Aprobatorio
 	= "#{@quiz.min_value}/#{@quiz.value}"
 
+%p.font-bold.text-4xl.mb-8= "Intentos de Usuarios: #{@quiz.quiz_attempts.size}"
 
-%p.font-bold.text-4xl.w-full.text-center= "Suma de Valores de las pruebas: #{@quiz.sum_values}"
+
+%p.font-bold.text-4xl.w-full.text-center= "Suma de Valores de las preguntas: #{@quiz.sum_values}"
 
 .overflow-x-scroll
 	%table.rounded-t-lg.m-5.mx-auto.text-pink-100.bg-purple-900{ class: "w-5/6" }

@@ -10,6 +10,7 @@
 				%th.px-4.py-3 #
 				%th.px-4.py-3 Pregunta
 				%th.px-4.py-3 Respuesta
+				%th.px-4.py-3 Retroalimentacion
 				%th.px-4.py-3 Puntos
 				%th.px-4.py-3 Calificacion
 		%tbody
@@ -19,5 +20,15 @@
 					%td.px-4.py-3.border-b.border-purple-500= question_attempt.quiz_question.title
 					%td.px-4.py-3.border-b.border-purple-500
 						= question_attempt.question_answer.answer
+					%td.px-4.py-3.border-b.border-purple-500
+						= question_attempt.question_answer.feedback
 					%td.px-4.py-3.border-b.border-purple-500= "#{question_attempt.real_score}/#{question_attempt.max_score}"
-					%td.px-4.py-3.border-b.border-purple-500= @quiz_attempt.result_quiz
+					%td.px-4.py-3.border-b.border-purple-500= question_attempt.result_question
+		%tfoot
+			%tr.bg-purple-700.font-semibold
+				%td.px-4.py-3.border-b.border-purple-500
+				%td.px-4.py-3.border-b.border-purple-500
+				%td.px-4.py-3.border-b.border-purple-500
+				%td.px-4.py-3.border-b.border-purple-500
+				%td.px-4.py-3.border-b.border-purple-500
+				%td.px-4.py-3.border-b.border-purple-500.text-center= @quiz_attempt.result_quiz

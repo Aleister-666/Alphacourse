@@ -34,6 +34,17 @@ class QuestionAttempt < ApplicationRecord
     return self.fraction * self.max_score
   end
 
+  def result_question
+
+    score = self.real_score
+
+    quiz_value = self.quiz_attempt.module_quiz.value
+
+    quiz_questions_value = self.quiz_attempt.module_quiz.sum_values
+
+    return ((score * quiz_value) / quiz_questions_value).floor(2)
+  end
+
   private
 
   def set_fraction_and_score
