@@ -1,11 +1,3 @@
-.flex.flex-start.gap-4.m-4
-	.p-4.rounded.bg-purple-600.text-white
-		%i.fa-regular.fa-file-lines.text-3xl
-	.flex.flex-col
-		%span.text-xs.font-mono Pagina
-		%h5.font-bold.text-xl= @page.title
-%hr.border-black
-
-
+= render 'shared/header_module', model: @page
 .my-8
 	= @page.content

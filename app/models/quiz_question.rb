@@ -21,8 +21,10 @@
 #
 class QuizQuestion < ApplicationRecord
   ################# Callbacks #####################################
-  after_save :update_sum_total
-  after_destroy :update_sum_total
+  after_create :increment_sum_total_quiz
+  after_update :update_sum_total_quiz, if: :saved_change_to_score?
+  after_destroy :update_sum_total_quiz
+  
   ################# MODULE QUIZ RELATION ##########################
   belongs_to :module_quiz
   
@@ -44,13 +46,12 @@ class QuizQuestion < ApplicationRecord
 
 
   ############### VALIDATIONS ####################################
-  validates :title, presence: true
-  validates :description, presence: true
+  validates :title, :description, :module_quiz, :question_answers, presence: true
   validates :score, presence: true, numericality: true
-  validates :module_quiz, presence: true
-  validates :question_answers, presence: true
 
+  ############### CUSTOM VALIDATION ###############################
   validate :required_one_correct_answer, :only_one_correct_answer
+
 
   ################ PUBLIC METHODS ################################
   def max_point_answer
@@ -78,7 +79,16 @@ class QuizQuestion < ApplicationRecord
     end
   end
 
-  def update_sum_total
+
+  ################# CALLBACKS FUNCTIONS ###########################
+  def increment_sum_total_quiz
+    quiz = self.module_quiz
+    quiz.sum_values += self.score
+    quiz.save
+  end
+
+  
+  def update_sum_total_quiz
     quiz = self.module_quiz
     quiz.sum_values = quiz.quiz_questions.map(&:score).sum
     quiz.save

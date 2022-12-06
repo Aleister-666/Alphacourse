@@ -31,7 +31,7 @@ class Admins::Courses::Modules::QuizzesController < ApplicationController
 
 	def update
 		respond_to do |format|
-			if @quiz.update(pages_params)
+			if @quiz.update(quizzes_params)
 				format.html {
 					redirect_to admins_course_path(@quiz.course_module.course_id), notice: 'Modulo Cuestionario: Actualizado'
 				}
@@ -64,6 +64,6 @@ class Admins::Courses::Modules::QuizzesController < ApplicationController
 	end
 
 	def quizzes_params
-    params.require(:module_quiz).permit(:title, :description, :min_value)
+    params.require(:module_quiz).permit(:title, :description, :min_value, :value)
   end
 end

@@ -17,6 +17,7 @@
 #  fk_rails_...  (quiz_question_id => quiz_questions.id) ON DELETE => cascade
 #
 class QuestionAnswer < ApplicationRecord
+
   VALID_SCORES = *("0.0".."1.0").freeze
   ################### QUIZ QUESTION RELATION ##########################
   belongs_to :quiz_question
@@ -30,10 +31,11 @@ class QuestionAnswer < ApplicationRecord
 
 
   ################## VALIDATIONS ######################################
-  validates :answer, presence: true
+  validates :answer, :quiz_question, presence: true
   validates :fraction, numericality: true
-  validates :quiz_question, presence: true
 
+
+  ################## PUBLIC METHODS ###########################
   def self.permited_scores
     VALID_SCORES.map { |e| [(e.to_f * 100).to_i, e.to_f] }
   end

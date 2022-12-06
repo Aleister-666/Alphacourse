@@ -3,7 +3,7 @@ es:
     attributes:
       quiz_question:
         title: Titulo
-        description: Descripcion
+        description: Enunciado
         position: Posicion
         score: Puntaje
         module_quiz: Pregunta

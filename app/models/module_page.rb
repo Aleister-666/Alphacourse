@@ -28,7 +28,6 @@ class ModulePage < ApplicationRecord
 
 
   ###################### VALIDATIONS #############################
-  validates :title, presence: true
-  validates :section, presence: true
+  validates :title, :section, presence: true
 
 end

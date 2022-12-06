@@ -31,6 +31,5 @@ class Section < ApplicationRecord
 
 
   ############### VALIDATIONS #########################
-  validates :title, presence: true
-  validates :course, presence: true
+  validates :title, :course, presence: true
 end

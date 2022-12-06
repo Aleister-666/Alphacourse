@@ -1,6 +1,11 @@
 %h1.font-bold.text-2xl Intento de Prueba
+.my-8
+	= "Puntacion Obtenida en el Cuestionario: #{@quiz_attempt.sum_scores}/#{@quiz.sum_values}"
+	%br
+	= "Puntacion general: #{@quiz_attempt.result_quiz}/#{@quiz.value}"
 
-= "Puntacion Obtenida: #{@quiz_attempt.sum_scores}/#{@quiz.sum_values}"
+.my-4
+	= link_to 'Regresar al Cuestionario', students_courses_modules_quiz_path(@quiz), class: 'rounded-lg py-3 px-5 bg-purple-600 inline-block font-medium text-white'
 
 
 .overflow-x-scroll
@@ -31,4 +36,4 @@
 				%td.px-4.py-3.border-b.border-purple-500
 				%td.px-4.py-3.border-b.border-purple-500
 				%td.px-4.py-3.border-b.border-purple-500
-				%td.px-4.py-3.border-b.border-purple-500.text-center= @quiz_attempt.result_quiz
+				%td.px-4.py-3.border-b.border-purple-500= @quiz_attempt.result_quiz

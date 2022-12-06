@@ -50,15 +50,15 @@ class User < ApplicationRecord
   ################# PUBLIC METHODS ########################
 
   def course_inscript?(course)
-    return self.courses.exists?(course.id)
+    self.courses.exists?(course.id)
   end
 
   def module_completation?(course_module)
-    return self.course_module_completations.exists?(course_module_id: course_module.id, complete: true)
+    self.course_module_completations.exists?(course_module_id: course_module.id, complete: true)
   end
 
   def completation_create?(course_module)
-    return self.course_module_completations.exists?(course_module_id: course_module.id)
+    self.course_module_completations.exists?(course_module_id: course_module.id)
   end
 
   def desinscription_course(course)

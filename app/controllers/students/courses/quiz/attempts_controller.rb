@@ -33,8 +33,6 @@ class Students::Courses::Quiz::AttemptsController < ApplicationController
   def results
     @quiz_attempt = QuizAttempt.includes(question_attempts: [:quiz_question, { question_answer: [:rich_text_answer, :rich_text_feedback] }])
     .where(id: params[:quiz_attempt_id], user: current_user).first
-
-
   end
 
 

@@ -20,11 +20,20 @@
 #  fk_rails_...  (user_id => users.id) ON DELETE => cascade
 #
 class QuizAttempt < ApplicationRecord
-
+  ################## MODULE QUIZ RELATION ######################
   belongs_to :module_quiz
+
+  ################# USER RELATION #############################
   belongs_to :user
 
+  ################# QUESTION ATTEMPTS RELATION ###############
   has_many :question_attempts, dependent: :delete_all
+
+  ################# VALIDATIONS #############################
+
+  validates :module_quiz, :user, presence: true
+
+  ################# PUBLIC METHODS #########################
 
   def set_sum_scores
     result = self.question_attempts.map(&:real_score).sum
@@ -40,4 +49,6 @@ class QuizAttempt < ApplicationRecord
 
     return ((questions_score * quiz_value) / quiz_questions_value).floor(2)
   end
+
+  
 end

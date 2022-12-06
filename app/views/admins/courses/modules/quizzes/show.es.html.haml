@@ -1,6 +1,5 @@
+= render 'shared/header_module', model: @quiz
 .flex.justify-between
-	%h1= @quiz.title
-	
 	= link_to 'Registrar pregunta', new_admins_courses_modules_quiz_question_path(@quiz), class: 'rounded-lg py-3 px-5 bg-purple-600 text-white inline-block font-medium cursor-pointer'
 
 = @quiz.description
@@ -29,7 +28,7 @@
 					%td.px-4.py-3.border-b.border-purple-500
 						%i.fa-solid.fa-up-down-left-right.text-xl.cursor-pointer
 					%td.px-4.py-3.border-b.border-purple-500
-						= link_to question.title, edit_admins_courses_modules_question_path(question), class: 'hover:text-purple-100 visited:text-rose-100'
+						= link_to question.title, edit_admins_courses_modules_question_path(question), class: 'hover:text-purple-100 visited:text-rose-100', title: 'Editar Pregunta'
 					%td.px-4.py-3.border-b.border-purple-500= question.score
 					%td.px-4.py-3.border-b.border-purple-500= question.question_type
 					%td.px-4.py-3.border-b.border-purple-500

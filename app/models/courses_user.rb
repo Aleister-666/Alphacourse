@@ -27,7 +27,6 @@ class CoursesUser < ApplicationRecord
 
 
   ################## VALIDATIONS #############################
-  validates :course, presence: true
-  validates :user, presence: true
+  validates :course, :user, presence: true
   
 end

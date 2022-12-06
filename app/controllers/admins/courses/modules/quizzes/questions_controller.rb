@@ -34,7 +34,7 @@ class Admins::Courses::Modules::Quizzes::QuestionsController < ApplicationContro
 		respond_to do |format|
 			if @question.update(questions_params)
 				format.html {
-					redirect_to admins_courses_modules_quiz_path(@question.module_quiz_id), alert: 'Pregunta de Cuestionario: Actualizada'
+					redirect_to admins_courses_modules_quiz_path(@question.module_quiz_id), notice: 'Pregunta de Cuestionario: Actualizada'
 				}
 			else
 				format.html {
@@ -68,7 +68,8 @@ class Admins::Courses::Modules::Quizzes::QuestionsController < ApplicationContro
 	end
 
 	def set_question
-		@question = QuizQuestion.find(params[:id])
+		@question = QuizQuestion.includes(question_answers: [:rich_text_answer, :rich_text_feedback])
+			.where(id: params[:id]).first
 	end
 
 	def questions_params

@@ -75,14 +75,15 @@
                       %span.select-none Cursos
             / navigation group end
 
+
             / example copies start
             .px-4.pb-6
               %h3.mb-2.text-xs.font-medium.uppercase.text-gray-500
-                Legal
+                Usuario
               %ul.mb-8.text-sm.font-medium
                 %li
-                  %a.flex.items-center.rounded.py-3.pl-3.pr-4.text-gray-50.hover:bg-gray-600{:href => "#tc"}
-                    %span.select-none Terms and Condition
+                  = link_to edit_user_registration_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                    %span.select-none Editar Usuario
                 %li
                   %a.flex.items-center.rounded.py-3.pl-3.pr-4.text-gray-50.hover:bg-gray-600{:href => "#privacy"}
                     %span.select-none Privacy policy

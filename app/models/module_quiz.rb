@@ -37,14 +37,18 @@ class ModuleQuiz < ApplicationRecord
 
 
   ##################### VALIDATIONS ##################################
-  validates :title, presence: true
-  validates :value, numericality: true
-  validates :min_value, numericality: true
-  validates :sum_values, numericality: true
-  validates :section, presence: true
+  validates :title, :section, presence: true
+  validates :value, :min_value, :sum_values, numericality: true
 
+  #################### CUSTOM VALIDATION ############################
   validate :max_value
 
+
+  #################### PUBLIC METHODS ##############################
+
+  def course_id
+    self.section.course_id
+  end
 
   #################### PRIVATE METHODS ################################
 
