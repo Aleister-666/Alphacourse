@@ -23,13 +23,10 @@ class User < ApplicationRecord
   has_many :courses_users, dependent: :destroy
   has_many :courses, through: :courses_users
   
-
-
   ################# COURSE MODULE COMPLETATION RELATIONS ##################
   has_many :course_module_completations, dependent: :destroy
   
   has_many :course_modules, through: :course_module_completations
-
 
   ################ QUIZ ATTEMPT RELATION ##################################
   has_many :quiz_attempts, dependent: :destroy
@@ -49,18 +46,31 @@ class User < ApplicationRecord
 
   ################# PUBLIC METHODS ########################
 
+  # Verifica si un usuario esta incrito en un curso o no
+  # @param course 
+  # @return True|False
   def course_inscript?(course)
     self.courses.exists?(course.id)
   end
 
+  # Verifica si un usuario completo un modulo de curso o no
+  # @param course_module
+  # @return True|False
   def module_completation?(course_module)
     self.course_module_completations.exists?(course_module_id: course_module.id, complete: true)
   end
 
+  # Verifica si un usuario tiene un registro de completacion de un curso
+  # @param course_module
+  # @return True|False
   def completation_create?(course_module)
     self.course_module_completations.exists?(course_module_id: course_module.id)
   end
 
+  # Metodo para desincribir un curso de un usuario, elimina su inscricion, sus modulos completado
+  # su registro de intentos de cuestionarios y sus respuestas a preguntas
+  # @param course
+  # @return True|False
   def desinscription_course(course)
     inscripcion = CoursesUser.find_by(user_id: self.id, course: course)
     modules_completations = self.course_module_completations

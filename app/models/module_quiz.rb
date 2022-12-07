@@ -56,7 +56,9 @@ class ModuleQuiz < ApplicationRecord
 
   def max_value
     if self.min_value > self.value
-      errors.add(:min_value, I18n.t('activerecord.errors.models.module_quiz.attributes.min_value.derbording'))      
+      errors.add(:min_value, I18n.t(
+        'activerecord.errors.models.module_quiz.attributes.min_value.derbording'
+        ))      
     end
   end
 end

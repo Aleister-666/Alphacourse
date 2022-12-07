@@ -47,7 +47,6 @@ class CourseModule < ApplicationRecord
   validates :course, presence: true
   validates :section, presence: true
 
-
   ############### PUBLIC METHODS #############
   def type_name
     self.instanceable_type.sub('Module', '')

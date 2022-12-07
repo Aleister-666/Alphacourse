@@ -26,7 +26,6 @@ class ModulePage < ApplicationRecord
   ####################### ACTION TEXT MODULE #####################
   has_rich_text :content
 
-
   ###################### VALIDATIONS #############################
   validates :title, :section, presence: true
 

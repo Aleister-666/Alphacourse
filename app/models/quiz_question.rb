@@ -66,7 +66,9 @@ class QuizQuestion < ApplicationRecord
     filtered = question_answers.select { |e| e.fraction == 1.0 }
 
     if filtered.size == 0
-      errors.add(:question_answers, I18n.t('activerecord.errors.models.quiz_question.attributes.question_answers.required_one'))
+      errors.add(:question_answers, I18n.t(
+        'activerecord.errors.models.quiz_question.attributes.question_answers.required_one'
+        ))
     end
   end
 
@@ -74,7 +76,9 @@ class QuizQuestion < ApplicationRecord
     filtered = question_answers.select { |e| e.fraction == 1.0 }
 
     if filtered.size > 1
-      errors.add(:question_answers, I18n.t('activerecord.errors.models.quiz_question.attributes.question_answers.only_one'))
+      errors.add(:question_answers, I18n.t(
+        'activerecord.errors.models.quiz_question.attributes.question_answers.only_one'
+        ))
       
     end
   end
