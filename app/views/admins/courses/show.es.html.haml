@@ -1,6 +1,8 @@
+= render 'shared/back_link', url_back: admins_courses_path
 .w-full.flex.flex-col
-  %h1= @course.name
-  = @course.description
+  %h1.font-bold.text-2xl= @course.name
+  .text-center
+    = @course.description
   %div
     .my-4
       = link_to 'Crear Seccion', new_admins_course_section_path(@course), class: 'mt-2 rounded-lg py-3 px-5 bg-purple-600 inline-block font-medium text-white', data: { turbo_frame: dom_id(Section.new) }
@@ -11,8 +13,7 @@
       = turbo_frame_tag 'sections' do
         = render @course.sections
 
-    = link_to 'Edit this course', edit_admins_course_path(@course), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+    = link_to 'Editar Datos del Curso', edit_admins_course_path(@course), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
     
     .inline-block.ml-2
-      = button_to 'Destroy this course', admins_course_path(@course), { class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium", method: :delete }
-    = link_to 'Back to courses', admins_courses_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+      = button_to 'Eliminar este Curso', admins_course_path(@course), { class: "mt-2 rounded-lg py-3 px-5 bg-red-600 font-medium text-white cursor-pointer", method: :delete, data: { turbo_confirm: 'Estas Seguro?' } }

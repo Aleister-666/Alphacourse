@@ -29,4 +29,8 @@ class ModulePage < ApplicationRecord
   ###################### VALIDATIONS #############################
   validates :title, :section, presence: true
 
+  def course_id
+    self.section.course_id
+  end
+
 end

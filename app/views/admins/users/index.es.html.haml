@@ -1,0 +1,20 @@
+%p.font-bold.text-4xl.w-full.text-center= "Usuarios Registrados Actualmente: #{@users.size}"
+
+.overflow-x-scroll
+  %table.rounded-t-lg.m-5.mx-auto.text-pink-100.bg-purple-900{ class: "w-5/6" }
+    %thead
+      %tr.text-left.border-b-2.border-pink-200.font-bold
+        %th.px-4.py-3 #
+        %th.px-4.py-3 Nombre de Usuario
+        %th.px-4.py-3 Correo Electronico
+        %th.px-4.py-3 Rol de Usuario
+        %th.px-4.py-3 Fecha de Registro
+        %th.px-4.py-3 Acciones
+    %tbody
+      - @users.order(:role).each_with_index do |user, index|
+        %tr.bg-purple-700.font-semibold
+          %td.px-4.py-3.border-b.border-purple-500= index + 1
+          %td.px-4.py-3.border-b.border-purple-500= user.username
+          %td.px-4.py-3.border-b.border-purple-500= user.email
+          %td.px-4.py-3.border-b.border-purple-500= user.role
+          %td.px-4.py-3.border-b.border-purple-500= user.created_at.to_date

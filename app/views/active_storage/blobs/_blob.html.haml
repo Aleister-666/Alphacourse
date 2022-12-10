@@ -1,0 +1,4 @@
+= link_to url_for(blob), class: '', title: 'Click para ver imagen completa' do
+  %figure{ class: 'flex justify-center items-center' }
+    - if blob.representable?
+      = image_tag blob.representation(resize_to_limit: [500, 500])

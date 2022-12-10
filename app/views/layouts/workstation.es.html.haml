@@ -1,6 +1,7 @@
 !!!
 %html{:lang => "es"}
   %head
+    %meta{ charset: 'utf-8' }
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title Alphacourse
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
@@ -41,7 +42,7 @@
 
     %section{ data: { controller: 'simple-navbar' } }
       / Navbar start
-      %nav.fixed.top-0.z-40.flex.w-full.flex-row.justify-end.bg-gray-700.px-4.sm:justify-between{ data: { 'simple-navbar-target': 'navbar' } }
+      %nav.fixed.top-0.z-40.flex.w-full.flex-row.justify-end.bg-purple-700.px-4.sm:justify-between{ data: { 'simple-navbar-target': 'navbar' } }
         %ul.breadcrumb.hidden.flex-row.items-center.py-4.text-lg.text-white.sm:flex
           %li.inline
             = link_to 'ALPHASOFT', about_path, class: 'hover:text-purple-600'
@@ -57,49 +58,47 @@
       / Sidebar start
       #containerSidebar.z-40
         .navbar-menu.relative.z-40
-          %nav#sidebar.fixed.left-0.bottom-0.flex.-translate-x-full.flex-col.overflow-y-auto.bg-gray-700.pt-6.pb-8.sm:max-w-xs.lg:w-80{ class: "w-3/4", data: { 'simple-navbar-target': 'sidebar' } }
+          %nav#sidebar.fixed.left-0.bottom-0.flex.-translate-x-full.flex-col.overflow-y-auto.bg-purple-900.pt-6.pb-8.sm:max-w-xs.lg:w-80{ class: "w-3/4", data: { 'simple-navbar-target': 'sidebar' } }
             / one category / navigation group
             .px-4.pb-6
-              %h3.mb-2.text-xs.font-medium.uppercase.text-gray-500
+              %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
                 Principales
               %ul.mb-8.text-sm.font-medium
                 - if current_user.admin?
-                  = link_to admins_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                  = link_to admins_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
                     %span.select-none Cursos
                 - else
                   %li
-                    = link_to students_my_courses_path, class: 'active flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                    = link_to students_my_courses_path, class: 'active flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
                       %span.select-none Mis Cursos
                   %li
-                    = link_to students_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                    = link_to students_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
                       %span.select-none Cursos
             / navigation group end
 
 
             / example copies start
             .px-4.pb-6
-              %h3.mb-2.text-xs.font-medium.uppercase.text-gray-500
+              %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
                 Usuario
               %ul.mb-8.text-sm.font-medium
+                - if current_user.admin?
+                  %li
+                    = link_to admins_users_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
+                      %span.select-none Listar Usuarios
                 %li
-                  = link_to edit_user_registration_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                  = link_to edit_user_registration_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
                     %span.select-none Editar Usuario
-                %li
-                  %a.flex.items-center.rounded.py-3.pl-3.pr-4.text-gray-50.hover:bg-gray-600{:href => "#privacy"}
-                    %span.select-none Privacy policy
-                %li
-                  %a.flex.items-center.rounded.py-3.pl-3.pr-4.text-gray-50.hover:bg-gray-600{:href => "#imprint"}
-                    %span.select-none Imprint
             
             .px-4.pb-6
-              %h3.mb-2.text-xs.font-medium.uppercase.text-gray-500
+              %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
                 Otros
               %ul.mb-8.text-sm.font-medium
                 %li
-                  = link_to root_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600' do
+                  = link_to root_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
                     %span.select-none Inicio
                 %li
-                  = link_to destroy_user_session_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600', data: { turbo_method: :delete } do
+                  = link_to destroy_user_session_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800', data: { turbo_method: :delete } do
                     %span.select-none Cerrar Session
             / example copies end
         .mx-auto.lg:ml-80
