@@ -1,0 +1,34 @@
+.w-full.flex.flex-col
+  .flex.items-center.my-4.gap-2
+    %h1.font-bold.text-4xl Cursos
+    = link_to new_admins_course_path,
+     class: 'text-purple-600 cursor-pointer text-3xl',
+     title: 'Crear Curso',
+     data: { turbo_frame: dom_id(Course.new) } do
+
+      %i{ class: 'fa-solid fa-circle-plus' }
+      
+  %hr.border.border-black
+  .my-4
+    = turbo_frame_tag dom_id(Course.new)
+
+
+  .mb-2
+    = form_with(url: admins_courses_path,
+     method: :get,
+     data: { turbo_frame: 'courses', controller: 'search', action: 'input->search#submit' },
+     class: '') do |form|
+
+      = form.search_field :name,
+       placeholder: 'Nombre del curso...',
+       class: 'block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-purple-500 focus:ring-purple-500 sm:text-sm'
+
+
+  = turbo_frame_tag 'courses' do
+    .flex.flex-col
+      #courses_content.min-w-full.grid.grid-cols-1.md:grid-cols-3.lg:grid-cols-4.gap-4
+        = render @courses
+
+      - if @pagy.pages > 1
+        .self-center.mt-8
+          != pagy_nav(@pagy, link_extra: 'data-turbo-action="advance"')

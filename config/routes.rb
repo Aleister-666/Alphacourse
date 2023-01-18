@@ -11,7 +11,10 @@ Rails.application.routes.draw do
 
   ####################### ADMINDS ROUTES ###############################
   namespace :admins do
-    get 'users/index', to: 'users#index', as: :users
+    # get 'users/index', to: 'users#index', as: :users
+
+    resources :users, only: %i[ index show destroy ]
+
 
     resources :courses do
       resources :sections, except: %i[ show index ], shallow: true

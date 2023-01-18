@@ -96,3 +96,5 @@ gem "requestjs-rails", "~> 0.0.10"
 
 # FontAwesome Icons with sass preprocesor
 gem "font-awesome-sass", "~> 6.2"
+
+gem "pagy", "~> 6.0" # Pagination

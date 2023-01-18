@@ -9,3 +9,4 @@ pin "trix"
 pin "@rails/actiontext", to: "actiontext.js"
 pin "sortablejs" # @1.15.0
 
+pin "debounce" # @1.2.1

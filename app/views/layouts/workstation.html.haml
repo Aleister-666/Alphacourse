@@ -40,12 +40,12 @@
 
   %body
 
-    %section{ data: { controller: 'simple-navbar' } }
+    %section.mb-16{ data: { controller: 'simple-navbar' } }
       / Navbar start
       %nav.fixed.top-0.z-40.flex.w-full.flex-row.justify-end.bg-purple-700.px-4.sm:justify-between{ data: { 'simple-navbar-target': 'navbar' } }
         %ul.breadcrumb.hidden.flex-row.items-center.py-4.text-lg.text-white.sm:flex
           %li.inline
-            = link_to 'ALPHASOFT', about_path, class: 'hover:text-purple-600'
+            = link_to 'ALPHASOFT', about_path, class: 'hover:text-purple-100'
           %li.inline
             %span ALPHACOURSE
         %button.py-4.text-2xl.text-white.hover:text-gray-200{ type: "button", data: { 'simple-navbar-target': 'button', action: 'click->simple-navbar#handler' } }
@@ -74,10 +74,8 @@
                   %li
                     = link_to students_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
                       %span.select-none Cursos
-            / navigation group end
 
 
-            / example copies start
             .px-4.pb-6
               %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
                 Usuario
@@ -103,7 +101,7 @@
             / example copies end
         .mx-auto.lg:ml-80
       / Sidebar end
-    %main.mt-28.w-full
+    %main.container.mx-auto
       #flash
         = render 'shared/flash'
 

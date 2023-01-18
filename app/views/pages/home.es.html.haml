@@ -34,15 +34,15 @@
           %ul.list-reset.lg:flex.justify-end.flex-1.items-center
             - if user_signed_in?
               %li.mr-3
-                %h2.text-purple= "Bienvenido #{current_user.username}"
+                %h2.font-bold.text-white#welcome_user_msg= "Bienvenido #{current_user.username}"
               %li.mr-3
-                = link_to 'Cursos', determine_courses_way, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-gray-300 hover:text-purple-600'
+                = link_to 'Cursos', determine_courses_way, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-white hover:text-purple-600'
             - else
               %li.mr-3
-                = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-gray-300 hover:text-purple-600'
+                = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-white hover:text-purple-600'
 
               %li.mr-3
-                = link_to t('devise.registrations.new.sign_up'), new_user_registration_path, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-gray-300 hover:text-rose-600'
+                = link_to t('devise.registrations.new.sign_up'), new_user_registration_path, class: 'block md:inline-block lg:inline-block py-2 px-4 font-bold no-underline lg:border lg:border-gray-100 rounded lg:text-white hover:bg-white hover:text-rose-600'
       %hr.border-b.border-gray-100.opacity-25.my-0.py-0/
     / Hero
     .pt-24
@@ -343,6 +343,7 @@
       var navlinks = navcontent.querySelectorAll('a'); 
       var brandname = document.getElementById("brandname");
       var toToggle = document.querySelectorAll(".toggleColour");
+      var welcome_user_msg = document.getElementById('welcome_user_msg');
 
       document.addEventListener("scroll", function () {
         /*Apply classes for slide in bar*/
@@ -355,6 +356,10 @@
             e.classList.remove('lg:text-white');
           });
 
+          if (welcome_user_msg) {
+            welcome_user_msg.classList.remove('text-white');
+          }
+
           //Use to switch toggleColour colours
           for (var i = 0; i < toToggle.length; i++) {
             toToggle[i].classList.add("text-gray-800");
@@ -365,6 +370,9 @@
           navcontent.classList.add("bg-white");
         } else {
           header.classList.remove("bg-white");
+          if (welcome_user_msg) {
+            welcome_user_msg.classList.add('text-white');
+          }
           //Use to switch toggleColour colours
           for (var i = 0; i < toToggle.length; i++) {
             toToggle[i].classList.add("text-white");

@@ -1,4 +1,5 @@
 module ApplicationHelper
+	include Pagy::Frontend
 
 	def determine_courses_way
 		return students_courses_path unless user_signed_in?

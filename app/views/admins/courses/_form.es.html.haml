@@ -15,5 +15,9 @@
   .my-5
     = form.label :visible
     = form.check_box :visible, class: "block mt-2 h-5 w-5"
+
+  .my-5
+    = form.label :cover
+    = form.file_field :cover
   .inline
     = form.submit class: "rounded-lg py-3 px-5 bg-purple-600 text-white inline-block font-medium cursor-pointer"

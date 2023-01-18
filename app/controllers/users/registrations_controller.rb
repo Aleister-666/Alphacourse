@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  layout false, except: %i[ edit update ]
-  layout 'workstation', only: %i[ edit update ]
+  layout :resolve_layout
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -39,6 +39,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
+
+
+  private
+
+  def resolve_layout
+    case action_name
+    when 'edit', 'update'
+      'workstation'
+    else
+      false
+    end
+  end
 
   # protected
 

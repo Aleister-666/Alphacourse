@@ -1,0 +1,42 @@
+.overflow-hidden.bg-white.shadow.sm:rounded-lg
+  .px-4.py-5.sm:px-6
+    %h3.text-lg.font-medium.leading-6.text-gray-900 Informacion de Usuario
+    %p.mt-1.max-w-2xl.text-sm.text-gray-500 Informacion personal no sensible de los usuarios
+  .border-t.border-gray-200
+    %dl
+      .bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+        %dt.text-sm.font-medium.text-gray-500 Nombre de Usuario
+        %dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @user.username
+      
+      .bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+        %dt.text-sm.font-medium.text-gray-500 Direccion de Correo Electronico
+        %dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @user.email
+      
+      .bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+        %dt.text-sm.font-medium.text-gray-500 Rol de Usuario
+        %dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @user.role
+      
+      .bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+        %dt.text-sm.font-medium.text-gray-500 Fecha de Registro
+        %dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @user.created_at
+      
+      .bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+        %dt.text-sm.font-medium.text-gray-500 Ultima fecha de Actualizacion de datos
+        %dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @user.updated_at
+      
+      .bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+        %dt.text-sm.font-medium.text-gray-500 Cursos Inscritos
+        %dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0
+          - if @user.courses.empty?
+            No se encuentras inscrito en ningun curso
+          - else
+            %ul.divide-y.divide-gray-200.rounded-md.border.border-gray-200{role: "list"}
+            - @user.courses.each do |course|
+              %li.flex.items-center.justify-between.py-3.pl-3.pr-4.text-sm
+                .flex.w-0.flex-1.items-center
+                  %i.fa-solid.fa-book.flex-shrink-0.text-purple-400
+                  %span.ml-2.w-0.flex-1.truncate= course.name
+                .ml-4.flex-shrink-0
+                  = link_to admins_course_path(course),
+                   class: 'font-medium text-indigo-600 hover:text-purple-500' do
+                    %i.fa-solid.fa-eye{ title: 'Ir al curso' }

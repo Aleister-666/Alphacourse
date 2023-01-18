@@ -25,6 +25,8 @@ class Course < ApplicationRecord
 
   ############### ACTION TEXT#####################
   has_rich_text :description
+  ############## ACTIVE STORAGE ##################
+  has_one_attached :cover
 
   ############### VALIDATIONS #############################
   validates :name, presence: true, uniqueness: true

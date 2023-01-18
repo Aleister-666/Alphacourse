@@ -8,7 +8,8 @@ class Admins::CoursesController < ApplicationController
 
   # GET admins/courses
   def index
-    @courses = Course.all
+    filtered = Course.where('name ILIKE ?', "%#{params[:name]}%")
+    @pagy, @courses = pagy(filtered.all, items: 15)
   end
 
   # GET admins/courses/1
@@ -67,6 +68,6 @@ class Admins::CoursesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:name, :description, :visible)
+      params.require(:course).permit(:name, :description, :visible, :cover)
     end
 end

@@ -1,0 +1,59 @@
+%h1.font-bold.text-4xl.w-full= "Usuarios Registrados Actualmente: #{@users.size}"
+%hr.border.border-black
+
+
+.overflow-x-scroll
+	%table.rounded-t-lg.m-5.mx-auto.text-purple-100.bg-gray-900{ class: "w-5/6" }
+		%thead
+			%tr.text-left.border-b-2.border-purple-200.font-bold
+				%th.px-4.py-3 #
+				%th.px-4.py-3 Nombre de Usuario
+				%th.px-4.py-3 Correo Electronico
+				%th.px-4.py-3 Rol de Usuario
+				%th.px-4.py-3 Fecha de Registro
+				%th.px-4.py-3 Acciones
+		%tbody
+			- @users.order(:role).each_with_index do |user, index|
+				- if user.admin?
+					%tr.bg-gray-700.font-semibold
+						%td.px-4.py-3.border-b.border-black= index + 1
+						%td.px-4.py-3.border-b.border-black= user.username
+						%td.px-4.py-3.border-b.border-black= user.email
+						%td.px-4.py-3.border-b.border-black= user.role
+						%td.px-4.py-3.border-b.border-black= user.created_at.to_date
+						%td.px-4.py-3.border-b.border-black
+							.flex.justify-center.items-center.gap-4
+								%i.fa-solid.fa-trash.opacity-50{ title: "Este usuario no se puede eliminar" }
+
+								= link_to admins_user_path(user), 
+									class: 'text-white hover:text-sky-500 text-lg cursor-pointer',
+									title: 'Inspeccionar Usuario' do
+									%i.fa-solid.fa-eye
+				- else
+					%tr.bg-gray-500.font-semibold
+						%td.px-4.py-3.border-b.border-black= index + 1
+						%td.px-4.py-3.border-b.border-black= user.username
+						%td.px-4.py-3.border-b.border-black= user.email
+						%td.px-4.py-3.border-b.border-black= user.role
+						%td.px-4.py-3.border-b.border-black= user.created_at.to_date
+						%td.px-4.py-3.border-b.border-black
+							.flex.justify-center.items-center.gap-4
+								= button_to admins_user_path(user),
+								 { class: "text-white hover:text-red-500 text-lg cursor-pointer",
+									method: :delete,
+									data: { turbo_confirm: '¿Estas Seguro que quieres eliminar este usuario?' },
+									title: 'Eliminar Usuario' } do
+
+									%i.fa-solid.fa-trash
+
+								= link_to admins_user_path(user), 
+									class: 'text-white hover:text-sky-500 text-lg cursor-pointer',
+									title: 'Inspeccionar Usuario' do
+									%i.fa-solid.fa-eye
+
+
+
+
+- if @pagy.pages > 1
+	.text-center
+		!= pagy_nav(@pagy, link_extra: 'data-turbo-action="advance"')
