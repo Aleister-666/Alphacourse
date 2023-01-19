@@ -1,9 +1,13 @@
 = turbo_frame_tag dom_id(section) do
-	.my-4
-		= build_accordion(title: section.title, h_classes: 'bg-purple-800 text-white text-bold cursor-pointer w-full') do
-			.flex.flex-col.gap-4.m-4
-
-				%div{ class: 'flex flex-col gap-4', data: { controller: 'drag-drop', 'drag-drop-handle-value': '.fa-up-down-left-right' } }
+	.mb-6{ id: "accordion-section-#{section.id}", "data-accordion" => "collapse", "data-active-classes" => "text-purple-600", "data-inactive-classes" => "text-gray-500 dark:text-gray-400"}
+		%h2{ id: "section-header-#{section.id}" }
+			%button.flex.items-center.justify-between.w-full.py-5.font-medium.text-left.text-gray-500.border-b.border-gray-200.dark:border-gray-700.dark:text-gray-400{"aria-controls" => "section-body-#{section.id}", "aria-expanded" => "true", "data-accordion-target" => "#section-body-#{section.id}", type: "button"}
+				%span= section.title
+				%svg.w-6.h-6.rotate-180.shrink-0{"data-accordion-icon" => "", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
+					%path{"clip-rule" => "evenodd", d: "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z", "fill-rule" => "evenodd"}
+		.hidden{ id: "section-body-#{section.id}", "aria-labelledby" => "section-header-#{section.id}"}
+			.py-5.font-light.border-b.border-gray-200.dark:border-gray-700
+				%div{ class: 'flex flex-col gap-4', data: { controller: 'drag-drop', 'drag-drop-handle-value': '.cursor-move' } }
 
 					= render partial: 'admins/courses/modules/course_module', collection: section.course_modules.order(:position), as: :mod
 

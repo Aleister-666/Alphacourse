@@ -10,3 +10,5 @@ pin "@rails/actiontext", to: "actiontext.js"
 pin "sortablejs" # @1.15.0
 
 pin "debounce" # @1.2.1
+
+pin "flowbite", to: 'flowbite.turbo.min.js'

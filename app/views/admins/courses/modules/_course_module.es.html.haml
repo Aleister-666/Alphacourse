@@ -1,30 +1,29 @@
-.border.border-purple-600.rounded.flex.flex-col{ id: dom_id(mod), data: { item_id: mod.id, move_url: admins_courses_modules_move_path(mod) } }
-	.flex.justify-end.m-2
-		= build_dropdown(icon_classes: 'fa-solid fa-gear text-black text-xl hover:text-purple-600', box_style: 'right-0 top-5 w-28 border border-purple-600 rounded bg-white ') do
-
-			.flex.flex-col.justify-center.items-center.w-full
-				.flex.justify-center.items-center.gap-2.hover:bg-purple-500.hover:text-white.w-full
-					%i.fa-solid.fa-trash.text-sm
-					= button_to 'Borrar', admins_courses_modules_path(mod), { method: :delete, class: 'cursor-pointer text-sm' }
-
+.flex.p-4.border.border-purple-600.rounded-md{ id: dom_id(mod),
+ data: { item_id: mod.id, move_url: admins_courses_modules_move_path(mod) } }
 	- if mod.type_name.eql?('Page')
-		.flex.justify-start.items-start.gap-4.mb-4.mx-4
-			.p-4.md:p-8.rounded.flex.justify-center.items-center.bg-purple-700.text-white
+		.flex.justify-start.items-start.gap-4
+			.w-16.h-16.rounded.flex.justify-center.items-center.bg-purple-700.text-white.cursor-move
 				%i.fa-regular.fa-file-lines.text-3xl
 
 			.flex.flex-col
-				%h4.font-bold= mod.type_name
+				.flex.items-center.gap-2
+					%h4.font-bold= mod.type_name
+					= button_to admins_courses_modules_path(mod),
+					 { method: :delete,
+					   class: 'cursor-pointer text-sm hover:text-red-600',
+					   title: 'Borrar',
+					   data: { turbo_confirm: '¿Seguro que quieres borrar este elemento?' } } do
+						%i.fa-solid.fa-trash.text-sm
 				= link_to mod.instanceable.title, admins_courses_modules_page_path(mod.instanceable_id), class: 'text-purple-600 hover:text-purple-800 visited:text-rose-700 text-sm break-all'
 
-				= link_to edit_admins_courses_modules_page_path(mod.instanceable_id), class: 'text-purple-600 hover:text-purple-800' do
+				= link_to edit_admins_courses_modules_page_path(mod.instanceable_id),
+				 class: 'text-purple-600 hover:text-purple-800', 
+				 title: 'Editar' do
 					%i.fa-regular.fa-pen-to-square.text-base
 
-		.flex.justify-end.items-center.m-2.my-3
-			%i.fa-solid.fa-up-down-left-right.text-xl
-
 	- else
-		.flex.justify-start.items-start.gap-4.mb-4.mx-4
-			.p-4.md:p-8.rounded.flex.justify-center.items-center.bg-rose-700.text-white
+		.flex.justify-start.items-start.gap-4
+			.w-16.h-16.rounded.flex.justify-center.items-center.bg-rose-700.text-white.cursor-move
 				%i.fa-solid.fa-file-pen.text-3xl
 
 			.flex.flex-col
@@ -33,6 +32,3 @@
 
 				= link_to edit_admins_courses_modules_quiz_path(mod.instanceable_id), class: 'text-purple-600 hover:text-purple-800' do
 					%i.fa-regular.fa-pen-to-square.text-base
-
-		.flex.justify-end.items-center.m-2.my-3
-			%i.fa-solid.fa-up-down-left-right.text-xl
