@@ -40,7 +40,7 @@
 
   %body
 
-    %section.mb-16{ data: { controller: 'simple-navbar' } }
+    %section.pb-16{ data: { controller: 'simple-navbar' } }
       / Navbar start
       %nav.fixed.top-0.z-40.flex.w-full.flex-row.justify-end.bg-purple-700.px-4.sm:justify-between{ data: { 'simple-navbar-target': 'navbar' } }
         %ul.breadcrumb.hidden.flex-row.items-center.py-4.text-lg.text-white.sm:flex
@@ -102,7 +102,7 @@
         .mx-auto.lg:ml-80
       / Sidebar end
     %main.container.mx-auto
-      #flash
+      #flash.flex.justify-center.my-2
         = render 'shared/flash'
 
       = yield

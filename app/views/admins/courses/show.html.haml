@@ -3,7 +3,18 @@
 .w-full.flex.flex-col
 
 	%h1.font-bold.text-2xl= @course.name
-	= @course.description
+
+	.mb-6{ id: "accordion-course-description-#{@course.id}", "data-accordion" => "collapse", "data-active-classes" => "text-purple-600", "data-inactive-classes" => "text-gray-500 dark:text-gray-400"}
+		%h2{ id: "course-description-header-#{@course.id}" }
+			%button.flex.items-center.justify-between.w-full.py-5.font-medium.text-left.text-gray-500.border-b.border-gray-200.dark:border-gray-700.dark:text-gray-400{"aria-controls" => "course-description-body-#{@course.id}", "aria-expanded" => "true", "data-accordion-target" => "#course-description-body-#{@course.id}", type: "button"}
+				%span Descripcion
+				%svg.w-6.h-6.rotate-180.shrink-0{"data-accordion-icon" => "", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
+					%path{"clip-rule" => "evenodd", d: "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z", "fill-rule" => "evenodd"}
+		
+		.hidden{ id: "course-description-body-#{@course.id}", "aria-labelledby" => "course-description-header-#{@course.id}"}
+			.py-5.font-light.border-b.border-gray-200.dark:border-gray-700
+				= @course.description
+
 	%div
 		.my-4
 			= link_to 'Crear Seccion', new_admins_course_section_path(@course), class: 'mt-2 rounded-lg py-3 px-5 bg-purple-600 inline-block font-medium text-white', data: { turbo_frame: dom_id(Section.new) }
@@ -18,3 +29,4 @@
 		
 		.inline-block.ml-2
 			= button_to 'Eliminar este Curso', admins_course_path(@course), { class: "mt-2 rounded-lg py-3 px-5 bg-red-600 font-medium text-white cursor-pointer", method: :delete, data: { turbo_confirm: 'Estas Seguro?' } }
+

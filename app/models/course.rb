@@ -30,6 +30,6 @@ class Course < ApplicationRecord
 
   ############### VALIDATIONS #############################
   validates :name, presence: true, uniqueness: true
-  validates :visible, presence: true, inclusion: { in: [true, false] }
+  validates :visible, inclusion: { in: [true, false] }
   
 end

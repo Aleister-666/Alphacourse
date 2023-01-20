@@ -1,4 +1,6 @@
-= link_to url_for(blob), class: '', title: 'Click para ver imagen completa' do
-  %figure{ class: 'flex justify-center items-center' }
-    - if blob.representable?
-      = image_tag blob.representation(resize_to_limit: [500, 500])
+%figure{ class: 'relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0' }
+  - if blob.representable?
+    = link_to url_for(blob), title: 'Click para ver imagen completa' do
+      = image_tag blob.representation(resize_to_limit: [500, 500]), class: 'rounded-lg'
+  -# %figcaption{ class: 'absolute px-4 text-lg text-white bottom-6' }
+  -#   %p Hola
