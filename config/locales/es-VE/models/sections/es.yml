@@ -1,0 +1,15 @@
+es-VE:
+  activerecord:
+    attributes:
+      section:
+        title: Titulo
+    errors:
+      models:
+        section:
+          attributes:
+            title:
+              blank: no puede estar en blanco
+    models:
+      section:
+        one: Seccion
+        other: Secciones

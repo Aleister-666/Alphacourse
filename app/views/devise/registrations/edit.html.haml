@@ -1,0 +1,55 @@
+.mb-6
+  = render 'shared/header_simple', text: 'Editar Usuario', url: :back
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = render "devise/shared/error_messages", resource: resource
+
+  .mb-4
+    .relative.z-0.w-full.mb-6.group
+      = f.email_field :email, class: "block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-purple-600 peer py-2.5", title: 'Correo Electronico', autofocus: true, autocomplete: "Correo Electronico"
+
+      = f.label :email, class: 'peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:left-0 peer-focus:text-purple-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 origin-[0]'
+
+  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+    %div
+      Currently waiting confirmation for: #{resource.unconfirmed_email}
+
+
+  .mb-4.flex.flex-col.gap-4
+
+    .relative.z-0.w-full.mb-6.group
+      = f.password_field :password, class: "block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-purple-600 peer py-2.5", title: 'Contraseña'
+
+      = f.label :password, class: 'peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:left-0 peer-focus:text-purple-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 origin-[0]'
+
+      - if @minimum_password_length
+        %em.text-xs
+          = @minimum_password_length
+          caracteres minimo
+      %span.text-xs.font-mono (dejalo en blanco si no quieres cambiarlo)
+
+
+
+  .mb-4.flex.flex-col.gap-4
+    .relative.z-0.w-full.mb-6.group
+      = f.password_field :password_confirmation, class: "block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-purple-600 peer py-2.5", title: 'Confirmacion de la Contraseña'
+
+      = f.label :password_confirmation, class: 'peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:left-0 peer-focus:text-purple-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 origin-[0]'
+
+
+  .mb-4.flex.flex-col.gap-4
+    .relative.z-0.w-full.mb-6.group
+      = f.password_field :current_password, class: "block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-purple-600 peer py-2.5", title: 'Contraseña actual'
+
+      = f.label :current_password, class: 'peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:left-0 peer-focus:text-purple-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 origin-[0]'
+      %span.text-xs (Para confirmar cambios introduce tu contraseña actual)
+
+
+  .mb-4
+    = f.submit "Actualizar", class: 'text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
+
+
+%h3.mb-2.font-bold Cancelar mi Cuenta
+.flex
+  %span No estas feliz?
+  = button_to "Cancelar mi Cuenta", registration_path(resource_name), data: { confirm: "Estas Seguro" }, method: :delete, class: 'text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'

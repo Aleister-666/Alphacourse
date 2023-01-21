@@ -1,0 +1,135 @@
+.mb-4
+	= render 'shared/header_module', model: @quiz, url: admins_course_path(@quiz.course_id)
+
+
+.overflow-hidden.bg-white.shadow.sm:rounded-lg.mb-4
+	.px-4.py-5.sm:px-6
+		%h3.text-lg.font-medium.leading-6.text-gray-900 Informacion del Cuestionario
+		%p.mt-1.max-w-2xl.text-sm.text-gray-500 Resumen
+	.border-t.border-gray-200
+		%dl
+			.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+				%dt.text-sm.font-medium.text-gray-500 Nombre del cuestionario
+				%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.title
+			
+			.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+				%dt.text-sm.font-medium.text-gray-500 Valor general del cuestionario
+				%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.value
+			
+			.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+				%dt.text-sm.font-medium.text-gray-500 Valor minimo aprobatorio
+				%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.min_value
+
+			.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+				%dt.text-sm.font-medium.text-gray-500 Numero total de intentos de usuarios
+				%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.quiz_attempts.size
+
+
+
+.flex.items-center.mb-4.gap-4
+	%h1.font-bold.text-4xl Preguntas
+
+	%button.text-purple-600.text-3xl.cursor-pointer{
+		type: 'button',
+		title: 'Agregar pregunta',
+		data: {
+			"modal-target": 'questions_modal',
+			"modal-toggle": 'questions_modal'
+		}
+	}
+
+		%i.fa-solid.fa-circle-plus
+
+
+	/ Modal
+	#questions_modal.fixed.top-0.left-0.right-0.z-50.hidden.w-full.p-4.overflow-x-hidden.overflow-y-auto.md:inset-0.h-modal.md:h-full{"aria-hidden" => "true", tabindex: "-1"}
+		.relative.w-full.h-full.max-w-2xl.md:h-auto
+			/ Modal content
+			.relative.bg-white.rounded-lg.shadow
+				/ Modal header
+				.flex.items-start.justify-between.p-4.border-b.rounded-t
+					%h3.text-xl.font-semibold.text-gray-900
+						Pregunta
+					%button.text-gray-400.bg-transparent.hover:bg-gray-200.hover:text-gray-900.rounded-lg.text-sm.ml-auto.inline-flex.items-center{class: "p-1.5", "data-modal-hide" => "questions_modal", type: "button"}
+						%svg.w-5.h-5{"aria-hidden" => "true", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
+							%path{"clip-rule" => "evenodd", d: "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z", "fill-rule" => "evenodd"}
+						%span.sr-only Close modal
+
+				/ Modal body
+				.p-6.grid.grid-cols-2
+
+					%ul.flex.flex-col.gap-2{
+						role: 'tablist',
+						data: { 'tabs-toggle': '#question-descriptions' }
+					}
+						%li{ role: 'presentation' }
+							%button#multichoice-tab.w-full.p-4.bg-purple-100.hover:text-purple-600.focus:text-purple-600{
+								role: 'tab',
+								type: 'button',
+								data: { 'tabs-target': '#multichoice' },
+								"aria-controls": 'profile',
+								"aria-selected": 'false'
+							}
+								Opcion Multiple
+
+						%li{ role: 'presentation' }
+							%button#truefalse-tab.w-full.p-4.bg-purple-100.hover:text-purple-600.focus:text-purple-600{
+								role: 'tab',
+								type: 'button',
+								data: { 'tabs-target': '#truefalse' },
+								"aria-controls": 'profile',
+								"aria-selected": 'false'
+							}
+								Verderaro o Falso
+
+
+					#question-descriptions
+						#multichoice.hidden.p-4.rounded-lg.bg-gray-50{"aria-labelledby" => "multichoice-tab", role: "tabpanel"}
+							.flex.flex-col.gap-4
+								.w-full.flex.flex-col.gap-4
+									%h5.text-md.font-mono.text-pruple-700.self-center Opcion Multiple
+									%p.text-sm.text-gray-500
+										Es un tipo de pregunta, donde el usuario debera escojer una respuesta entre un listado de respuestas posibles
+
+								= link_to 'Registrar pregunta',
+								 new_admins_courses_modules_quiz_question_path(@quiz, type: 'multichoice'),
+								 class: 'text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
+
+						#truefalse.hidden.p-4.rounded-lg.bg-gray-50{"aria-labelledby" => "truefalse-tab", role: "tabpanel"}
+							.flex.flex-col.gap-4
+								.w-full.flex.flex-col.gap-4
+									%h5.text-md.font-mono.text-pruple-700.self-center Verdadero/Falso
+									%p.text-sm.text-gray-500
+										Es un tipo de pregunta, donde el usuario debera escojer segun el enunciado 2 opciones
+										%span.text-green-600 Verdadero
+										o
+										%span.text-red-600 Falso
+
+								= link_to 'Registrar pregunta',
+								 new_admins_courses_modules_quiz_question_path(@quiz, type: 'truefalse'),
+								 class: 'text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
+
+
+- if @quiz.quiz_questions.size >= 1
+	%p.font-bold.text-xl.w-full.text-center= "Puntaje total de preguntas: #{@quiz.sum_values}"
+
+	.overflow-x-scroll
+		%table.rounded-t-lg.m-5.mx-auto.text-pink-100.bg-rose-900{ class: "w-5/6" }
+			%thead
+				%tr.text-left.border-b-2.border-pink-200.font-bold
+					%th.px-4.py-3 &
+					%th.px-4.py-3 Titulo
+					%th.px-4.py-3 Puntacion
+					%th.px-4.py-3 Tipo de Pregunta
+					%th.px-4.py-3 Acciones
+			%tbody{ data: { controller: 'drag-drop', 'drag-drop-handle-value': '.fa-up-down-left-right' } }
+				- @quiz.quiz_questions.order(:position).each do |question|
+					%tr.bg-rose-700.font-semibold{ id: dom_id(question), data: { item_id: question.id, move_url: admins_courses_modules_move_question_path(question) } }
+						%td.px-4.py-3.border-b.border-rose-500
+							%i.fa-solid.fa-up-down-left-right.text-xl.cursor-pointer
+						%td.px-4.py-3.border-b.border-rose-500
+							= link_to question.title, edit_admins_courses_modules_question_path(question), class: 'hover:text-purple-100 visited:text-purple-100', title: 'Editar Pregunta'
+						%td.px-4.py-3.border-b.border-rose-500= question.score
+						%td.px-4.py-3.border-b.border-rose-500= question.question_type
+						%td.px-4.py-3.border-b.border-rose-500
+							= button_to 'Borrar', admins_courses_modules_question_path(question), { method: :delete, class: 'rounded-lg py-3 px-5 bg-gray-100 text-black hover:bg-red-500 hover:text-white inline-block font-medium cursor-pointer', data: { turbo_confirm: 'Seguro?' }} 

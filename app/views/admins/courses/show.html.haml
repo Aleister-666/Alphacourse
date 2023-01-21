@@ -1,6 +1,6 @@
-= render 'shared/header_simple', text: 'Pagina principal del Curso'
+= render 'shared/header_simple', text: 'Pagina principal del Curso', url: admins_courses_path
 
-.w-full.flex.flex-col
+.w-full.flex.flex-col.mt-4
 
 	%h1.font-bold.text-2xl= @course.name
 
@@ -12,21 +12,29 @@
 					%path{"clip-rule" => "evenodd", d: "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z", "fill-rule" => "evenodd"}
 		
 		.hidden{ id: "course-description-body-#{@course.id}", "aria-labelledby" => "course-description-header-#{@course.id}"}
-			.py-5.font-light.border-b.border-gray-200.dark:border-gray-700
+			.py-5.font-light
 				= @course.description
 
+
+	.flex.items-center.mb-4.gap-4
+		%h1.font-bold.text-4xl Secciones
+		= link_to new_admins_course_section_path(@course),
+		 class: 'text-purple-600 cursor-pointer text-3xl',
+		 title: 'Crear Seccion',
+		 data: { turbo_frame: dom_id(Section.new) } do
+
+			%i{ class: 'fa-solid fa-circle-plus' }		
+
+		= turbo_frame_tag dom_id(Section.new)
+
 	%div
-		.my-4
-			= link_to 'Crear Seccion', new_admins_course_section_path(@course), class: 'mt-2 rounded-lg py-3 px-5 bg-purple-600 inline-block font-medium text-white', data: { turbo_frame: dom_id(Section.new) }
 
-			.my-4
-				= turbo_frame_tag dom_id(Section.new)
-		.my-4
-			= turbo_frame_tag 'sections' do
-				= render @course.sections
+		= turbo_frame_tag 'sections' do
+			= render @course.sections
 
-		= link_to 'Editar Datos del Curso', edit_admins_course_path(@course), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+		
+		= link_to 'Editar Datos del Curso', edit_admins_course_path(@course), class: "text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
 		
 		.inline-block.ml-2
-			= button_to 'Eliminar este Curso', admins_course_path(@course), { class: "mt-2 rounded-lg py-3 px-5 bg-red-600 font-medium text-white cursor-pointer", method: :delete, data: { turbo_confirm: 'Estas Seguro?' } }
+			= button_to 'Eliminar este Curso', admins_course_path(@course), { class: "text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center", method: :delete, data: { turbo_confirm: 'Estas Seguro?' } }
 

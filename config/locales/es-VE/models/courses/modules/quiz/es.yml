@@ -1,0 +1,24 @@
+es-VE:
+  activerecord:
+    attributes:
+      module_quiz:
+        title: Titulo
+        description: Descripcion
+        value: Valor General
+        sum_values: Valor Total Actual
+        min_value: Valor Minimo Aprobatorio
+    errors:
+      models:
+        module_quiz:
+          attributes:
+            title:
+              blank: no puede estar en blanco
+            description:
+            value:
+            sum_values:
+            min_value:
+              derbording: no puede ser superior al valor del cuestionario
+    models:
+      module_quiz:
+        one: Cuestionario
+        other: Cuestionarios

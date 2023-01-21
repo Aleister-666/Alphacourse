@@ -19,7 +19,7 @@ class Admins::Courses::Modules::Quizzes::QuestionsController < ApplicationContro
 			if @question.save
 				format.html {
 					redirect_to admins_courses_modules_quiz_path(@quiz), notice: 'Pregunta de Cuestionario: Creada'
-				}				
+				}
 			else
 				format.html { render :new, status: :unprocessable_entity }
 			end

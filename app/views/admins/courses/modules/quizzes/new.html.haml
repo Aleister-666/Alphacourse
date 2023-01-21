@@ -1,0 +1,4 @@
+.mb-4
+	= render 'shared/header_simple', text: 'Crear Cuestionario', url: admins_course_path(@section.course_id)
+
+= render 'form', model: @quiz, url: admins_courses_modules_section_quizzes_path(@section)

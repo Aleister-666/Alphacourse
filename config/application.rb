@@ -11,8 +11,7 @@ module MoodleTutorial
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     
-    config.i18n.available_locales = [ :es, :en ]
-    config.i18n.default_locale = :es
+    config.i18n.default_locale = :'es-VE'
 
     # Configuration for the application, engines, and railties goes here.
     #

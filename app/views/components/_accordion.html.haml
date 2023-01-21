@@ -1,7 +1,18 @@
-%div{ data: { controller: 'simple-accordion' } }
-  .transition.flex.space-x-5.px-5.items-center.h-16.rounded{ class: classes, data: { 'simple-accordion-target': 'header', action: 'click->simple-accordion#handler' } }
-    %i.fas.fa-plus
-    %h5= title
+.mb-4{ data: { controller: 'accordion', 'accordion-active-color-value': active_color } }
 
-  .pt-0.overflow-hidden.max-h-0.rounded{ class: '[transition:max-height_.3s_ease-out,padding_.3s_ease]', data: { 'simple-accordion-target': 'content' } }
-    = yield
+  %h2
+    %button.flex.items-center.justify-between.w-full.py-5.font-medium.text-left.text-gray-500.border-b.border-gray-200.dark:border-gray-700{
+      type: 'button',
+      data: {
+        'accordion-target': 'handle',
+        action: 'click->accordion#click'
+      }
+    }
+      %span= header
+      %svg.w-6.h-6.shrink-0{ fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg", data: { 'accordion-target': 'marker' } }
+        %path{"clip-rule" => "evenodd", d: "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z", "fill-rule" => "evenodd"}
+
+  .hidden{ data: { 'accordion-target': 'modal' } }
+
+    .py-5.font-light
+      = yield
