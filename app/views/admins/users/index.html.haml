@@ -2,7 +2,7 @@
 	= render 'shared/header_simple', text: 'Indice de Usuarios', url: :back
 
 .overflow-x-scroll.mt-4
-	%table.rounded-t-lg.m-5.mx-auto.text-purple-100.bg-gray-900{ class: "w-5/6" }
+	%table.rounded-t-lg.m-5.mx-auto.text-white.bg-purple-700{ class: "w-5/6" }
 		%thead
 			%tr.text-left.border-b-2.border-purple-200.font-bold
 				%th.px-4.py-3 #
@@ -14,7 +14,7 @@
 		%tbody
 			- @users.order(:role).each_with_index do |user, index|
 				- if user.admin?
-					%tr.bg-gray-700.font-semibold
+					%tr.font-semibold.text-black{ class: index.even? ? 'bg-white' : 'bg-gray-50' }
 						%td.px-4.py-3.border-b.border-black= index + 1
 						%td.px-4.py-3.border-b.border-black= user.username
 						%td.px-4.py-3.border-b.border-black= user.email
@@ -25,11 +25,11 @@
 								%i.fa-solid.fa-trash.opacity-50{ title: "Este usuario no se puede eliminar" }
 
 								= link_to admins_user_path(user), 
-									class: 'text-white hover:text-sky-500 text-lg cursor-pointer',
+									class: 'hover:text-sky-500 text-lg cursor-pointer',
 									title: 'Inspeccionar Usuario' do
 									%i.fa-solid.fa-eye
 				- else
-					%tr.bg-gray-500.font-semibold
+					%tr.font-semibold.text-black{ class: index.even? ? 'bg-white' : 'bg-gray-50' }
 						%td.px-4.py-3.border-b.border-black= index + 1
 						%td.px-4.py-3.border-b.border-black= user.username
 						%td.px-4.py-3.border-b.border-black= user.email
@@ -38,7 +38,7 @@
 						%td.px-4.py-3.border-b.border-black
 							.flex.justify-center.items-center.gap-4
 								= button_to admins_user_path(user),
-								 { class: "text-white hover:text-red-500 text-lg cursor-pointer",
+								 { class: "hover:text-red-500 text-lg cursor-pointer",
 									method: :delete,
 									data: { turbo_confirm: '¿Estas Seguro que quieres eliminar este usuario?' },
 									title: 'Eliminar Usuario' } do
@@ -46,7 +46,7 @@
 									%i.fa-solid.fa-trash
 
 								= link_to admins_user_path(user), 
-									class: 'text-white hover:text-sky-500 text-lg cursor-pointer',
+									class: 'hover:text-sky-500 text-lg cursor-pointer',
 									title: 'Inspeccionar Usuario' do
 									%i.fa-solid.fa-eye
 

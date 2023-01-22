@@ -1,0 +1,27 @@
+.flex.p-4.border.border-purple-600.rounded-md{ id: dom_id(mod) }
+  - if mod.type_name.eql?('Page')
+    .flex.justify-start.items-start.gap-4
+      .w-16.h-16.rounded.flex.justify-center.items-center.bg-purple-700.text-white.cursor-move
+        %i.fa-regular.fa-file-lines.text-3xl
+
+      .flex.flex-col
+        .flex.items-center.gap-2
+          %h4.font-bold= mod.type_name
+          - if current_user.module_completation?(mod)
+            %span.text-md.text-green-600{ title: 'Completado' } ✔
+
+        = link_to mod.instanceable.title, students_courses_modules_page_path(mod.instanceable_id), class: 'text-purple-600 hover:text-purple-800 visited:text-rose-700 text-sm break-all'
+
+  - else
+    .flex.justify-start.items-start.gap-4
+      .w-16.h-16.rounded.flex.justify-center.items-center.bg-rose-700.text-white.cursor-move
+        %i.fa-solid.fa-file-pen.text-3xl
+
+      .flex.flex-col
+        .flex.items-center.gap-2
+          %h4.font-bold= mod.type_name
+          - if current_user.module_completation?(mod)
+            %span.text-md.text-green-600{ title: 'Completado' } ✔          
+
+
+        = link_to mod.instanceable.title, students_courses_modules_quiz_path(mod.instanceable_id), class: 'text-purple-600 hover:text-purple-800 visited:text-rose-700 text-sm break-all'

@@ -60,6 +60,20 @@ class User < ApplicationRecord
     self.course_module_completations.exists?(course_module_id: course_module.id, complete: true)
   end
 
+  # Verifica si un usuario competo un modulo de curso,
+  # De no tener completado el modulo, entonces crear un
+  # registro en la base de datos completando el modulo
+  # Si ya completo ese modulo entonces no realiza ninguna accion adicional
+  # @param course_module CourseModule
+  # @return CourseModuleCompletation
+  def module_complete!(course_module)
+    unless module_completation?(course_module)
+      complete = self.course_module_completations.build(course_module:, complete: true)
+
+      complete.save
+    end
+  end
+
   # Verifica si un usuario tiene un registro de completacion de un curso
   # @param course_module
   # @return True|False

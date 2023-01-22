@@ -50,5 +50,13 @@ class QuizAttempt < ApplicationRecord
     return ((questions_score * quiz_value) / quiz_questions_value).floor(2)
   end
 
+  def approved?
+    if self.result_quiz >= self.module_quiz.min_value
+      true
+    else
+      false
+    end
+  end
+
   
 end

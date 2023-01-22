@@ -32,3 +32,9 @@ es-VE:
       quiz_question:
         one: Pregunta
         other: Preguntas
+
+    enums:
+      quiz_question:
+        question_type:
+          multichoice: Opcion Multiple
+          truefalse: Verdadero/Falso

@@ -29,25 +29,51 @@
 
 
 
-  - index = 1
-  = form.fields_for :question_answers do |answer|
-    = build_accordion(active_color: 'text-rose-600', header: "Respuesta #{index}") do
-      .mb-4
-        = answer.label :answer
-        = answer.rich_text_area :answer, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full trix-editor bg-gray-50'
 
-      .mb-4
-        = answer.label :feedback
-        = answer.rich_text_area :feedback, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full trix-editor bg-gray-50'
+  - case model.question_type
+  - when 'multichoice'
+    = form.hidden_field :question_type, value: 'multichoice'
 
-      %div
-        = answer.label :fraction
-        = answer.select :fraction,
-         QuestionAnswer.permited_scores,
-         { selected: 0 },
-         { class: 'block py-2.5 px-0 w-full text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer' }
-        
-    - index += 1
+    = form.fields_for :question_answers do |answer|
+      = build_accordion(active_color: 'text-rose-600', header: "Respuesta #{answer.index + 1}") do
+        .mb-4
+          = answer.label :answer
+          = answer.rich_text_area :answer, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full trix-editor bg-gray-50'
+
+        .mb-4
+          = answer.label :feedback
+          = answer.rich_text_area :feedback, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full trix-editor bg-gray-50'
+
+        %div
+          = answer.label :fraction
+          = answer.select :fraction,
+           QuestionAnswer.permited_scores,
+           {},
+           { class: 'block py-2.5 px-0 w-full text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer' }
+          
+  - when 'truefalse'
+    = form.hidden_field :question_type, value: 'truefalse'
+    = build_accordion(active_color: 'text-rose-600', header: 'Respuesta') do
+
+
+      = form.fields_for :question_answers do |answer|
+        .mb-4
+          = answer.label :answer
+          = answer.text_field :answer,
+           class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full trix-editor bg-gray-50',
+           value: answer.index.zero? ? 'Verdadero' : 'Falso', 
+           readonly: true
+
+        .mb-4
+          = answer.label :feedback
+          = answer.rich_text_area :feedback, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full trix-editor bg-gray-50'
+
+        %div
+          = answer.label :fraction
+          = answer.select :fraction,
+           QuestionAnswer.permited_scores(type: 'truefalse'),
+           {},
+           { class: 'block py-2.5 px-0 w-full text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer' }
 
 
   .inline

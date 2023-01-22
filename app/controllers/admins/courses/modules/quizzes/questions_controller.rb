@@ -7,9 +7,18 @@ class Admins::Courses::Modules::Quizzes::QuestionsController < ApplicationContro
 	layout 'workstation'
 
 	def new
-		@question = @quiz.quiz_questions.build
+		case params[:type]
+		when 'multichoice'
+			@question = @quiz.quiz_questions.build
 
-		4.times { @question.question_answers.build }
+			4.times { @question.question_answers.build }
+		when 'truefalse'
+			@question = @quiz.quiz_questions.build(question_type: 'truefalse')
+
+			@question.question_answers.build(answer: 'Verdadero')
+			@question.question_answers.build(answer: 'Falso')
+		end
+
 	end
 
 	def create
@@ -77,6 +86,7 @@ class Admins::Courses::Modules::Quizzes::QuestionsController < ApplicationContro
 			:title,
 			:description,
 			:score,
+			:question_type,
 			question_answers_attributes: [:id, :answer, :feedback, :fraction]
 		)
 	end

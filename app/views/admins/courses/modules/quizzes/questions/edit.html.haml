@@ -1,3 +1,5 @@
-%h1.font-bold.text-2xl Editar Pregunta para Cuestionario
+.mb-4
+	= render 'shared/header_simple', text: 'Editar Pregunta', url: admins_courses_modules_quiz_path(@question.module_quiz_id)
+
 
 = render 'form', model: @question, url: admins_courses_modules_question_path(@question)

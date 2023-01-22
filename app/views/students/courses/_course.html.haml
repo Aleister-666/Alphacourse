@@ -1,2 +1,20 @@
-= link_to students_course_path(course), class: 'flex flex-col p-12 rounded bg-purple-300 hover:bg-purple-500 hover:text-white font-bold', id: dom_id(course) do
-  %span= course.name
+.max-w-md.overflow-hidden.rounded-lg.bg-white.shadow
+  - if course.cover.attached?
+    = image_tag course.cover, class: 'aspect-video w-full object-cover', alt: course.name
+  - else
+    .bg-black.aspect-video.w-full.object-cover.h-32
+
+
+  .p-4
+    %p.mb-1.text-sm.text-primary-500
+      Curso•
+      %time= course.created_at.strftime("%d-%m-%Y")
+
+    = link_to students_course_path(course),
+     id: dom_id(course),
+     class: '' do
+      %h3.text-xl.font-medium.text-gray-900.hover:text-purple-600= course.name
+
+    .mt-4.flex.gap-2
+      %span.inline-flex.items-center.gap-1.rounded-full.bg-purple-50.px-2.py-1.text-xs.font-semibold.text-purple-600
+        Educacion

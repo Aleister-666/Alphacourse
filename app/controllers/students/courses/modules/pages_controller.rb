@@ -5,6 +5,7 @@ class Students::Courses::Modules::PagesController < ApplicationController
   layout 'workstation'
 
   def show
+    current_user.module_complete!(@page.course_module)
   end
 
 

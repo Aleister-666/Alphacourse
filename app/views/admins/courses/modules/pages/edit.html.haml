@@ -1,3 +1,6 @@
-%h1 Editar Pagina
+.mb-4
+	= render 'shared/header_simple', text: 'Editar Pagina', url: admins_course_path(@page.course_id)
 
-= render 'form', model: @page, url: admins_courses_modules_page_path(@page)
+%div{ class: 'w-full flex justify-center' }
+	%div{ class: 'w-3/4' }
+		= render 'form', model: @page, url: admins_courses_modules_page_path(@page)

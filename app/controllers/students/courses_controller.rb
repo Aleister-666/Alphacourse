@@ -4,7 +4,8 @@ class Students::CoursesController < ApplicationController
 
   # GET students/courses
   def index
-    @courses = Course.all
+    filtered = Course.where('name ILIKE ? AND visible = ?', "%#{params[:name]}%", true)
+    @pagy, @courses = pagy(filtered.all, items: 15)
   end
 
   # GET students/courses/1
@@ -14,7 +15,7 @@ class Students::CoursesController < ApplicationController
 
   # GET students/my_courses
   def my_courses
-    @courses = current_user.courses
+    @pagy, @courses = pagy(current_user.courses, items: 15)
   end
 
 

@@ -1,3 +1,6 @@
-%h1 Editar Cuestionario
+.mb-4
+	= render 'shared/header_simple', text: 'Editar Cuestionario', url: admins_course_path(@quiz.course_id)
 
-= render 'form', model: @quiz, url: admins_courses_modules_quiz_path(@quiz)
+%div{ class: 'w-full flex justify-center' }
+	%div{ class: 'w-3/4' }
+		= render 'form', model: @quiz, url: admins_courses_modules_quiz_path(@quiz)

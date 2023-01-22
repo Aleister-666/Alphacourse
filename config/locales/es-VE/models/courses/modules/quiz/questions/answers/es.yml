@@ -6,6 +6,8 @@ es-VE:
         feedback: Retroalimentacion
         fraction: Valor
 
+      question_answers:
+        answer: Respuestas
     errors:
       models:
         question_answer:
@@ -14,6 +16,8 @@ es-VE:
               blank: no puede estar en blanco
             feedback:
             fraction:
+        question_answers:
+          attributes:
     models:
       question_answer:
         one: Respuesta

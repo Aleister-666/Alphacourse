@@ -36,7 +36,9 @@ class QuestionAnswer < ApplicationRecord
 
 
   ################## PUBLIC METHODS ###########################
-  def self.permited_scores
+  def self.permited_scores(type: 'multichoice')
+    return [[0, 0.0], [100, 1.0]] if type.eql?('truefalse')
+
     VALID_SCORES.map { |e| [(e.to_f * 100).to_i, e.to_f] }
   end
 

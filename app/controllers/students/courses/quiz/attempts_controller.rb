@@ -1,6 +1,7 @@
 class Students::Courses::Quiz::AttemptsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_quiz
+  before_action :lock_attempt, only: %i[ start finish ]
 
   layout 'workstation'
 
@@ -10,15 +11,17 @@ class Students::Courses::Quiz::AttemptsController < ApplicationController
   end
 
   def finish
-
     @quiz_attempt = QuizAttempt.new(module_quiz: @quiz, user: current_user)
 
     responses_params[:quiz_attempts_attributes].each do |key, value|
       @quiz_attempt.question_attempts.build(value)
     end
 
+
     respond_to do |format|
       if @quiz_attempt.save && @quiz_attempt.set_sum_scores
+
+        current_user.module_complete!(@quiz.course_module) if @quiz_attempt.approved?
 
         format.html {
           redirect_to students_courses_quiz_results_attempt_path(@quiz, @quiz_attempt), notice: "Prueba Finalizada"
@@ -28,6 +31,8 @@ class Students::Courses::Quiz::AttemptsController < ApplicationController
         format.html { render :start, status: :unprocessable_entity }
       end
     end
+
+    
   end
 
   def results
@@ -41,6 +46,12 @@ class Students::Courses::Quiz::AttemptsController < ApplicationController
 
   def set_quiz
     @quiz = ModuleQuiz.find(params[:quiz_id])
+  end
+
+  def lock_attempt
+    if current_user.module_completation?(@quiz.course_module)
+      redirect_to students_courses_modules_quiz_path(@quiz), alert: 'Ya has completado este cuestionario'
+    end
   end
 
   def responses_params

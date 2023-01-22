@@ -1,6 +1,3 @@
-.my-4
-	= build_accordion(title: section.title, h_classes: 'w-full bg-purple-800 text-white text-bold cursor-pointer') do
-		.flex.flex-col.gap-4.m-4
-
-			%div{ class: 'flex flex-col gap-4'}
-				= render partial: 'students/courses/modules/course_modules/course_module', collection: section.course_modules, as: :course_module
+= build_accordion(active_color: 'text-purple-600', header: section.title) do
+	.flex.flex-col.gap-4
+		= render partial: 'students/courses/modules/course_modules/course_module', collection: section.course_modules, as: :mod

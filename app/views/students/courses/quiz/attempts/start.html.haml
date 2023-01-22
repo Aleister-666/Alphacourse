@@ -1,0 +1,32 @@
+.mb-4
+  = render 'shared/header_module', model: @quiz, url: students_courses_modules_quiz_path(@quiz)
+
+
+.mb-4
+  %h1.font-bold.text-2xl.text-purple-800 Cuestionario
+
+.mb-4
+
+  = form_with(url: students_courses_quiz_finish_path(@quiz)) do |form|
+
+    - @questions.each_with_index do |question, index|
+
+      = form.hidden_field "responses[quiz_attempts_attributes][#{index}][quiz_question_id]", value: question.id 
+
+      .mb-6.flex.flex-col.gap-8
+        %h5.bg-purple-600.text-white= question.title
+
+        = question.description
+
+      .mb-4
+        .flex.flex-col.gap-6
+          = form.collection_radio_buttons "responses[quiz_attempts_attributes][#{index}][question_answer_id]",
+           question.question_answers,
+           :id,
+           :answer,
+           { checked: question.question_answers.first.id },
+           { class: 'bg-red-600' }
+
+
+
+    = form.submit 'Enviar Cuestionario', class: 'text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
