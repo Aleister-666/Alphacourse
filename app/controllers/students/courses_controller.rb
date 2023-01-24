@@ -11,6 +11,7 @@ class Students::CoursesController < ApplicationController
   # GET students/courses/1
   def show
     @course = Course.includes(sections: {course_modules: :instanceable}).where(id: params[:id]).first
+    lock_for_visible
   end
 
   # GET students/my_courses
@@ -18,5 +19,10 @@ class Students::CoursesController < ApplicationController
     @pagy, @courses = pagy(current_user.courses, items: 15)
   end
 
+  private
+
+  def lock_for_visible
+    redirect_back_or_to students_courses_path, alert: 'Acceso Invalido' unless @course.visible
+  end
 
 end

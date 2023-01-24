@@ -17,7 +17,7 @@
 
 
 	.flex.items-center.mb-4.gap-4
-		%h1.font-bold.text-4xl Secciones
+		%h1.font-bold.text-2xl Secciones
 		= link_to new_admins_course_section_path(@course),
 		 class: 'text-purple-600 cursor-pointer text-3xl',
 		 title: 'Crear Seccion',
@@ -27,12 +27,11 @@
 
 		= turbo_frame_tag dom_id(Section.new)
 
-	%div
-
+	.mb-4
 		= turbo_frame_tag 'sections' do
 			= render @course.sections
-
-		
+			
+	%div
 		= link_to 'Editar Datos del Curso', edit_admins_course_path(@course), class: "text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
 		
 		.inline-block.ml-2

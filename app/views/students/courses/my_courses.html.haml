@@ -1,28 +1,29 @@
 .w-full.flex.flex-col
-  %h1.font-bold.text-4xl Mis Cursos Inscritos
+  %h1.font-bold.text-4xl Mis Inscripciones
   %hr.border.border-black.mb-4
 
-  .mb-2
-    = form_with(url: students_courses_path,
-     method: :get,
-     data: { turbo_frame: 'courses', controller: 'search', action: 'input->search#submit' },
-     class: 'flex justify-center') do |form|
+  - unless @courses.size.zero?
+    .mb-2
+      = form_with(url: students_courses_path,
+       method: :get,
+       data: { turbo_frame: 'courses', controller: 'search', action: 'input->search#submit' },
+       class: 'flex justify-center') do |form|
 
-      %div{ class: 'w-2/4' }
-        -# = form.label :name, class: 'block mb-2 text-sm font-medium text-gray-900'
-        .relative
-          .absolute.inset-y-0.left-0.flex.items-center.pl-3.pointer-events-none
-            %i.fa-brands.fa-searchengin.w-5.h-5.text-purple-500.text-md
-          = form.search_field :name,
-           placeholder: 'Nombre del curso...',
-           class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 p-2.5'
+        %div{ class: 'w-2/4' }
+          -# = form.label :name, class: 'block mb-2 text-sm font-medium text-gray-900'
+          .relative
+            .absolute.inset-y-0.left-0.flex.items-center.pl-3.pointer-events-none
+              %i.fa-brands.fa-searchengin.w-5.h-5.text-purple-500.text-md
+            = form.search_field :name,
+             placeholder: 'Nombre del curso...',
+             class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 p-2.5'
 
 
-  = turbo_frame_tag 'courses' do
-    .flex.flex-col
-      #courses_content.min-w-full.grid.grid-cols-1.md:grid-cols-3.lg:grid-cols-4.gap-4
-        = render @courses
+    = turbo_frame_tag 'courses' do
+      .flex.flex-col
+        #courses_content.min-w-full.grid.grid-cols-1.md:grid-cols-3.lg:grid-cols-4.gap-4
+          = render @courses
 
-      - if @pagy.pages > 1
-        .self-center.mt-8
-          != pagy_nav(@pagy, link_extra: 'data-turbo-action="advance"')
+        - if @pagy.pages > 1
+          .self-center.mt-8
+            != pagy_nav(@pagy, link_extra: 'data-turbo-action="advance"')

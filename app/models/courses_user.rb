@@ -24,8 +24,7 @@ class CoursesUser < ApplicationRecord
 
   ################## USER RELATION ###########################
   belongs_to :user
-
-
+  
   ################## VALIDATIONS #############################
   validates :course, :user, presence: true
   

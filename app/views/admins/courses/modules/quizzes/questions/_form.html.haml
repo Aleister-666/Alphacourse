@@ -60,7 +60,7 @@
         .mb-4
           = answer.label :answer
           = answer.text_field :answer,
-           class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full trix-editor bg-gray-50',
+           class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full trix-editor bg-gray-50 cursor-not-allowed',
            value: answer.index.zero? ? 'Verdadero' : 'Falso', 
            readonly: true
 

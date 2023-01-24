@@ -20,6 +20,8 @@
 #  fk_rails_...  (section_id => sections.id) ON DELETE => cascade
 #
 class ModuleQuiz < ApplicationRecord
+  after_create :update_all_completed_course_status
+
   ###################### SECTION RELATION ############################
   belongs_to :section
 
@@ -46,6 +48,10 @@ class ModuleQuiz < ApplicationRecord
 
   #################### PUBLIC METHODS ##############################
 
+
+  # Obtiene el id del curso al que pertenece
+  # el modulo de cuestionario
+  # @return [Integer]
   def course_id
     self.section.course_id
   end
@@ -54,6 +60,24 @@ class ModuleQuiz < ApplicationRecord
 
   private
 
+
+  # Actualiza el registro de completacion de un curso para todos
+  # los usuarios que tengan un curso como completo
+  # (Este metodo solo se llama cuando se crea un nuevo registro)
+  # @return [Array]
+  def update_all_completed_course_status
+    users_completed = CourseCompletation.find_by(course_id: self.course_id, completed: true)
+
+    unless users_completed.nil?
+      users_completed.update_all(completed: false)
+    end
+  end
+
+  # Valida que el valor minimo y el valor
+  # general del cuestionario no sean nulo,
+  # y ademas valida que el valor minimo del
+  # cuestionario no sea mayor al valor general del mismo
+  # @return [ActiveRecordValidation]
   def max_value
 
     if (!self.min_value.nil? && !self.value.nil?) && self.min_value > self.value
@@ -64,4 +88,5 @@ class ModuleQuiz < ApplicationRecord
     end
     
   end
+
 end

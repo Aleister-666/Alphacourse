@@ -1,7 +1,6 @@
 .mb-4
 	= render 'shared/header_simple', text: 'Resultados', url: students_courses_modules_quiz_path(@quiz)
 
-
 .mb-4
 	.overflow-hidden.bg-white.shadow.sm:rounded-lg
 		.px-4.py-5.sm:px-6
@@ -37,9 +36,9 @@
 					%dt.text-sm.font-medium.text-gray-500 Estado
 					%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0
 						- if @quiz_attempt.approved?
-							%span.text-green-600 .font-boldAprobado
+							%span.text-lg.text-green-600.font-bold Aprobado
 						- else
-							%span.text-red-600.font-bold Reprobado
+							%span.text-lg.text-red-600.font-bold Reprobado
 
 
 .mb-4

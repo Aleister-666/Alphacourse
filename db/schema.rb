@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_18_043629) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_24_010220) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,10 +52,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_18_043629) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "course_completations", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "completed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_completations_on_course_id"
+    t.index ["user_id"], name: "index_course_completations_on_user_id"
+  end
+
   create_table "course_module_completations", force: :cascade do |t|
     t.bigint "course_module_id", null: false
     t.bigint "user_id", null: false
-    t.boolean "complete", default: false, null: false
+    t.boolean "completed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_module_id"], name: "index_course_module_completations_on_course_module_id"
@@ -77,7 +87,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_18_043629) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name", null: false
-    t.boolean "visible", default: true, null: false
+    t.boolean "visible", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_courses_on_name", unique: true
@@ -177,6 +187,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_18_043629) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "course_completations", "courses", on_delete: :cascade
+  add_foreign_key "course_completations", "users", on_delete: :cascade
   add_foreign_key "course_module_completations", "course_modules", on_delete: :cascade
   add_foreign_key "course_module_completations", "users", on_delete: :cascade
   add_foreign_key "course_modules", "courses", on_delete: :cascade

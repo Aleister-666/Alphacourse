@@ -101,8 +101,8 @@
             / example copies end
         .mx-auto.lg:ml-80
       / Sidebar end
-    %main.container.mx-auto
-      #flash.flex.justify-center.my-2
+    %main.container.px-2.md:mx-auto.md:px-0
+      #flash.flex.justify-center.my-2.w-full{ class: 'md:w-3/4' }
         = render 'shared/flash'
 
       = yield

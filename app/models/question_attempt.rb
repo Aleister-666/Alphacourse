@@ -41,18 +41,31 @@ class QuestionAttempt < ApplicationRecord
   validates :quiz_attempt, :quiz_question, :question_answer, presence: true
 
   ################ PUBLIC METHODS ###############################
+
+  # Obtiene el puntaje real del cuestionario al
+  # multiplicar la fraccion obtenida
+  # por el valor maximo del cuestionario
+  # @return [Float]
   def real_score
     return self.fraction * self.max_score
   end
 
+
+  # Obtiene resultado porcentual final
+  # de una pregunta
+  # @return [Float]
   def result_question
 
-    score = self.real_score
+    score = self.real_score # Puntaje real del intento
 
-    quiz_value = self.quiz_attempt.module_quiz.value
+    quiz_value = self.quiz_attempt.module_quiz.value # Valor general del cuestionario
 
-    quiz_questions_value = self.quiz_attempt.module_quiz.sum_values
+    # Sumatoria total de Valores de las preguntas del cuestionario
+    quiz_questions_value = self.quiz_attempt.module_quiz.sum_values 
 
+    # Proceso Matematico; Formula:
+    # (Valor real del intento * Valor general del cuestionario) / Sumatoria de valores de las preguntas
+    # Y entonces tomamos solo los 2 primeros puntos decimales 
     return ((score * quiz_value) / quiz_questions_value).floor(2)
   end
 
@@ -61,7 +74,10 @@ class QuestionAttempt < ApplicationRecord
 
   private
 
-  ############### CALLBACKS FUCTIONS ######################
+  # Setea el valor de la fraccion y el puntaje maximo
+  # para su posterior guardado
+  # (Este metodo se ejecuta automatico al guardar(crear/actualizar) un registro)
+  # @return [Float]
   def set_fraction_and_score
     self.fraction = self.question_answer.fraction
     self.max_score = self.quiz_question.score

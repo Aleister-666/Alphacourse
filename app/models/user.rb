@@ -31,6 +31,10 @@ class User < ApplicationRecord
   ################ QUIZ ATTEMPT RELATION ##################################
   has_many :quiz_attempts, dependent: :destroy
 
+
+  ################ COURSE_COMPLATATION_RELATIONS ##########################
+  has_many :course_completations, dependent: :destroy
+
   ###################### DEVISE MODULES ####################
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -46,51 +50,74 @@ class User < ApplicationRecord
 
   ################# PUBLIC METHODS ########################
 
-  # Verifica si un usuario esta incrito en un curso o no
-  # @param course 
-  # @return True|False
+  # Verifica si un usuario esta incrito en un curso o no.
+  # @param course [Course]
+  # @return [True|False]
   def course_inscript?(course)
     self.courses.exists?(course.id)
   end
 
   # Verifica si un usuario completo un modulo de curso o no
-  # @param course_module
-  # @return True|False
+  # @param course_module [CourseModule]
+  # @return [True|False]
   def module_completation?(course_module)
-    self.course_module_completations.exists?(course_module_id: course_module.id, complete: true)
+    self.course_module_completations.exists?(course_module_id: course_module.id, completed: true)
   end
 
   # Verifica si un usuario competo un modulo de curso,
   # De no tener completado el modulo, entonces crear un
   # registro en la base de datos completando el modulo
   # Si ya completo ese modulo entonces no realiza ninguna accion adicional
-  # @param course_module CourseModule
-  # @return CourseModuleCompletation
+  # @param course_module [CourseModule]
+  # @return [CourseModuleCompletation]
   def module_complete!(course_module)
     unless module_completation?(course_module)
-      complete = self.course_module_completations.build(course_module:, complete: true)
+      complete = self.course_module_completations.build(course_module:, completed: true)
 
       complete.save
     end
   end
 
-  # Verifica si un usuario tiene un registro de completacion de un curso
-  # @param course_module
-  # @return True|False
-  def completation_create?(course_module)
-    self.course_module_completations.exists?(course_module_id: course_module.id)
+
+  # Calcula el progreso de un usuario en un curso dado
+  # usando los modulos de dicho curso como referencia
+  # @param course [Course]
+  # @return [Float]
+  def course_progress(course)
+    total_modules_course = course.course_modules.size
+    modules_complete = self.course_module_completations.select { |e| e.course_module.course_id == course.id }.size
+
+    return (modules_complete * 100) / total_modules_course
   end
 
-  # Metodo para desincribir un curso de un usuario, elimina su inscricion, sus modulos completado
-  # su registro de intentos de cuestionarios y sus respuestas a preguntas
-  # @param course
-  # @return True|False
+  # Verifica si un curso ha sido completado por un usuario
+  # @params course [Course]
+  # @return [Course]
+  def course_completation?(course)
+    self.course_completations.exists?(course_id: course.id, completed: true)
+  end
+
+  # Devuelve el regitro de la base de datos, ya sea que este
+  # completado o no
+  # @param course [Course]
+  # @return [CourseCompletation]
+  def course_completation(course)
+    self.course_completations.select { |e| e.course_id == course.id }.first
+  end
+
+  # Desinscribe a un usuario de un curso: Elimina su inscripcion,
+  # sus modulos completados, sus cursos completados
+  # su registro en los cuestionarios, sus respuestas a los cuestionarios,
+  # y su progreso general en el curso
+  # @param course [Course]
+  # @return [True|False]
   def desinscription_course(course)
     inscripcion = CoursesUser.find_by(user_id: self.id, course: course)
     modules_completations = self.course_module_completations
     quiz_attempts = self.quiz_attempts
+    courses_completed = self.course_completations
 
-    if inscripcion.destroy && modules_completations.destroy_all && quiz_attempts.destroy_all
+    if inscripcion.destroy && modules_completations.destroy_all && courses_completed.destroy_all && quiz_attempts.destroy_all
       true
     else
       false

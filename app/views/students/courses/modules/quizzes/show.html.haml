@@ -1,78 +1,79 @@
 .mb-4
-	= render 'shared/header_module', model: @quiz, url: admins_course_path(@quiz.course_id)
+	= render 'shared/header_module', model: @quiz, url: students_course_path(@quiz.course_id)
 
 
 .flex.flex-col
-	.mb-8
-		= build_accordion(active_color: 'text-purple-600', header: 'Descripcion') do
-			= @quiz.description
+	= build_accordion(active_color: 'text-purple-600', header: 'Descripcion') do
+		= @quiz.description
 
-	.mb-4
-		= build_accordion(active_color: 'text-purple-600', header: 'Resumen del Cuestionario') do
-			.overflow-hidden.bg-white.shadow.sm:rounded-lg
-				.px-4.py-5.sm:px-6
-					%h3.text-lg.font-medium.leading-6.text-gray-900 Informacion del Cuestionario
-					%p.mt-1.max-w-2xl.text-sm.text-gray-500 Resumen
-				.border-t.border-gray-200
-					%dl
-						.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
-							%dt.text-sm.font-medium.text-gray-500 Nombre del cuestionario
-							%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.title
-						
-						.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
-							%dt.text-sm.font-medium.text-gray-500 Valor general del cuestionario
-							%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.value
-						
-						.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
-							%dt.text-sm.font-medium.text-gray-500 Valor minimo aprobatorio
-							%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.min_value
+	= build_accordion(active_color: 'text-purple-600', header: 'Resumen del Cuestionario') do
+		.overflow-hidden.bg-white.shadow.sm:rounded-lg
+			.px-4.py-5.sm:px-6
+				%h3.text-lg.font-medium.leading-6.text-gray-900 Informacion del Cuestionario
+				%p.mt-1.max-w-2xl.text-sm.text-gray-500 Resumen
+			.border-t.border-gray-200
+				%dl
+					.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+						%dt.text-sm.font-medium.text-gray-500 Nombre del cuestionario
+						%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.title
+					
+					.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+						%dt.text-sm.font-medium.text-gray-500 Valor general del cuestionario
+						%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.value
+					
+					.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+						%dt.text-sm.font-medium.text-gray-500 Valor minimo aprobatorio
+						%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.min_value
 
-						.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
-							%dt.text-sm.font-medium.text-gray-500 Acciones
-							%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0
+					.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+						%dt.text-sm.font-medium.text-gray-500 Acciones
+						%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0
+							- if current_user.module_completation?(@quiz.course_module)
+								%p.font-bold.text-lg.text-red-600 Ya has completado este cuestionario
+							- else
 								- if @quiz.quiz_questions.any?
 									= link_to 'Hacer Prueba',
 									 students_courses_quiz_start_path(@quiz),
 									 class: 'rounded-lg py-3 px-5 bg-purple-600 inline-block font-medium text-white'
 
 								- else
-									.bg-red-400
-										%p.font-bold.text-md.text-red-600
-											Este cuestionario aun no tiene preguntas por lo que no puedes realizarlo
+									%p.font-bold.text-lg.text-red-600
+										Este cuestionario aun no tiene preguntas, por lo que no puedes realizarlo.
 
 
 
-	.mb-4
-		= build_accordion(active_color: 'text-purple-600', header: 'Intentos') do
-			- if @user_attempts.size >= 1
-				.overflow-x-scroll
-					%table.w-full.rounded-t-lg.text-white.bg-purple-900
-						%thead
-							%tr.text-left.border-b-2.border-black.font-bold
-								%th.px-4.py-3 Intento N°
-								%th.px-4.py-3 Fecha de intento
-								%th.px-4.py-3 Puntuacion del Cuestionario
-								%th.px-4.py-3 Calificacion Final
-								%th.px-4.py-3 Estado
-								%th.px-4.py-3 Revisar
-						%tbody
-							- @user_attempts.each_with_index do |user_attempt, index|
-								%tr.font-semibold{ class: index.even? ? 'bg-white' : 'bg-gray-50' }
-									%td.px-4.py-3.border-b.border-black.text-black= index + 1
-									%td.px-4.py-3.border-b.border-black.text-black= user_attempt.created_at.to_date
-									%td.px-4.py-3.border-b.border-black.text-black= "#{user_attempt.sum_scores}/#{user_attempt.module_quiz.sum_values}"
-									%td.px-4.py-3.border-b.border-black.text-black= user_attempt.result_quiz
-									%td.px-4.py-3.border-b.border-black.text-black
-										- if user_attempt.result_quiz >= @quiz.min_value
-											.flex.items-center.gap-4.text-green-600
-												%i.fa-solid.fa-check.text-2xl
-												Aprobado
-										- else
-											.flex.items-center.gap-4.text-red-600
-												%i.fa-solid.fa-xmark.text-2xl
-												Reprobado
-									%td.px-4.py-3.border-b.border-black.text-black
-										= link_to students_courses_quiz_results_attempt_path(@quiz, user_attempt),
-										 class: 'hover:text-sky-500',
-										 title: 'Revisar Resultados' do
-											%i.fa-solid.fa-magnifying-glass
+	- unless @user_attempts.size.zero?
+		.mb-4
+			= build_accordion(active_color: 'text-purple-600', header: 'Intentos') do
+				- if @user_attempts.size >= 1
+					.overflow-x-scroll
+						%table.w-full.rounded-t-lg.text-white.bg-purple-900
+							%thead
+								%tr.text-left.border-b-2.border-black.font-bold
+									%th.px-4.py-3 Intento N°
+									%th.px-4.py-3 Fecha de intento
+									%th.px-4.py-3 Puntuacion del Cuestionario
+									%th.px-4.py-3 Calificacion Final
+									%th.px-4.py-3 Estado
+									%th.px-4.py-3 Revisar
+							%tbody
+								- @user_attempts.each_with_index do |user_attempt, index|
+									%tr.font-semibold{ class: index.even? ? 'bg-white' : 'bg-gray-50' }
+										%td.px-4.py-3.border-b.border-black.text-black= index + 1
+										%td.px-4.py-3.border-b.border-black.text-black= user_attempt.created_at.to_date
+										%td.px-4.py-3.border-b.border-black.text-black= "#{user_attempt.sum_scores}/#{user_attempt.module_quiz.sum_values}"
+										%td.px-4.py-3.border-b.border-black.text-black= user_attempt.result_quiz
+										%td.px-4.py-3.border-b.border-black.text-black
+											- if user_attempt.approved?
+												.flex.items-center.gap-4.text-green-600
+													%i.fa-solid.fa-check.text-2xl
+													Aprobado
+											- else
+												.flex.items-center.gap-4.text-red-600
+													%i.fa-solid.fa-xmark.text-2xl
+													Reprobado
+										%td.px-4.py-3.border-b.border-black.text-black
+											= link_to students_courses_quiz_results_attempt_path(@quiz, user_attempt),
+											 class: 'hover:text-indigo-500',
+											 title: 'Revisar Resultados' do
+												%i.fa-solid.fa-magnifying-glass

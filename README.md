@@ -7,17 +7,19 @@ Sistema tutorial para el aprendizaje del uso educactivo de la plataforma moodle 
 	- Crear Secciones
 	- Crear Cursos
 	- Crear Pruebas
-	- Crear y Eliminar Usuarios(Admin y estudiante)
+	- Inspeccionar y Eliminar Usuarios(Admin y estudiante)
 	- Control Total
 * Usuario Normal:
 	- Crear cuenta de Estudiante
 	- Incribirse a los cursos
 	- Presentar Pruebas
+	- Completar modulos de pruebas
+	- COmpletar Cursos
 
 ## Requisitos
 * Ruby version: 3.1+
 * Postgresql: 15+
-* vips
+* libvips
 * Gemas:
 	- haml
 	- annotate
@@ -27,3 +29,5 @@ Sistema tutorial para el aprendizaje del uso educactivo de la plataforma moodle 
 	- acts_as_list
 	- requestjs-rails
 	- font-awesome-sass
+	- image_processing
+	- Pagy

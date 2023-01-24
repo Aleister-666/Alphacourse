@@ -4,7 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  name       :string           not null
-#  visible    :boolean          default(TRUE), not null
+#  visible    :boolean          default(FALSE), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

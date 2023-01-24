@@ -54,6 +54,10 @@ class QuizQuestion < ApplicationRecord
 
 
   ################ PUBLIC METHODS ################################
+
+  # Obtiene la respuesta de un cuestionario que
+  # poseaa el valor(fraccion) mas elevado
+  # @return [QuestionAnswer]
   def max_point_answer
     QuestionAnswer.where(quiz_question: self.id).order(fraction: :desc).first
   end
@@ -62,6 +66,13 @@ class QuizQuestion < ApplicationRecord
 
   private
 
+
+  ################ CUSTOM VALIDATIONS ###########################
+
+  # Valida que en un cuestionario, al menos
+  # una respuesta tenga el valor fraccionario total
+  # permitido(Valor maximo)
+  # @return [ActiveRecordsValidations]
   def required_one_correct_answer
     filtered = question_answers.select { |e| e.fraction == 1.0 }
 
@@ -72,6 +83,10 @@ class QuizQuestion < ApplicationRecord
     end
   end
 
+
+  # Valida que en un cuestionario, unicamente
+  # exista una respuesta correcta(que posea el valor maximo permitido)
+  # @return [ActiveRecordValidation]
   def only_one_correct_answer
     filtered = question_answers.select { |e| e.fraction == 1.0 }
 
@@ -85,6 +100,12 @@ class QuizQuestion < ApplicationRecord
 
 
   ################# CALLBACKS FUNCTIONS ###########################
+
+  # Incrementa el valor total de la suma de valores
+  # de las preguntas de un cuestionario en base al puntaje que
+  # posee la pregunta
+  # (Este metodo se ejecuta despues de crear un registro)
+  # @return [ModuleQuiz]
   def increment_sum_total_quiz
     quiz = self.module_quiz
     quiz.sum_values += self.score
@@ -92,6 +113,10 @@ class QuizQuestion < ApplicationRecord
   end
 
   
+  # Actualiza el valor total de la suma de valores
+  # de las preguntas de un cuestionario y actualiza el registro
+  # (Este metodo se ejecuta al actualizar o borrar un registro)
+  # @return [ModuleQuiz]
   def update_sum_total_quiz
     quiz = self.module_quiz
     quiz.sum_values = quiz.quiz_questions.map(&:score).sum

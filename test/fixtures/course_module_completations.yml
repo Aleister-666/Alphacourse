@@ -3,7 +3,7 @@
 # Table name: course_module_completations
 #
 #  id               :bigint           not null, primary key
-#  complete         :boolean          default(FALSE), not null
+#  completed        :boolean          default(FALSE), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  course_module_id :bigint           not null

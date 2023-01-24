@@ -1,0 +1,4 @@
+- unless section.course_modules.size.zero?
+	= build_accordion(active_color: 'text-purple-600', header: section.title) do
+		.flex.flex-col.gap-4
+			= render partial: 'students/courses/modules/course_modules/course_module', collection: section.course_modules, as: :mod

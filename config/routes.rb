@@ -52,11 +52,6 @@ Rails.application.routes.draw do
         resources :pages, only: %i[ show ]
         resources :quizzes, only: %i[ show ] do
         end
-
-        resources :course_modules, only: [] do
-          post :completations, to: 'course_module_completions#create'
-          patch :completations, to: 'course_module_completions#update'
-        end
       end
 
       resources :quizzes, module: :quiz, only: [] do

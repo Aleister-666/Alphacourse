@@ -2,19 +2,19 @@
   = render 'shared/header_simple', text: 'Pagina principal del Curso', url: students_courses_path
 
 .w-full.flex.flex-col
-  .mb-4
-    .flex.flex-col.items-center
-      %h1.font-bold.text-2xl= @course.name
+  .flex.flex-col.items-center
+    %h1.font-bold.text-2xl= @course.name
 
-      - if @course.cover.representable?
-        = image_tag @course.cover, alt: 'Portada del Curso', class: 'h-auto max-w-full rounded-lg'
+    - if @course.cover.representable?
+      = image_tag @course.cover, alt: 'Portada del Curso', class: 'h-auto max-w-full rounded-lg'
 
-    = build_accordion(active_color: 'text-purple-600', header: 'Descripcion') do
-      - if @course.description.empty?
-        Este curso no tiene una descripcion
-      - else
-        = @course.description
-  
+  = build_accordion(active_color: 'text-purple-600', header: 'Descripcion') do
+    - if @course.description.empty?
+      Este curso no tiene una descripcion
+    - else
+      = @course.description
+
+
   - if current_user.course_inscript?(@course)
     .mb-4
       = render @course.sections
@@ -27,5 +27,5 @@
        form: { data: { turbo_confirm: 'Si te retiras del curso se borarran todos tus progresos. ¿Seguro que quieres continuar?' } }
 
   - else
-    .flex.gap-4.items-baseline
+    .flex.gap-4.items-baseline.mt-4
       = button_to 'Inscribir', students_course_inscriptions_path(@course), { class: 'text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center' }

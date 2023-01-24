@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 
-// Connects to data-controller="drag-drop"
+// Connects to data-controller="accordion"
 export default class extends Controller {
   static targets = [ 'handle', 'marker', 'modal' ]
 

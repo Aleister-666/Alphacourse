@@ -17,8 +17,9 @@
 #  fk_rails_...  (quiz_question_id => quiz_questions.id) ON DELETE => cascade
 #
 class QuestionAnswer < ApplicationRecord
-
+  # Valores faccionarios permtidos para las respuestas
   VALID_SCORES = *("0.0".."1.0").freeze
+
   ################### QUIZ QUESTION RELATION ##########################
   belongs_to :quiz_question
 
@@ -36,6 +37,12 @@ class QuestionAnswer < ApplicationRecord
 
 
   ################## PUBLIC METHODS ###########################
+
+  # Obtiene los valores permitidos para una respuestas
+  # de cuestionario, despues los formatea de fomra que
+  # pueda ser utilizado para selects, checkboxes, etc
+  # @param type [String] Default: 'multichoice'
+  # @return [Array]
   def self.permited_scores(type: 'multichoice')
     return [[0, 0.0], [100, 1.0]] if type.eql?('truefalse')
 

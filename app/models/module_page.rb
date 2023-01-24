@@ -17,6 +17,8 @@
 #  fk_rails_...  (section_id => sections.id) ON DELETE => cascade
 #
 class ModulePage < ApplicationRecord
+  after_create :update_all_completed_course_status
+
   ####################### SECTION RELATION #######################
   belongs_to :section
 
@@ -29,8 +31,25 @@ class ModulePage < ApplicationRecord
   ###################### VALIDATIONS #############################
   validates :title, :section, presence: true
 
+  # Obtiene el id del curso de la seccion
+  # a la que pertenece el modulo de pagina
+  # @return [Integer]
   def course_id
     self.section.course_id
+  end
+
+  private
+
+  # Actualiza el registro de completacion de un curso para todos
+  # los usuarios que tengan un curso como completo
+  # (Este metodo solo se llama cuando se crea un nuevo registro)
+  # @return [Array]
+  def update_all_completed_course_status
+    users_completed = CourseCompletation.where('course_id = ? AND completed = ?', self.course_id, true)
+    
+    unless users_completed.nil?
+      users_completed.update_all(completed: false)
+    end
   end
 
 end
