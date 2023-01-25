@@ -1,4 +1,8 @@
 es-VE:
+  course_module:
+    type_name:
+      page: Pagina
+      quiz: Cuestionario
   activerecord:
     attributes:
       course_module:

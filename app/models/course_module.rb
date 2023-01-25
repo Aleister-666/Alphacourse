@@ -50,7 +50,10 @@ class CourseModule < ApplicationRecord
   # usando su relacion polimorfica
   # @return [String]
   def type_name
-    self.instanceable_type.sub('Module', '')
+    name = self.instanceable_type.sub('Module', '')
+    
+    I18n.t("course_module.type_name.#{name.downcase}")
+
   end
   
 end

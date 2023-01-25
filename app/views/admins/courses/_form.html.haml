@@ -18,20 +18,21 @@
 	.my-5
 		= form.label :description
 		= form.rich_text_area :description, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full trix-editor bg-gray-50", title: 'Descripcion del Curso'
-	.my-5
+	.my-5.flex.flex-col.gap-2
 		= form.label :visible,
-		 class: 'relative inline-flex items-center mb-4 cursor-pointer', 
+		 class: 'relative inline-flex items-center cursor-pointer', 
 		 title: 'Visibilidad del Curso' do
 			= form.check_box :visible, class: "sr-only peer", value: ''
 			%div{ class: 'w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-purple-600' }
 			%span{ class: 'ml-3 text-sm font-medium text-gray-900' } Visible
-		%span.text-xs Mientras la visibilidad este desactivada los estudiantes no podran acceder al curso
+		%span.text-xs.font-mono Mientras la visibilidad este desactivada los estudiantes no podran acceder al curso
 
 	.my-5
 		= form.label :cover, class: 'block', title: 'Portada del Curso' do
-			%span.sr-only Subir Portada
+			%span Portada del curso(*.png|*.jpg)
 			= form.file_field :cover, class: 'block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 focus:border-0 focus:outline-none cursor-pointer'
-	.inline
+
+	.flex.gap-4
 		= form.submit class: "text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
 
 		- if action_name.eql?('edit')

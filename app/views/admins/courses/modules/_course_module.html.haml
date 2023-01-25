@@ -1,6 +1,6 @@
 .flex.p-4.border.border-purple-600.rounded-md{ id: dom_id(mod),
  data: { item_id: mod.id, move_url: admins_courses_modules_move_path(mod) } }
-	- if mod.type_name.eql?('Page')
+	- if mod.type_name.eql?('Pagina')
 		.flex.justify-start.items-start.gap-4
 			.w-16.h-16.rounded.flex.justify-center.items-center.bg-purple-700.text-white.cursor-move
 				%i.fa-regular.fa-file-lines.text-3xl

@@ -1,0 +1,12 @@
+= form_with(url: url,
+ method: :get,
+ data: { turbo_frame: content_target, controller: 'search', action: 'input->search#submit' },
+ class: 'flex justify-center') do |form|
+
+  .w-full{ class: 'md:w-2/4' }
+    .relative
+      .absolute.inset-y-0.left-0.flex.items-center.pl-3.pointer-events-none
+        %i.fa-brands.fa-searchengin.w-5.h-5.text-purple-500.text-md
+      = form.search_field input_name,
+       placeholder: input_placeholder,
+       class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 p-2.5'

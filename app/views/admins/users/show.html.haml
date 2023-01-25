@@ -31,7 +31,7 @@
         %dt.text-sm.font-medium.text-gray-500 Cursos Inscritos
         %dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0
           - if @user.courses.empty?
-            No se encuentras inscrito en ningun curso
+            No posee inscripciones
           - else
             %ul.divide-y.divide-gray-200.rounded-md.border.border-gray-200{role: "list"}
             - @user.courses.each do |course|
@@ -43,3 +43,21 @@
                   = link_to admins_course_path(course),
                    class: 'font-medium text-indigo-600 hover:text-purple-500' do
                     %i.fa-solid.fa-eye{ title: 'Ir al curso' }
+
+      .bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+        %dt.text-sm.font-medium.text-gray-500 Completados
+        %dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0
+          - if @user.course_completations.select{ |e| e.completed == true }.empty?
+            No ha completado ningun curso
+          - else
+            %ul.divide-y.divide-gray-200.rounded-md.border.border-gray-200{role: "list"}
+            - @user.courses_completations.each do |completation|
+              - if completation.completed
+                %li.flex.items-center.justify-between.py-3.pl-3.pr-4.text-sm
+                  .flex.w-0.flex-1.items-center
+                    %i.fa-solid.fa-book.flex-shrink-0.text-purple-400
+                    %span.ml-2.w-0.flex-1.truncate= completation.course.name
+                  .ml-4.flex-shrink-0
+                    = link_to admins_course_path(completation.course),
+                     class: 'font-medium text-indigo-600 hover:text-purple-500' do
+                      %i.fa-solid.fa-eye{ title: 'Ir al curso' }

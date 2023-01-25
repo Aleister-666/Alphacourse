@@ -4,4 +4,8 @@ module ComponentsHelper
 			body.call if body
 		end
 	end
+
+	def build_search_form(url:, content_target:, input_name:, input_placeholder: '')
+		render 'components/search_form', url:, content_target:, input_name:, input_placeholder:
+	end
 end
