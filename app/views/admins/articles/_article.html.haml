@@ -1,0 +1,15 @@
+.max-w-md.overflow-hidden.rounded-lg.bg-white.shadow
+  .w-full.h-32.aspect-video.object-cover.bg-purple-800.flex.justify-center.items-center.text-5xl.text-white
+    %i.fa-regular.fa-newspaper
+
+  .p-4
+    %p.mb-1.text-sm.text-primary-500
+      Redactado el
+      %time= article.created_at.strftime("%d-%m-%Y")
+
+    = link_to admins_article_path(article) do
+      %h3.text-xl.font-medium.text-gray-900.hover:text-purple-600= article.title
+
+    .mt-4.flex.gap-2
+      %span.inline-flex.items-center.gap-1.rounded-full.bg-purple-50.px-2.py-1.text-xs.font-semibold.text-purple-600
+        Articulo

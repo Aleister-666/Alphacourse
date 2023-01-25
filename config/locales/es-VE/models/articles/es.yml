@@ -1,0 +1,10 @@
+es-VE:
+  activerecord:
+    attributes:
+      article:
+        title: Titulo
+        content: Contenido
+    models:
+      article:
+        one: Articulo
+        other: Articulos

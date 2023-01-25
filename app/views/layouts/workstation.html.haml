@@ -60,34 +60,64 @@
         .navbar-menu.relative.z-40
           %nav#sidebar.fixed.left-0.bottom-0.flex.-translate-x-full.flex-col.overflow-y-auto.bg-purple-900.pt-6.pb-8.sm:max-w-xs.lg:w-80{ class: "w-3/4", data: { 'simple-navbar-target': 'sidebar' } }
             / one category / navigation group
-            .px-4.pb-6
-              %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
-                Principales
-              %ul.mb-8.text-sm.font-medium
-                - if current_user.admin?
-                  = link_to admins_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
-                    %span.select-none Cursos
-                - else
+            - if current_user.admin?
+              .px-4.pb-6
+                %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
+                  Cursos
+                %ul.mb-8.text-sm.font-medium
                   %li
-                    = link_to students_my_courses_path, class: 'active flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
-                      %span.select-none Mis Cursos
+                    = link_to admins_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
+                      %span.select-none Listado de Cursos
+
+              .px-4.pb-6
+                %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
+                  Articulos
+                %ul.mb-8.text-sm.font-medium
                   %li
-                    = link_to students_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
-                      %span.select-none Cursos
+                    = link_to admins_articles_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
+                      %span.select-none Listado de Articulos
 
-
-            .px-4.pb-6
-              %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
-                Usuario
-              %ul.mb-8.text-sm.font-medium
-                - if current_user.admin?
+              .px-4.pb-6
+                %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
+                  Usuario
+                %ul.mb-8.text-sm.font-medium
                   %li
                     = link_to admins_users_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
-                      %span.select-none Listar Usuarios
-                %li
-                  = link_to edit_user_registration_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
-                    %span.select-none Editar Usuario
+                      %span.select-none Listado de Usuarios
+                  %li
+                    = link_to edit_user_registration_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
+                      %span.select-none Editar mi Usuario
+
+            - else
+
+              .px-4.pb-6
+                %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
+                  Cursos
+                %ul.mb-8.text-sm.font-medium
+                  %li
+                    = link_to students_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
+                      %span.select-none Listado de Cursos
+                  %li
+                    = link_to students_my_courses_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
+                      %span.select-none Mis Cursos
+
+              .px-4.pb-6
+                %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
+                  Articulos
+                %ul.mb-8.text-sm.font-medium
+                  %li
+                    = link_to students_articles_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
+                      %span.select-none Listado de Articulos
+
+              .px-4.pb-6
+                %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
+                  Usuario
+                %ul.mb-8.text-sm.font-medium
+                  %li
+                    = link_to edit_user_registration_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
+                      %span.select-none Editar mi Usuario
             
+
             .px-4.pb-6
               %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
                 Otros
@@ -98,7 +128,7 @@
                 %li
                   = link_to destroy_user_session_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800', data: { turbo_method: :delete } do
                     %span.select-none Cerrar Session
-            / example copies end
+                    
         .mx-auto.lg:ml-80
       / Sidebar end
     %main.container.px-2.md:mx-auto.md:px-0

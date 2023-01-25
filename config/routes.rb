@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     # get 'users/index', to: 'users#index', as: :users
 
     resources :users, only: %i[ index show destroy ]
-
+    resources :articles
 
     resources :courses do
       resources :sections, except: %i[ show index ], shallow: true
@@ -46,7 +46,9 @@ Rails.application.routes.draw do
 
   ######################### STUDENTS ROUTES ###############################
   namespace :students do 
+    resources :articles, only: %i[ index show ]
 
+    
     namespace :courses do
       namespace :modules do
         resources :pages, only: %i[ show ]

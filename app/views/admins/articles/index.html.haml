@@ -1,0 +1,26 @@
+.w-full.flex.flex-col
+  .flex.items-center.my-4.gap-2
+    %h1.font-bold.text-4xl Articulos
+    = link_to new_admins_article_path,
+     class: 'text-purple-600 cursor-pointer text-3xl',
+     title: 'Crear Articulo' do
+      %i{ class: 'fa-solid fa-circle-plus' }
+      
+  %hr.border.border-black.mb-4
+
+
+  - unless @articles.size.zero?
+    .mb-2
+      = build_search_form(url: admins_articles_path,
+       content_target: 'articles',
+       input_name: :title,
+       input_placeholder: 'Titulo del articulo...')
+
+  = turbo_frame_tag 'articles' do
+    .flex.flex-col
+      .min-w-full.grid.grid-cols-1.md:grid-cols-3.lg:grid-cols-4.gap-4
+        = render @articles
+
+      - if @pagy.pages > 1
+        .self-center.mt-8
+          != pagy_nav(@pagy, link_extra: 'data-turbo-action="advance"')

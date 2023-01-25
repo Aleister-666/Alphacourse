@@ -1,8 +1,8 @@
 .max-w-md.overflow-hidden.rounded-lg.bg-white.shadow
   - if course.cover.attached?
-    = image_tag course.cover, class: 'aspect-video w-full object-cover', alt: course.name
+    = image_tag course.cover, class: 'aspect-video w-full object-cover', alt: course.name, class: 'aspect-video w-full object-cover h-32'
   - else
-    .bg-black.aspect-video.w-full.object-cover.h-32
+    .bg-black.w-full.h-32
 
 
   .p-4

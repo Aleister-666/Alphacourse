@@ -51,7 +51,7 @@
             No ha completado ningun curso
           - else
             %ul.divide-y.divide-gray-200.rounded-md.border.border-gray-200{role: "list"}
-            - @user.courses_completations.each do |completation|
+            - @user.course_completations.each do |completation|
               - if completation.completed
                 %li.flex.items-center.justify-between.py-3.pl-3.pr-4.text-sm
                   .flex.w-0.flex-1.items-center
