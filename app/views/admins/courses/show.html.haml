@@ -1,18 +1,15 @@
 = render 'shared/header_simple', text: 'Pagina principal del Curso', url: admins_courses_path
 
-.w-full.flex.flex-col.mt-4
 
+
+.mx-auto.w-full{:class => "md:w-2/3"}
 	%h1.font-bold.text-2xl= @course.name
 
-	.mb-6{ id: "accordion-course-description-#{@course.id}", "data-accordion" => "collapse", "data-active-classes" => "text-purple-600", "data-inactive-classes" => "text-gray-500 dark:text-gray-400"}
-		%h2{ id: "course-description-header-#{@course.id}" }
-			%button.flex.items-center.justify-between.w-full.py-5.font-medium.text-left.text-gray-500.border-b.border-gray-200.dark:border-gray-700.dark:text-gray-400{"aria-controls" => "course-description-body-#{@course.id}", "aria-expanded" => "true", "data-accordion-target" => "#course-description-body-#{@course.id}", type: "button"}
-				%span Descripcion
-				%svg.w-6.h-6.rotate-180.shrink-0{"data-accordion-icon" => "", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
-					%path{"clip-rule" => "evenodd", d: "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z", "fill-rule" => "evenodd"}
-		
-		.hidden{ id: "course-description-body-#{@course.id}", "aria-labelledby" => "course-description-header-#{@course.id}"}
-			.py-5.font-light
+	.mb-6
+		= build_accordion(active_color: 'text-purple-600', header: "Descripcion") do
+			- if @course.description.blank?
+				%p Este curso no posee Descripcion
+			- else
 				= @course.description
 
 
@@ -27,10 +24,13 @@
 
 		= turbo_frame_tag dom_id(Section.new)
 
-	.mb-4
+	.mb-4{ data: { controller: 'modal-module' } }
 		= turbo_frame_tag 'sections' do
 			= render @course.sections
-			
+
+		= render 'components/module_modal'
+
+
 	%div
 		= link_to 'Editar Datos del Curso', edit_admins_course_path(@course), class: "text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
 		

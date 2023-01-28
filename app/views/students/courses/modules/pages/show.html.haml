@@ -1,5 +1,6 @@
 .mb-4
 	= render 'shared/header_module', model: @page, url: students_course_path(@page.course_id)
 
-.my-8
-	= @page.content
+.mx-auto.w-full{:class => "md:w-2/3"}
+	.my-4
+		= @page.content

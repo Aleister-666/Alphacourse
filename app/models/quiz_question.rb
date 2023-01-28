@@ -62,6 +62,10 @@ class QuizQuestion < ApplicationRecord
     QuestionAnswer.where(quiz_question: self.id).order(fraction: :desc).first
   end
 
+  def type
+    return I18n.t("quiz_question.question_type.#{self.question_type}")
+  end
+
   ################ PRIVATE METHODS ###############################
 
   private

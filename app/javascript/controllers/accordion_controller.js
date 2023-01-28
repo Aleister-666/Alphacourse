@@ -7,11 +7,14 @@ export default class extends Controller {
 
   static values = {
     status: String,
-    activeColor: { type: String, default: 'text-purple-600' }
+    activeColor: { type: String, default: 'text-purple-600' },
+    collapsed: { type: String, default: 'true' }
   }
 
   connect() {
-    this.show_modal();
+    if (this.collapsedValue === 'true') {
+      this.show_modal()
+    }
   }
 
   click(e) {
