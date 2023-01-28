@@ -2,7 +2,7 @@
 	id: 'modules_modal',
 	data: { 'modal-module-target': 'modal' }
 }
-	.relative.w-full.h-full.max-w-2xl.md:h-auto
+	.relative.w-auto.h-full.max-w-2xl.md:h-auto
 		/ Modal content
 		.relative.bg-white.rounded-lg.shadow
 			/ Modal header
@@ -17,13 +17,16 @@
 			/ Modal body
 			.p-6.space-y-6
 
-				.flex.items-center.justify-around.gap-4
-					
-					= link_to '#',
-					 class: 'w-48 h-48 flex justify-center items-center rounded-md hover:text-white text-[4rem] border border-purple-800 hover:border-0 bg-purple-300 hover:bg-purple-700', title: 'Agregar Pagina', data: { 'modal-module-target': 'linkPage' } do
-						%i.fa-regular.fa-file-lines
 
+				%ul.flex.flex-col.items-start.gap-4
+					%li.w-full
+						= link_to '#',
+						 class: 'flex justify-start items-center gap-4 p-4 bg-purple-600 hover:bg-purple-800 text-white rounded-md', title: 'Agregar Pagina', data: { 'modal-module-target': 'linkPage' } do
+							%i.fa-regular.fa-file-lines.text-xl
+							%span.text-xl Agregar Pagina
 
-					= link_to '#',
-					 class: 'w-48 h-48 flex justify-center items-center rounded-md hover:text-white text-[4rem] border border-rose-800 hover:border-0 bg-rose-300 hover:bg-rose-700', title: 'Agregar Cuestionario', data: { 'modal-module-target': 'linkQuiz' } do 
-						%i.fa-solid.fa-file-pen
+					%li.w-full
+						= link_to '#',
+						 class: 'flex justify-start items-center gap-4 p-4 bg-rose-600 hover:bg-rose-800 text-white rounded-md', title: 'Agregar Cuestionario', data: { 'modal-module-target': 'linkQuiz' } do 
+							%i.fa-solid.fa-file-pen.text-xl
+							%span.text-xl Agregar Cuestionario

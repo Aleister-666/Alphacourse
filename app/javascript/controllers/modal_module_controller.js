@@ -25,6 +25,5 @@ export default class extends Controller {
   set_links(page, quiz){
     this.linkPageTarget.href = page;
     this.linkQuizTarget.href = quiz;
-
   }
 }
