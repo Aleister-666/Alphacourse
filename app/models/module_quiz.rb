@@ -54,6 +54,10 @@ class ModuleQuiz < ApplicationRecord
     self.section.course_id
   end
 
+  def quiz_attempts_any?
+    self.quiz_attempts.any?
+  end
+
   #################### PRIVATE METHODS ################################
 
   private

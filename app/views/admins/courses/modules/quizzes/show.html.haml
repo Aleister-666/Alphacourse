@@ -25,96 +25,108 @@
 					%dt.text-sm.font-medium.text-gray-500 Numero total de intentos de usuarios
 					%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.quiz_attempts.size
 
+				- if @quiz.quiz_attempts_any?
+					.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+						%dt.text-sm.font-medium.text-gray-500 Advertencia
+						%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0
+							.flex.flex-col.gap-4
+								%p
+									No puedes modificar un cuestionario que ya ha sido respondido por estudiantes
+									%span.text-xs.text-red-600 (Tienes que eliminar todos los intentos de usuarios para poder editar)
 
-
+								= link_to 'Borrar intentos de usuarios',
+									delete_attempts_admins_courses_modules_quiz_path(@quiz),
+									class: 'text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center',
+									data: { turbo_method: :delete, turbo_confirm: '¿Seguro?' }
+						
 	.flex.items-center.mb-4.gap-4
 		%h1.font-bold.text-4xl Preguntas
-
-		%button.text-purple-600.text-3xl.cursor-pointer{
-			type: 'button',
-			title: 'Agregar pregunta',
-			data: {
-				"modal-target": 'questions_modal',
-				"modal-toggle": 'questions_modal'
+		- unless @quiz.quiz_attempts_any?
+			%button.text-purple-600.text-3xl.cursor-pointer{
+				type: 'button',
+				title: 'Agregar pregunta',
+				data: {
+					"modal-target": 'questions_modal',
+					"modal-toggle": 'questions_modal'
+				}
 			}
-		}
 
-			%i.fa-solid.fa-circle-plus
+				%i.fa-solid.fa-circle-plus
 
-		/ Modal
-		#questions_modal.fixed.top-0.left-0.right-0.z-50.hidden.w-full.p-4.overflow-x-hidden.overflow-y-auto.md:inset-0.h-modal.md:h-full{"aria-hidden" => "true", tabindex: "-1"}
-			.relative.w-full.h-full.max-w-2xl.md:h-auto
-				/ Modal content
-				.relative.bg-white.rounded-lg.shadow
-					/ Modal header
-					.flex.items-start.justify-between.p-4.border-b.rounded-t
-						%h3.text-xl.font-semibold.text-gray-900
-							Pregunta
-						%button.text-gray-400.bg-transparent.hover:bg-gray-200.hover:text-gray-900.rounded-lg.text-sm.ml-auto.inline-flex.items-center{class: "p-1.5", "data-modal-hide" => "questions_modal", type: "button"}
-							%svg.w-5.h-5{"aria-hidden" => "true", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
-								%path{"clip-rule" => "evenodd", d: "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z", "fill-rule" => "evenodd"}
-							%span.sr-only Close modal
+			/ Modal
+			#questions_modal.fixed.top-0.left-0.right-0.z-50.hidden.w-full.p-4.overflow-x-hidden.overflow-y-auto.md:inset-0.h-modal.md:h-full{"aria-hidden" => "true", tabindex: "-1"}
+				.relative.w-full.h-full.max-w-2xl.md:h-auto
+					/ Modal content
+					.relative.bg-white.rounded-lg.shadow
+						/ Modal header
+						.flex.items-start.justify-between.p-4.border-b.rounded-t
+							%h3.text-xl.font-semibold.text-gray-900
+								Pregunta
+							%button.text-gray-400.bg-transparent.hover:bg-gray-200.hover:text-gray-900.rounded-lg.text-sm.ml-auto.inline-flex.items-center{class: "p-1.5", "data-modal-hide" => "questions_modal", type: "button"}
+								%svg.w-5.h-5{"aria-hidden" => "true", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
+									%path{"clip-rule" => "evenodd", d: "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z", "fill-rule" => "evenodd"}
+								%span.sr-only Close modal
 
-					/ Modal body
-					.p-6.grid.grid-cols-2
+						/ Modal body
+						.p-6.grid.grid-cols-2
 
-						%ul.flex.flex-col.gap-2{
-							role: 'tablist',
-							data: { 'tabs-toggle': '#question-descriptions' }
-						}
-							%li{ role: 'presentation' }
-								%button#multichoice-tab.w-full.p-4.bg-purple-100.hover:text-purple-600.focus:text-purple-600{
-									role: 'tab',
-									type: 'button',
-									data: { 'tabs-target': '#multichoice' },
-									"aria-controls": 'profile',
-									"aria-selected": 'false'
-								}
-									Opcion Multiple
+							%ul.flex.flex-col.gap-2{
+								role: 'tablist',
+								data: { 'tabs-toggle': '#question-descriptions' }
+							}
+								%li{ role: 'presentation' }
+									%button#multichoice-tab.w-full.p-4.bg-purple-100.hover:text-purple-600.focus:text-purple-600{
+										role: 'tab',
+										type: 'button',
+										data: { 'tabs-target': '#multichoice' },
+										"aria-controls": 'profile',
+										"aria-selected": 'false'
+									}
+										Opcion Multiple
 
-							%li{ role: 'presentation' }
-								%button#truefalse-tab.w-full.p-4.bg-purple-100.hover:text-purple-600.focus:text-purple-600{
-									role: 'tab',
-									type: 'button',
-									data: { 'tabs-target': '#truefalse' },
-									"aria-controls": 'profile',
-									"aria-selected": 'false'
-								}
-									Verderaro o Falso
+								%li{ role: 'presentation' }
+									%button#truefalse-tab.w-full.p-4.bg-purple-100.hover:text-purple-600.focus:text-purple-600{
+										role: 'tab',
+										type: 'button',
+										data: { 'tabs-target': '#truefalse' },
+										"aria-controls": 'profile',
+										"aria-selected": 'false'
+									}
+										Verderaro o Falso
 
 
-						#question-descriptions
-							#multichoice.hidden.p-4.rounded-lg.bg-gray-50{"aria-labelledby" => "multichoice-tab", role: "tabpanel"}
-								.flex.flex-col.gap-4
-									.w-full.flex.flex-col.gap-4
-										%h5.text-md.font-mono.text-pruple-700.self-center Opcion Multiple
-										%p.text-sm.text-gray-500
-											Es un tipo de pregunta, donde el usuario debera escojer una respuesta entre un listado de respuestas posibles
+							#question-descriptions
+								#multichoice.hidden.p-4.rounded-lg.bg-gray-50{"aria-labelledby" => "multichoice-tab", role: "tabpanel"}
+									.flex.flex-col.gap-4
+										.w-full.flex.flex-col.gap-4
+											%h5.text-md.font-mono.text-pruple-700.self-center Opcion Multiple
+											%p.text-sm.text-gray-500
+												Es un tipo de pregunta, donde el usuario debera escojer una respuesta entre un listado de respuestas posibles
 
-									= link_to 'Registrar pregunta',
-									 new_admins_courses_modules_quiz_question_path(@quiz, type: 'multichoice'),
-									 class: 'text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
+										= link_to 'Registrar pregunta',
+										 new_admins_courses_modules_quiz_question_path(@quiz, type: 'multichoice'),
+										 class: 'text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
 
-							#truefalse.hidden.p-4.rounded-lg.bg-gray-50{"aria-labelledby" => "truefalse-tab", role: "tabpanel"}
-								.flex.flex-col.gap-4
-									.w-full.flex.flex-col.gap-4
-										%h5.text-md.font-mono.text-pruple-700.self-center Verdadero/Falso
-										%p.text-sm.text-gray-500
-											Es un tipo de pregunta, donde el usuario debera escojer segun el enunciado 2 opciones
-											%span.text-green-600 Verdadero
-											o
-											%span.text-red-600 Falso
+								#truefalse.hidden.p-4.rounded-lg.bg-gray-50{"aria-labelledby" => "truefalse-tab", role: "tabpanel"}
+									.flex.flex-col.gap-4
+										.w-full.flex.flex-col.gap-4
+											%h5.text-md.font-mono.text-pruple-700.self-center Verdadero/Falso
+											%p.text-sm.text-gray-500
+												Es un tipo de pregunta, donde el usuario debera escojer segun el enunciado 2 opciones
+												%span.text-green-600 Verdadero
+												o
+												%span.text-red-600 Falso
 
-									= link_to 'Registrar pregunta',
-									 new_admins_courses_modules_quiz_question_path(@quiz, type: 'truefalse'),
-									 class: 'text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
+										= link_to 'Registrar pregunta',
+										 new_admins_courses_modules_quiz_question_path(@quiz, type: 'truefalse'),
+										 class: 'text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
 
 
 	- if @quiz.quiz_questions.size >= 1
 		%p.font-bold.text-xl.w-full.text-center= "Puntaje total de preguntas: #{@quiz.sum_values}"
 
 		.overflow-x-scroll
-			%table.rounded-t-lg.text-white.bg-rose-700
+			%table.rounded-t-lg.text-white.bg-rose-700.w-full
 				%thead
 					%tr.text-left.border-b-2.border-gray-200.font-bold
 						%th.px-4.py-3 
@@ -134,17 +146,14 @@
 									title: 'Arastra para reorganizar preguntas'
 								}
 							%td.px-4.py-3.border-b.border-gray-700
-								= link_to question.title,
-								 edit_admins_courses_modules_question_path(question),
-								 title: 'Editar Pregunta',
-								 class: 'hover:text-rose-600'
+								- if @quiz.quiz_attempts_any?
+									= question.title
+								- else
+									= link_to question.title, edit_admins_courses_modules_question_path(question), title: 'Editar Pregunta',class: 'hover:text-rose-600'
 							%td.px-4.py-3.border-b.border-gray-700= question.score
 							%td.px-4.py-3.border-b.border-gray-700= question.type
 							%td.px-4.py-3.border-b.border-gray-700
-								= button_to admins_courses_modules_question_path(question),
-								{ method: :delete,
-									class: 'text-2xl font-bold text-gray-900 hover:text-red-500',
-									title: 'Eliminar Pregunta',
-									data: { turbo_confirm: 'Tambien se eliminara las respuestas de esta pregunta. ¿Seguro que quieres eliminar esta pregunta?' } } do
+								- unless @quiz.quiz_attempts_any?
+									= button_to admins_courses_modules_question_path(question), { method: :delete, class: 'text-2xl font-bold text-gray-900 hover:text-red-500', title: 'Eliminar Pregunta', data: { turbo_confirm: 'Tambien se eliminara las respuestas de esta pregunta. ¿Seguro que quieres eliminar esta pregunta?' } } do
 
-									%i.fa-solid.fa-trash
+										%i.fa-solid.fa-trash

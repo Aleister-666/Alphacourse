@@ -28,8 +28,11 @@ Rails.application.routes.draw do
 
         resources :sections, only: [] do
           resources :pages, except: %i[ index ], shallow: true
-          resources :quizzes, except: %i[ index ], shallow: true
+          resources :quizzes, except: %i[ index ], shallow: true do
+            delete :delete_attempts, to: 'quizzes#delete_attempts', on: :member
+          end
         end
+
 
 
         resources :quizzes, only: [], module: 'quizzes' do

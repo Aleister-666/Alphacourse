@@ -3,6 +3,7 @@ class Admins::Courses::Modules::Quizzes::QuestionsController < ApplicationContro
 	before_action :authenticate_admin!
 	before_action :set_quiz, only: %i[ new create ]
 	before_action :set_question, except: %i[ new create ]
+	before_action :lock_modify, except: %i[ move ]
 
 	layout 'workstation'
 
@@ -89,5 +90,16 @@ class Admins::Courses::Modules::Quizzes::QuestionsController < ApplicationContro
 			:question_type,
 			question_answers_attributes: [:id, :answer, :feedback, :fraction]
 		)
+	end
+
+	def lock_modify
+		if @quiz.nil?
+			redirect_to admins_courses_modules_quiz_path(@question.module_quiz),
+			 alert: 'No puedes modificar un cuestionario que ya ha sido respondido' if @question.module_quiz.quiz_attempts.any? 
+			
+		else
+			redirect_to admins_courses_modules_quiz_path(@quiz),
+			 alert: 'No puedes modificar un cuestionario que ya ha sido respondido' if @quiz.quiz_attempts.any?
+		end
 	end
 end

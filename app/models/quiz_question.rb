@@ -46,7 +46,7 @@ class QuizQuestion < ApplicationRecord
 
 
   ############### VALIDATIONS ####################################
-  validates :title, :description, :module_quiz, :question_answers, presence: true
+  validates :title, :module_quiz, :question_answers, presence: true
   validates :score, presence: true, numericality: true
 
   ############### CUSTOM VALIDATION ###############################
@@ -62,16 +62,20 @@ class QuizQuestion < ApplicationRecord
     QuestionAnswer.where(quiz_question: self.id).order(fraction: :desc).first
   end
 
+  # Devuelve el tipo de pregunta internazionalizado
+  # @return [String]
   def type
     return I18n.t("quiz_question.question_type.#{self.question_type}")
   end
+
+
 
   ################ PRIVATE METHODS ###############################
 
   private
 
 
-  ################ CUSTOM VALIDATIONS ###########################
+    ############# CUSTOM VALIDATIONS ###########################
 
   # Valida que en un cuestionario, al menos
   # una respuesta tenga el valor fraccionario total

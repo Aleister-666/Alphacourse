@@ -53,6 +53,21 @@ class Admins::Courses::Modules::QuizzesController < ApplicationController
 		end
 	end
 
+	def delete_attempts
+		attempts = QuizAttempt.where(module_quiz: @quiz)
+		completations = CourseModuleCompletation.where(course_module: @quiz.course_module)
+
+		respond_to do |format|
+
+			unless attempts.empty?
+				attempts.destroy_all
+				completations.destroy_all
+				
+				format.html { redirect_to admins_courses_modules_quiz_path(@quiz), alert: 'Intentos Eliminados' }
+			end
+		end
+	end
+
 	private
 
 	def set_section
