@@ -23,6 +23,9 @@ class Course < ApplicationRecord
   ############## MODULES RELATIONS ################
   has_many :course_modules, dependent: :destroy
 
+  ############# COMPLETATIONS RELATIONS ####################
+  has_many :course_module_completations, dependent: :destroy
+
   ############### ACTION TEXT#####################
   has_rich_text :description
   ############## ACTIVE STORAGE ##################

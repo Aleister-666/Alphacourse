@@ -3,6 +3,7 @@
 # Table name: courses_users
 #
 #  id         :bigint           not null, primary key
+#  completed  :boolean          default(FALSE), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  course_id  :bigint           not null
@@ -19,13 +20,27 @@
 #  fk_rails_...  (user_id => users.id) ON DELETE => cascade
 #
 class CoursesUser < ApplicationRecord
-  ################## COURSE RELATION #########################
+  ################# COURSE RELATION #################
   belongs_to :course
-
-  ################## USER RELATION ###########################
+  ################## USER RELATION ##################
   belongs_to :user
-  
-  ################## VALIDATIONS #############################
-  validates :course, :user, presence: true
+
+  ################## VALIDATIONS ########################
+  validates :course, uniqueness: true
+
+  validates :completed, inclusion: { in: [ true, false ] }
+
+
+
+  # Calcula el progreso de un usuario en un curso dado
+  # usando los modulos de dicho curso como referencia
+  # @param course [Course]
+  # @return [Float]
+  # def self.progress(course, user)
+  #   total_modules_course = course.course_modules.size
+  #   modules_complete = user.course_module_completations.select { |e| e.course_module.course_id == course.id }.size
+
+  #   return (modules_complete * 100) / total_modules_course
+  # end
   
 end

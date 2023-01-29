@@ -13,7 +13,7 @@ class Admins::Courses::Modules::PagesController < ApplicationController
 	def create
 		@page = @section.module_pages.build(pages_params)
 		@page.course_module = CourseModule.new(course_id: @section.course_id, section_id: @section.id)
-
+		
 		respond_to do |format|
 			if @page.save
 				format.html { redirect_to admins_course_path(@section.course_id), notice: 'Modulo Pagina: Creado' }				

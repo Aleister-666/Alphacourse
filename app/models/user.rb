@@ -31,10 +31,6 @@ class User < ApplicationRecord
   ################ QUIZ ATTEMPT RELATION ##################################
   has_many :quiz_attempts, dependent: :destroy
 
-
-  ################ COURSE_COMPLATATION_RELATIONS ##########################
-  has_many :course_completations, dependent: :destroy
-
   ###################### DEVISE MODULES ####################
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -72,7 +68,7 @@ class User < ApplicationRecord
   # @return [CourseModuleCompletation]
   def module_complete!(course_module)
     unless module_completation?(course_module)
-      complete = self.course_module_completations.build(course_module:, completed: true)
+      complete = self.course_module_completations.build(course_id: course_module.course_id ,course_module:, completed: true)
 
       complete.save
     end
@@ -94,7 +90,7 @@ class User < ApplicationRecord
   # @params course [Course]
   # @return [Course]
   def course_completation?(course)
-    self.course_completations.exists?(course_id: course.id, completed: true)
+    self.courses_users.exists?(course_id: course.id, completed: true)
   end
 
   # Devuelve el regitro de la base de datos, ya sea que este
@@ -102,7 +98,7 @@ class User < ApplicationRecord
   # @param course [Course]
   # @return [CourseCompletation]
   def course_completation(course)
-    self.course_completations.select { |e| e.course_id == course.id }.first
+    self.courses_users.select { |e| e.course_id == course.id }.first
   end
 
   # Desinscribe a un usuario de un curso: Elimina su inscripcion,
@@ -113,11 +109,15 @@ class User < ApplicationRecord
   # @return [True|False]
   def desinscription_course(course)
     inscripcion = CoursesUser.find_by(user_id: self.id, course: course)
-    modules_completations = self.course_module_completations
-    quiz_attempts = self.quiz_attempts
-    courses_completed = self.course_completations
+    modules_completations = self.course_module_completations.select do |e|
+      e.course_module.course_id == course.id
+    end
 
-    if inscripcion.destroy && modules_completations.destroy_all && courses_completed.destroy_all && quiz_attempts.destroy_all
+    quiz_attempts = self.quiz_attempts.select do |e|
+      e.module_quiz.course_id == course.id
+    end
+
+    if inscripcion.destroy && modules_completations.each(&:destroy) && quiz_attempts.each(&:destroy)
       true
     else
       false

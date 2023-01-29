@@ -23,6 +23,20 @@
 #  fk_rails_...  (section_id => sections.id) ON DELETE => cascade
 #
 class CourseModule < ApplicationRecord
+  include CourseCompletation
+
+  # Cuando se crear un nuevo modulo de cursos
+  # Setea como imcompleto el curso al que corresponde
+  # para todo usuario que lo halla completado
+  after_create :set_incomplete_course_status
+
+  # Cuando un modulo de curso es eliminado se evalua
+  # si hay usuarios que tengan el curso como incompleto
+  # cuando al haber borrado dicho modulo el usuario posee sus 
+  # modulos completos, para ese caso, a todos esos usuarios
+  # el curso se les marca como completado
+  after_destroy :set_complete_course_status
+
   ############### INSTANCEABLE PYLYMORPHIC RELATION ###################
   belongs_to :instanceable, polymorphic: true
 
