@@ -5,11 +5,14 @@
 .mx-auto.w-full{:class => "md:w-2/3"}
 	
 	.mb-4
-		= build_accordion(active_color: 'text-purple-600', header: 'Descripcion') do
-			= @quiz.description
+		= build_accordion(active_color: 'text-rose-600', header: 'Descripcion') do
+			- if @quiz.description.blank?
+				%span No tiene descripcion
+			- else
+				= @quiz.description
 
 	.mb-4
-		= build_accordion(active_color: 'text-purple-600', header: 'Resumen del Cuestionario') do
+		= build_accordion(active_color: 'text-rose-600', header: 'Resumen del Cuestionario') do
 			.overflow-hidden.bg-white.shadow.sm:rounded-lg
 				.px-4.py-5.sm:px-6
 					%h3.text-lg.font-medium.leading-6.text-gray-900 Informacion del Cuestionario
@@ -37,7 +40,7 @@
 									- if @quiz.quiz_questions.any?
 										= link_to 'Hacer Prueba',
 										 students_courses_quiz_start_path(@quiz),
-										 class: 'rounded-lg py-3 px-5 bg-purple-600 inline-block font-medium text-white'
+										 class: 'rounded-lg py-3 px-5 bg-rose-600 inline-block font-medium text-white'
 
 									- else
 										%p.font-bold.text-lg.text-red-600
@@ -47,11 +50,11 @@
 
 	- unless @user_attempts.size.zero?
 		.mb-4
-			= build_accordion(active_color: 'text-purple-600', header: 'Intentos') do
+			= build_accordion(active_color: 'text-rose-600', header: 'Intentos') do
 				.overflow-x-scroll
-					%table.w-full.rounded-t-lg.text-white.bg-purple-900
+					%table.w-full.rounded-t-lg.text-white.bg-rose-900
 						%thead
-							%tr.text-left.border-b-2.border-black.font-bold
+							%tr.text-left.border-b-2.border-black.font-bold.text-sm
 								%th.px-4.py-3 Intento N°
 								%th.px-4.py-3 Fecha de intento
 								%th.px-4.py-3 Puntuacion del Cuestionario

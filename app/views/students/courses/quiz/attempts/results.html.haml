@@ -1,73 +1,77 @@
 .mb-4
 	= render 'shared/header_simple', text: 'Resultados', url: students_courses_modules_quiz_path(@quiz)
 
-.mb-4
-	.overflow-hidden.bg-white.shadow.sm:rounded-lg
-		.px-4.py-5.sm:px-6
-			%h3.text-lg.font-medium.leading-6.text-gray-900 Resultados
-			%p.mt-1.max-w-2xl.text-sm.text-gray-500 Resumen
-		.border-t.border-gray-200
-			%dl
-				.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
-					%dt.text-sm.font-medium.text-gray-500 Nombre del cuestionario
-					%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.title
-				
-				.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
-					%dt.text-sm.font-medium.text-gray-500 Valor general del cuestionario
-					%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.value
-				
-				.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
-					%dt.text-sm.font-medium.text-gray-500 Valor minimo aprobatorio
-					%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.min_value
+.mx-auto.w-full{:class => "md:w-2/3"}
+	.mb-4
+		.overflow-hidden.bg-white.shadow.sm:rounded-lg
+			.px-4.py-5.sm:px-6
+				%h3.text-lg.font-medium.leading-6.text-gray-900 Resultados
+				%p.mt-1.max-w-2xl.text-sm.text-gray-500 Resumen
+			.border-t.border-gray-200
+				%dl
+					.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+						%dt.text-sm.font-medium.text-gray-500 Nombre del cuestionario
+						%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.title
+					
+					.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+						%dt.text-sm.font-medium.text-gray-500 Valor general del cuestionario
+						%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.value
+					
+					.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+						%dt.text-sm.font-medium.text-gray-500 Puntaje minimo aprobatorio
+						%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.min_value
 
-				.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
-					%dt.text-sm.font-medium.text-gray-500 Valor total de las preguntas
-					%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.sum_values
+					.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+						%dt.text-sm.font-medium.text-gray-500 Valor total de las preguntas
+						%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz.sum_values
 
-				.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
-					%dt.text-sm.font-medium.text-gray-500 Puntaje total de las preguntas obtenido
-					%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz_attempt.sum_scores
+					.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+						%dt.text-sm.font-medium.text-gray-500 Puntaje total de las preguntas obtenido
+						%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= @quiz_attempt.sum_scores
 
-				.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
-					%dt.text-sm.font-medium.text-gray-500 Puntaje General
-					%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= "#{@quiz_attempt.result_quiz}/#{@quiz.value}"
+					.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+						%dt.text-sm.font-medium.text-gray-500 Puntaje General
+						%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0= "#{@quiz_attempt.result_quiz}/#{@quiz.value}"
 
-				.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
-					%dt.text-sm.font-medium.text-gray-500 Estado
-					%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0
-						- if @quiz_attempt.approved?
-							%span.text-lg.text-green-600.font-bold Aprobado
-						- else
-							%span.text-lg.text-red-600.font-bold Reprobado
+					.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+						%dt.text-sm.font-medium.text-gray-500 Estado
+						%dd.mt-1.text-sm.text-gray-900.sm:col-span-2.sm:mt-0
+							- if @quiz_attempt.approved?
+								%span.text-lg.text-green-600.font-bold Aprobado
+							- else
+								%span.text-lg.text-red-600.font-bold Reprobado
 
 
-.mb-4
-	.overflow-x-scroll
-		%table.w-full.rounded-t-lg.text-white.bg-purple-700
-			%thead
-				%tr.text-left.border-b-2.border-black.font-bold
-					%th.px-4.py-3 #
-					%th.px-4.py-3 Pregunta
-					%th.px-4.py-3 Respuesta
-					%th.px-4.py-3 Retroalimentacion
-					%th.px-4.py-3 Puntos
-					%th.px-4.py-3 Calificacion
-			%tbody
-				- @quiz_attempt.question_attempts.each_with_index do |question_attempt, index|
-					%tr.font-semibold{ class: index.even? ? 'bg-white' : 'bg-gray-50' }
-						%td.px-4.py-3.border-b.border-black.text-black= index + 1
-						%td.px-4.py-3.border-b.border-black.text-black= question_attempt.quiz_question.title
-						%td.px-4.py-3.border-b.border-black.text-black
-							= question_attempt.question_answer.answer
-						%td.px-4.py-3.border-b.border-black.text-black
-							= question_attempt.question_answer.feedback
-						%td.px-4.py-3.border-b.border-black.text-black= "#{question_attempt.real_score}/#{question_attempt.max_score}"
-						%td.px-4.py-3.border-b.border-black.text-black= question_attempt.result_question
-			%tfoot
-				%tr.bg-white.font-semibold
-					%td.px-4.py-3.bg-transparent
-					%td.px-4.py-3.bg-transparent
-					%td.px-4.py-3.bg-transparent
-					%td.px-4.py-3.bg-transparent
-					%td.px-4.py-3.bg-transparent
-					%td.px-4.py-3.border-l.border-b.border-black.text-purple-900.text-xl= @quiz_attempt.result_quiz
+	.mb-4
+		.overflow-x-scroll
+			%table.w-full.rounded-t-lg.text-white.bg-rose-700
+				%thead
+					%tr.text-left.border-b-2.border-black.font-bold
+						%th.px-4.py-3 #
+						%th.px-4.py-3 Pregunta
+						%th.px-4.py-3 Respuesta
+						%th.px-4.py-3 Retroalimentacion
+						%th.px-4.py-3 Puntos
+						%th.px-4.py-3 Calificacion
+				%tbody
+					- @quiz_attempt.question_attempts.each_with_index do |question_attempt, index|
+						%tr.font-semibold{ class: index.even? ? 'bg-white' : 'bg-gray-50' }
+							%td.px-4.py-3.border-b.border-black.text-black= index + 1
+							%td.px-4.py-3.border-b.border-black.text-black= question_attempt.quiz_question.title
+							%td.px-4.py-3.border-b.border-black.text-black
+								= question_attempt.question_answer.answer
+							%td.px-4.py-3.border-b.border-black.text-black
+								- if question_attempt.question_answer.feedback.blank?
+									%span No posee retroalimentacion
+								- else
+									= question_attempt.question_answer.feedback
+							%td.px-4.py-3.border-b.border-black.text-black= "#{question_attempt.real_score}/#{question_attempt.max_score}"
+							%td.px-4.py-3.border-b.border-black.text-black= question_attempt.result_question
+				%tfoot
+					%tr.bg-white.font-semibold
+						%td.px-4.py-3.bg-transparent
+						%td.px-4.py-3.bg-transparent
+						%td.px-4.py-3.bg-transparent
+						%td.px-4.py-3.bg-transparent
+						%td.px-4.py-3.bg-transparent
+						%td.px-4.py-3.border-l.border-b.border-black.text-rose-900.text-xl= @quiz_attempt.result_quiz

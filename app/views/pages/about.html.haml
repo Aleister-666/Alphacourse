@@ -180,12 +180,8 @@
                 = link_to 'Linkedin', 'https://www.linkedin.com/in/junior-rengifo-2418b9214', class: 'no-underline hover:underline text-gray-800 hover:text-pink-500'
           .flex-1
             %p.uppercase.text-gray-500.md:mb-6 Company
-            = image_tag 'pages/Alphasoft.svg', alt: 'Alphasoft', class: 'w-full text-black'
-            %ul.list-reset.mb-6
-              %li.mt-2.inline-block.mr-2.md:block.md:mr-0
-                = link_to 'About Us', about_path, class: 'no-underline hover:underline text-gray-800 hover:text-pink-500'
-              %li.mt-2.inline-block.mr-2.md:block.md:mr-0
-                %a.no-underline.hover:underline.text-gray-800.hover:text-pink-500{:href => "#"} Contact
+            = link_to about_path, class: 'cursor-pointer', title: "Acerca de..." do
+              = image_tag 'pages/Alphasoft.svg', alt: 'Alphasoft', class: 'w-full text-black'
 
     
     :javascript

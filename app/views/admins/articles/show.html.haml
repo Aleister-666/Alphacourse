@@ -2,17 +2,18 @@
 	= render 'shared/header_simple', url: admins_articles_path, text: 'Articulo' 
 
 
-.mb-4
-	%h1.font-bold= @article.title
+.mx-auto.w-full{:class => "md:w-2/3"}
+	.mb-4
+		%h1.font-bold= @article.title
 
-.mb-4
-	= @article.content
+	.mb-4
+		= @article.content
 
 
 
-%div
-	= link_to 'Editar Articulo', edit_admins_article_path(@article), class: "text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
-	
-	.inline-block.ml-2
-		= button_to 'Eliminar Articulo', admins_article_path(@article), { class: "text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center", method: :delete, data: { turbo_confirm: 'Estas Seguro?' } }
+	%div
+		= link_to 'Editar Articulo', edit_admins_article_path(@article), class: "text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
+		
+		.inline-block.ml-2
+			= button_to 'Eliminar Articulo', admins_article_path(@article), { class: "text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center", method: :delete, data: { turbo_confirm: 'Estas Seguro?' } }
 

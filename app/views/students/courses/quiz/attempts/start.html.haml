@@ -2,63 +2,64 @@
 	= render 'shared/header_module', model: @quiz, url: students_courses_modules_quiz_path(@quiz)
 
 
-.mb-4
-	%h1.font-bold.text-2xl.text-purple-800 Cuestionario
+.mx-auto.w-full{:class => "md:w-2/3"}
+	.mb-4
+		%h1.font-bold.text-2xl.text-purple-800 Cuestionario
 
-.mb-4
+	.mb-4
 
-	= form_with(url: students_courses_quiz_finish_path(@quiz)) do |form|
+		= form_with(url: students_courses_quiz_finish_path(@quiz)) do |form|
 
-		.mb-4.border-b.border-black
-			%ul#questions-tab.flex.gap-4.-mb-px.text-sm.font-medium.text-center.overflow-x-scroll{
-				role: 'tablist',
-				data: { 'tabs-toggle': '#questions-tab-content' }
-			}
-
-				- @questions.each_with_index do |question, index|
-
-					%li{ role: 'presentation' }
-						%button{
-							id: "question-#{index + 1}",
-							class: 'w-max inline-block p-4 rounded-t-lg',
-							role: 'tab',
-							type: 'button',
-							'aria-controls': "content-question-#{index + 1}",
-							'aria-selected': 'false',
-							data: { 'tabs-target': "#content-question-#{index + 1}" }
-						}
-
-							= "Pregunta #{index + 1}"
-
-
-		#questions-tab-content.mb-6
-			- @questions.each_with_index do |question, index|
-				.hidden.p-4.rounded-lg.bg-gray-50{
-					id: "content-question-#{index + 1}",
-					role: 'tabpanel',
-					'aria-labelledby': "content-question-#{index + 1}-tab"
+			.mb-4.border-b.border-black
+				%ul#questions-tab.flex.gap-4.-mb-px.text-sm.font-medium.text-center.overflow-x-scroll{
+					role: 'tablist',
+					data: { 'tabs-toggle': '#questions-tab-content' }
 				}
-					= form.hidden_field "responses[quiz_attempts_attributes][#{index + 1}][quiz_question_id]", value: question.id 
 
-					.flex.flex-col.items-center.gap-6
-						%p.text-md.text-purple-700.font-bold= question.title
+					- @questions.order(:position).each_with_index do |question, index|
 
-						= question.description
-					%hr.border.border-black.mb-8
+						%li{ role: 'presentation' }
+							%button{
+								id: "question-#{index + 1}",
+								class: 'w-max inline-block p-4 rounded-t-lg',
+								role: 'tab',
+								type: 'button',
+								'aria-controls': "content-question-#{index + 1}",
+								'aria-selected': 'false',
+								data: { 'tabs-target': "#content-question-#{index + 1}" }
+							}
 
-					.flex.flex-col.gap-6
-						= form.collection_radio_buttons "responses[quiz_attempts_attributes][#{index + 1}][question_answer_id]",
-						 question.question_answers,
-						 :id,
-						 :answer,
-						 { checked: question.question_answers.first.id },
-						 { class: '' } do |radio|
-
-							.flex.items-center.mb-4.gap-2
-								= radio.radio_button
-								= radio.label
+								= "Pregunta #{index + 1}"
 
 
-		= form.submit 'Enviar Cuestionario', class: 'text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
+			#questions-tab-content.mb-6
+				- @questions.order(:position).each_with_index do |question, index|
+					.hidden.p-4.rounded-lg.bg-gray-50{
+						id: "content-question-#{index + 1}",
+						role: 'tabpanel',
+						'aria-labelledby': "content-question-#{index + 1}-tab"
+					}
+						= form.hidden_field "responses[quiz_attempts_attributes][#{index + 1}][quiz_question_id]", value: question.id 
+
+						.flex.flex-col.items-center.gap-6
+							%p.text-md.text-purple-700.font-bold= question.title
+
+							= question.description
+						%hr.border.border-black.mb-8
+
+						.flex.flex-col.gap-6
+							= form.collection_radio_buttons "responses[quiz_attempts_attributes][#{index + 1}][question_answer_id]",
+							 question.question_answers,
+							 :id,
+							 :answer,
+							 { checked: question.question_answers.first.id },
+							 { class: '' } do |radio|
+
+								.flex.items-center.mb-4.gap-2
+									= radio.radio_button
+									= radio.label
+
+
+			= form.submit 'Enviar Cuestionario', class: 'text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
 
 

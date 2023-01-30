@@ -1,9 +1,9 @@
 .mb-4
 	= render 'shared/header_simple', url: students_articles_path, text: 'Articulo' 
 
+.mx-auto.w-full{:class => "md:w-2/3"}
+	.mb-4
+		%h1.font-bold= @article.title
 
-.mb-4
-	%h1.font-bold= @article.title
-
-.mb-4
-	= @article.content
+	.mb-4
+		= @article.content

@@ -1,4 +1,5 @@
 .mb-4
 	= render 'shared/header_simple', url: admins_article_path(@article), text: 'Editar Articulo' 
 
-= render 'form', article: @article
+.mx-auto.w-full{:class => "md:w-2/3"}
+	= render 'form', article: @article
