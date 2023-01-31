@@ -13,7 +13,7 @@
 				= @course.description
 
 
-	.flex.items-center.mb-4.gap-4
+	.flex.items-center.mb-6.gap-4
 		%h1.font-bold.text-2xl Secciones
 		= link_to new_admins_course_section_path(@course),
 		 class: 'text-purple-600 cursor-pointer text-3xl',
@@ -30,6 +30,41 @@
 
 		= render 'components/module_modal'
 
+
+
+	%h1.font-bold.text-2xl Estudiantes Inscritos
+	.overflow-x-scroll.mb-6
+		%table.w-full.rounded-t-lg.text-white.bg-purple-700
+			%thead
+				%tr.text-left.border-b-2.border-purple-200.font-bold
+					%th.px-4.py-3.text-sm #
+					%th.px-4.py-3.text-sm Nombre de Usuario
+					%th.px-4.py-3.text-sm Correo Electronico
+					%th.px-4.py-3.text-sm Fecha de Inscripcion
+					%th.px-4.py-3.text-sm Progreso del Curso
+					%th.px-4.py-3.text-sm Acciones
+			%tbody
+				- @course.courses_users.each_with_index do |inscription, index|
+					%tr.font-semibold.text-black{ class: index.even? ? 'bg-white' : 'bg-gray-50' }
+						%td.px-4.py-3.border-b.border-black.text-sm= index + 1
+						%td.px-4.py-3.border-b.border-black.text-sm= inscription.user.username
+						%td.px-4.py-3.border-b.border-black.text-sm= inscription.user.email
+						%td.px-4.py-3.border-b.border-black.text-sm= inscription.created_at.to_date
+						%td.px-4.py-3.border-b.border-black.text-sm= "#{inscription.user.course_progress(@course)}%"
+						%td.px-4.py-3.border-b.border-black.text-sm
+							.flex.justify-center.items-center.gap-4
+								= button_to unsubscribe_admins_course_path(inscription.course_id, inscription.user_id),
+								 { class: "hover:text-red-500 text-lg cursor-pointer",
+									method: :delete,
+									data: { turbo_confirm: '¿Estas Seguro que quieres eliminar esta inscription, el estudiante perdera todo progreso?' },
+									title: 'Eliminar Inscripcion' } do
+
+									%i.fa-solid.fa-trash
+
+								= link_to admins_user_path(inscription.user), 
+									class: 'hover:text-sky-500 text-lg cursor-pointer',
+									title: 'Inspeccionar Usuario' do
+									%i.fa-solid.fa-eye
 
 	%div
 		= link_to 'Editar Datos del Curso', edit_admins_course_path(@course), class: "text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"

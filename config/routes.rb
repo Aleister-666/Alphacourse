@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    passwords: 'users/passwords'
   }
 
 
@@ -17,6 +18,11 @@ Rails.application.routes.draw do
     resources :articles
 
     resources :courses do
+      delete 'unsubscribe/student/:student_id',
+       to: 'courses#unsubscribe_student',
+       on: :member,
+       as: :unsubscribe
+       
       resources :sections, except: %i[ show index ], shallow: true
     end
 
@@ -48,7 +54,9 @@ Rails.application.routes.draw do
   end
 
   ######################### STUDENTS ROUTES ###############################
-  namespace :students do 
+  namespace :students do
+    get 'perfil/:id', to: 'users#show' 
+    
     resources :articles, only: %i[ index show ]
 
     

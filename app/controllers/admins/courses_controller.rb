@@ -2,7 +2,7 @@ class Admins::CoursesController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_admin!
   
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy unsubscribe_student ]
 
   layout 'workstation'
 
@@ -59,6 +59,15 @@ class Admins::CoursesController < ApplicationController
 
     end
   end
+
+  def unsubscribe_student
+    student = User.find(params[:student_id])
+
+    if !student.nil? && student.desinscription_course(@course)
+      redirect_to admins_course_path(@course), alert: 'Inscripcion Eliminada'
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

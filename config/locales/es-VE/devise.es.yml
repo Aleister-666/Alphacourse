@@ -113,5 +113,5 @@ es-VE:
       not_found: no se ha encontrado
       not_locked: no estaba bloqueada
       not_saved:
-        one: 'Ocurrió un error al tratar de guardar %{resource}:'
-        other: 'Ocurrieron %{count} errores al tratar de guardar %{resource}:'
+        one: 'Ocurrió un error al tratar de procesar %{resource}:'
+        other: 'Ocurrieron %{count} errores al tratar de procesar %{resource}:'

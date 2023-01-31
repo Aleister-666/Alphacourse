@@ -45,14 +45,16 @@
       %nav.fixed.top-0.z-40.flex.w-full.flex-row.justify-end.bg-purple-700.px-4.sm:justify-between{ data: { 'simple-navbar-target': 'navbar' } }
         %ul.breadcrumb.hidden.flex-row.items-center.py-4.text-lg.text-white.sm:flex
           %li.inline
-            = link_to 'ALPHASOFT', about_path, class: 'hover:text-purple-100'
+            = link_to 'ALPHASOFT', about_path, class: 'hover:text-purple-100 text-bold'
           %li.inline
             %span ALPHACOURSE
-        %button.py-4.text-2xl.text-white.hover:text-gray-200{ type: "button", data: { 'simple-navbar-target': 'button', action: 'click->simple-navbar#handler' } }
-          %svg#navClosed.h-8.w-8{fill: "none", stroke: "currentColor", "stroke-width": "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", data: { 'simple-navbar-target': 'closed' }}
-            %path{:d => "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
-          %svg#navOpen.hidden.h-8.w-8{fill: "none", stroke: "currentColor", "stroke-width": "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", data: { 'simple-navbar-target': 'open' }}
-            %path{:d => "M6 18L18 6M6 6l12 12", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+        .flex.items-center.gap-4
+          %span.text-white.text-bold= current_user.username
+          %button.py-4.text-2xl.text-white.hover:text-gray-200{ type: "button", data: { 'simple-navbar-target': 'button', action: 'click->simple-navbar#handler' } }
+            %svg#navClosed.h-8.w-8{fill: "none", stroke: "currentColor", "stroke-width": "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", data: { 'simple-navbar-target': 'closed' }}
+              %path{:d => "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+            %svg#navOpen.hidden.h-8.w-8{fill: "none", stroke: "currentColor", "stroke-width": "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", data: { 'simple-navbar-target': 'open' }}
+              %path{:d => "M6 18L18 6M6 6l12 12", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
 
       / Navbar end
       / Sidebar start
@@ -113,6 +115,10 @@
                 %h3.mb-2.text-xs.font-medium.uppercase.text-gray-400
                   Usuario
                 %ul.mb-8.text-sm.font-medium
+                  %li
+                    = link_to students_path(current_user), class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
+                      %span.select-none Mi Perfil
+
                   %li
                     = link_to edit_user_registration_path, class: 'flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-purple-800' do
                       %span.select-none Editar mi Usuario

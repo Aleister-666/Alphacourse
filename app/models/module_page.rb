@@ -27,7 +27,7 @@ class ModulePage < ApplicationRecord
   has_rich_text :content
 
   ###################### VALIDATIONS #############################
-  validates :title, :section, presence: true
+  validates :title, :content, :section, presence: true
 
   # Obtiene el id del curso de la seccion
   # a la que pertenece el modulo de pagina
