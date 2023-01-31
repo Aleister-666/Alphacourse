@@ -46,3 +46,8 @@ es-VE:
       user:
         one: Usuario
         other: Usuarios
+
+  user:
+    role:
+      admin: Administrador
+      student: Estudiante

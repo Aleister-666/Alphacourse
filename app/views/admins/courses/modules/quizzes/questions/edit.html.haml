@@ -1,5 +1,5 @@
 .mb-4
 	= render 'shared/header_simple', text: 'Editar Pregunta', url: admins_courses_modules_quiz_path(@question.module_quiz_id)
 
-
-= render 'form', model: @question, url: admins_courses_modules_question_path(@question)
+.mx-auto.w-full{:class => "md:w-2/3"}
+	= render 'form', model: @question, url: admins_courses_modules_question_path(@question)
