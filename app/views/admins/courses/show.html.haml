@@ -1,74 +1,132 @@
-= render 'shared/header_simple', text: 'Pagina principal del Curso', url: admins_courses_path
+.mb-4
+	= render 'shared/header_simple', text: 'Pagina principal del Curso', url: admins_courses_path
 
 
 
 .mx-auto.w-full{:class => "md:w-2/3"}
-	%h1.font-bold.text-2xl= @course.name
+	%h1.font-bold.text-2xl.border-b.border-black= @course.name
 
-	.mb-6
-		= build_accordion(active_color: 'text-purple-600', header: "Descripcion") do
-			- if @course.description.blank?
-				%p Este curso no posee Descripcion
-			- else
-				= @course.description
+	-# Tab List
+	.mb-4.border-b.border-black
+		%ul#course-tab.flex.gap-4.-mb-px.text-sm.font-medium.text-center.overflow-x-scroll{
+			role: 'tablist',
+			data: { 'tabs-toggle': '#course-tab-content' }
+		}
+
+			-#  Tab buttons
+			%li{ role: 'presentation' }
+				%button{
+					id: 'course-content',
+					role: 'tab',
+					type: 'button',
+					class: 'w-max inline-block p-4 rounded-t-lg text-purple-600 font-bold',
+					data: { 'tabs-target': '#tab-course-content' }
+				}
+					Curso
+
+			%li{ role: 'presentation' }
+				%button{
+					id: 'participants-content',
+					role: 'tab',
+					type: 'button',
+					class: 'w-max inline-block p-4 rounded-t-lg text-purple-600 font-bold',
+					data: { 'tabs-target': '#tab-participants-content' }
+				}
+					Participantes
+
+			%li{ role: 'presentation' }
+				%button{
+					id: 'extra-content',
+					role: 'tab',
+					type: 'button',
+					class: 'w-max inline-block p-4 rounded-t-lg text-purple-600 font-bold',
+					data: { 'tabs-target': '#tab-extra-content' }
+				}
+					Mas
 
 
-	.flex.items-center.mb-6.gap-4
-		%h1.font-bold.text-2xl Secciones
-		= link_to new_admins_course_section_path(@course),
-		 class: 'text-purple-600 cursor-pointer text-3xl',
-		 title: 'Crear Seccion',
-		 data: { turbo_frame: dom_id(Section.new) } do
+	-# Tab Panel
+	#course-tab-content.mb-4
+		-# Tab Panel 1: Course
+		.hidden.p-4.rounded-lg.bg-gray-50{
+			id: 'tab-course-content',
+			role: 'tabpanel'
+		}
 
-			%i{ class: 'fa-solid fa-circle-plus' }		
-
-		= turbo_frame_tag dom_id(Section.new)
-
-	.mb-4{ data: { controller: 'modal-module' } }
-		= turbo_frame_tag 'sections' do
-			= render @course.sections
-
-		= render 'components/module_modal'
+			- unless @course.description.blank?
+				.mb-4
+					= build_accordion(active_color: 'text-purple-600', header: "Descripcion") do
+						= @course.description
 
 
+			.flex.items-center.gap-4
+				%h1.font-bold.text-2xl Secciones
+				= link_to new_admins_course_section_path(@course),
+				 class: 'text-purple-600 cursor-pointer text-3xl',
+				 title: 'Crear Seccion',
+				 data: { turbo_frame: dom_id(Section.new) } do
 
-	%h1.font-bold.text-2xl Estudiantes Inscritos
-	.overflow-x-scroll.mb-6
-		%table.w-full.rounded-t-lg.text-white.bg-purple-700
-			%thead
-				%tr.text-left.border-b-2.border-purple-200.font-bold
-					%th.px-4.py-3.text-sm #
-					%th.px-4.py-3.text-sm Nombre de Usuario
-					%th.px-4.py-3.text-sm Correo Electronico
-					%th.px-4.py-3.text-sm Fecha de Inscripcion
-					%th.px-4.py-3.text-sm Progreso del Curso
-					%th.px-4.py-3.text-sm Acciones
-			%tbody
-				- @course.courses_users.each_with_index do |inscription, index|
-					%tr.font-semibold.text-black{ class: index.even? ? 'bg-white' : 'bg-gray-50' }
-						%td.px-4.py-3.border-b.border-black.text-sm= index + 1
-						%td.px-4.py-3.border-b.border-black.text-sm= inscription.user.username
-						%td.px-4.py-3.border-b.border-black.text-sm= inscription.user.email
-						%td.px-4.py-3.border-b.border-black.text-sm= inscription.created_at.to_date
-						%td.px-4.py-3.border-b.border-black.text-sm= "#{inscription.user.course_progress(@course)}%"
-						%td.px-4.py-3.border-b.border-black.text-sm
-							.flex.justify-center.items-center.gap-4
-								= button_to unsubscribe_admins_course_path(inscription.course_id, inscription.user_id),
-								 { class: "hover:text-red-500 text-lg cursor-pointer",
-									method: :delete,
-									data: { turbo_confirm: '¿Estas Seguro que quieres eliminar esta inscription, el estudiante perdera todo progreso?' },
-									title: 'Eliminar Inscripcion' } do
+					%i{ class: 'fa-solid fa-circle-plus' }		
 
-									%i.fa-solid.fa-trash
+				= turbo_frame_tag dom_id(Section.new)
 
-								= link_to admins_user_path(inscription.user), 
-									class: 'hover:text-sky-500 text-lg cursor-pointer',
-									title: 'Inspeccionar Usuario' do
-									%i.fa-solid.fa-eye
+			%div{ data: { controller: 'modal-module' } }
+				= turbo_frame_tag 'sections' do
+					= render @course.sections
 
-	%div
-		= link_to 'Editar Datos del Curso', edit_admins_course_path(@course), class: "text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-		
-		.inline-block.ml-2
-			= button_to 'Eliminar este Curso', admins_course_path(@course), { class: "text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center", method: :delete, data: { turbo_confirm: 'Estas Seguro?' } }
+				= render 'components/module_modal'
+
+
+		-# Tab Panel 2: Participantes/Students
+		.hidden.p-4.rounded-lg.bg-gray-50{
+			id: 'tab-participants-content',
+			role: 'tabpanel'
+		}
+			%h1.font-bold.text-2xl Estudiantes Inscritos
+			- if @course.courses_users.any?
+				.overflow-x-scroll.mb-6
+					%table.w-full.rounded-t-lg.text-white.bg-purple-700
+						%thead
+							%tr.text-left.border-b-2.border-purple-200.font-bold
+								%th.px-4.py-3.text-sm #
+								%th.px-4.py-3.text-sm Nombre de Usuario
+								%th.px-4.py-3.text-sm Correo Electronico
+								%th.px-4.py-3.text-sm Fecha de Inscripcion
+								%th.px-4.py-3.text-sm Progreso del Curso
+								%th.px-4.py-3.text-sm Acciones
+						%tbody
+							- @course.courses_users.each_with_index do |inscription, index|
+								%tr.font-semibold.text-black{ class: index.even? ? 'bg-white' : 'bg-gray-50' }
+									%td.px-4.py-3.border-b.border-black.text-sm= index + 1
+									%td.px-4.py-3.border-b.border-black.text-sm= inscription.user.username
+									%td.px-4.py-3.border-b.border-black.text-sm= inscription.user.email
+									%td.px-4.py-3.border-b.border-black.text-sm= inscription.created_at.to_date
+									%td.px-4.py-3.border-b.border-black.text-sm= "#{inscription.user.course_progress(@course)}%"
+									%td.px-4.py-3.border-b.border-black.text-sm
+										.flex.justify-center.items-center.gap-4
+											= button_to unsubscribe_admins_course_path(inscription.course_id, inscription.user_id),
+											 { class: "hover:text-red-500 text-lg cursor-pointer",
+												method: :delete,
+												data: { turbo_confirm: '¿Estas Seguro que quieres eliminar esta inscription, el estudiante perdera todo progreso?' },
+												title: 'Eliminar Inscripcion' } do
+
+												%i.fa-solid.fa-trash
+
+											= link_to admins_user_path(inscription.user), 
+												class: 'hover:text-sky-500 text-lg cursor-pointer',
+												title: 'Inspeccionar Usuario' do
+												%i.fa-solid.fa-eye
+			- else 
+				.w-full.p-4.bg-red-200.border.border-red-200.text-red-700.font-bold.rounded-md.flex.justify-start.items-center No hay inscripciones
+
+		-#  Tab Panel 3: Extra options
+		.hidden.p-4.rounded-lg.bg-gray-50{
+			id: 'tab-extra-content',
+			role: 'tabpanel'
+		}
+			%div
+				= link_to 'Editar Datos del Curso', edit_admins_course_path(@course), class: "text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+				
+				.inline-block.ml-2
+					= button_to 'Eliminar este Curso', admins_course_path(@course), { class: "text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center", method: :delete, data: { turbo_confirm: 'Estas Seguro?' } }
 

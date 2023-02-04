@@ -1,5 +1,5 @@
 = form_with(model: model) do |f|
-	= render 'shared/form_errors', model:
+	= render 'shared/form_errors', model: model.last
 	
 	.relative.z-0.w-full.flex.items-end.gap-1
 		= f.text_field :title,

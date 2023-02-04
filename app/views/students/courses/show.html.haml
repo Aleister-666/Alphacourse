@@ -5,20 +5,17 @@
 .mx-auto.w-full{:class => "md:w-2/3"}
 
 	.w-full.flex.flex-col
-		.mb-4
-			.flex.items-center.gap-2
-				%h1.font-bold.text-2xl= @course.name
-				- if current_user.course_completation?(@course)
-					%span.text-md.text-green-600{ title: 'Completado' } ✔
+		.flex.items-center.gap-2.border-b.border-black
+			%h1.font-bold.text-2xl= @course.name
+			- if current_user.course_completation?(@course)
+				%span.text-md.text-green-600{ title: 'Completado' } ✔
 
-			- if @course.cover.representable?
-				= image_tag @course.cover, alt: 'Portada del Curso', class: 'h-auto max-w-full rounded-lg'
+		- if @course.cover.representable?
+			= image_tag @course.cover, alt: 'Portada del Curso', class: 'h-auto max-w-full rounded-lg'
 
-		.mb-4
-			= build_accordion(active_color: 'text-purple-600', header: 'Descripcion') do
-				- if @course.description.blank?
-					Este curso no tiene una descripcion
-				- else
+		- unless @course.description.blank?
+			.mb-4
+				= build_accordion(active_color: 'text-purple-600', header: 'Descripcion') do
 					= @course.description
 
 		- if current_user.course_inscript?(@course)

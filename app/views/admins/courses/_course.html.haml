@@ -1,13 +1,15 @@
 .max-w-md.overflow-hidden.rounded-lg.bg-white.shadow
   - if course.cover.attached?
-    = image_tag course.cover, class: 'aspect-video w-full object-cover', alt: course.name, class: 'aspect-video w-full object-cover h-32'
+    = link_to url_for(course.cover), title: 'Ver Imagen', target: '_blank' do
+      = image_tag course.cover, class: 'aspect-video w-full object-cover', alt: course.name, class: 'aspect-video w-full object-cover h-32'
   - else
-    .bg-black.w-full.h-32
+    .bg-slate-900.w-full.h-32.flex.justify-center.items-center.text-5xl{ title: 'Sin Portada' }
+      %i.fa-solid.fa-image.text-slate-700
 
 
   .p-4
     %p.mb-1.text-sm.text-primary-500
-      Curso•
+      Creado•
       %time= course.created_at.strftime("%d-%m-%Y")
 
     = link_to admins_course_path(course),

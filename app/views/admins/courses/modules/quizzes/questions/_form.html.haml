@@ -26,7 +26,7 @@
     = form.hidden_field :question_type, value: 'multichoice'
 
     = form.fields_for :question_answers do |answer|
-      = build_accordion(active_color: 'text-rose-600', header: "Respuesta #{answer.index + 1}") do
+      = build_accordion(active_color: 'text-rose-600', header: "Respuesta #{answer.index + 1}", collapsed: 'false') do
         .mb-4
           = answer.label :answer
           = answer.rich_text_area :answer, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full trix-editor bg-gray-50'
@@ -44,7 +44,7 @@
           
   - when 'truefalse'
     = form.hidden_field :question_type, value: 'truefalse'
-    = build_accordion(active_color: 'text-rose-600', header: 'Respuesta') do
+    = build_accordion(active_color: 'text-rose-600', header: 'Respuesta', collapsed: 'false') do
 
 
       = form.fields_for :question_answers do |answer|

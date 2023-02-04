@@ -22,4 +22,14 @@ class ApplicationController < ActionController::Base
 			redirect_to root_path, alert: 'Acceso Denegado'
 		end
 	end
+
+	def lock_for_visible(course)
+	  redirect_back_or_to students_courses_path, alert: 'Acceso Invalido' unless course.visible
+	end
+
+	def lock_for_inscription(course)
+		unless current_user.course_inscript?(course)
+			redirect_back_or_to students_courses_path, alert: 'Acceso Invalido: Tienes que estar inscrito en el curso para acceder a este recurso' 
+		end
+	end
 end

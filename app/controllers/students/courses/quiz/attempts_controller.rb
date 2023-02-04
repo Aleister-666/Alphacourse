@@ -2,6 +2,8 @@ class Students::Courses::Quiz::AttemptsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_quiz
   before_action :lock_attempt, only: %i[ start finish ]
+  before_action { lock_for_visible(@quiz.course_module.course) }
+  before_action { lock_for_inscription(@quiz.course_module.course) }
 
   layout 'workstation'
 
@@ -46,6 +48,7 @@ class Students::Courses::Quiz::AttemptsController < ApplicationController
 
   def set_quiz
     @quiz = ModuleQuiz.find(params[:quiz_id])
+    lock_for_visible(@quiz.course_module.course)
   end
 
   def lock_attempt

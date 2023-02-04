@@ -1,6 +1,8 @@
 class Students::Courses::Modules::QuizzesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_quiz
+  before_action { lock_for_visible(@quiz.course_module.course) }
+  before_action { lock_for_inscription(@quiz.course_module.course) }
 
   layout 'workstation'
 
@@ -13,4 +15,6 @@ class Students::Courses::Modules::QuizzesController < ApplicationController
   def set_quiz
     @quiz = ModuleQuiz.find(params[:id])
   end
+
+  
 end
