@@ -52,7 +52,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  # protected
+  protected
+
+  def after_update_path_for(resource)
+    helpers.determine_courses_way
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params

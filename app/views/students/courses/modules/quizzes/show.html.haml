@@ -4,11 +4,9 @@
 
 .mx-auto.w-full{:class => "md:w-2/3"}
 	
-	.mb-4
-		= build_accordion(active_color: 'text-rose-600', header: 'Descripcion') do
-			- if @quiz.description.blank?
-				%span No tiene descripcion
-			- else
+	- unless @quiz.description.blank?
+		.mb-4
+			= build_accordion(active_color: 'text-rose-600', header: 'Descripcion') do
 				= @quiz.description
 
 	.mb-4

@@ -4,14 +4,15 @@
 
 .mx-auto.w-full{:class => "md:w-2/3"}
 	.mb-4
-		%h1.font-bold.text-2xl.text-purple-800 Cuestionario
+		%h1.font-bold.text-2xl.text-rose-800 Cuestionario
 
 	.mb-4
 
 		= form_with(url: students_courses_quiz_finish_path(@quiz)) do |form|
 
 			.mb-4.border-b.border-black
-				%ul#questions-tab.flex.gap-4.-mb-px.text-sm.font-medium.text-center.overflow-x-scroll{
+
+				%ul#questions-tab.flex.gap-4.-mb-px.text-sm.font-medium.text-center.overflow-x-scroll.text-rose-600{
 					role: 'tablist',
 					data: { 'tabs-toggle': '#questions-tab-content' }
 				}
@@ -21,11 +22,9 @@
 						%li{ role: 'presentation' }
 							%button{
 								id: "question-#{index + 1}",
-								class: 'w-max inline-block p-4 rounded-t-lg',
 								role: 'tab',
 								type: 'button',
-								'aria-controls': "content-question-#{index + 1}",
-								'aria-selected': 'false',
+								class: 'w-max inline-block p-4 rounded-t-lg font-bold',
 								data: { 'tabs-target': "#content-question-#{index + 1}" }
 							}
 
@@ -37,7 +36,6 @@
 					.hidden.p-4.rounded-lg.bg-gray-50{
 						id: "content-question-#{index + 1}",
 						role: 'tabpanel',
-						'aria-labelledby': "content-question-#{index + 1}-tab"
 					}
 						= form.hidden_field "responses[quiz_attempts_attributes][#{index + 1}][quiz_question_id]", value: question.id 
 
