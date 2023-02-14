@@ -32,7 +32,7 @@
 
 
 			#questions-tab-content.mb-6
-				- @questions.order(:position).each_with_index do |question, index|
+				- @questions.each_with_index do |question, index|
 					.hidden.p-4.rounded-lg.bg-gray-50{
 						id: "content-question-#{index + 1}",
 						role: 'tabpanel',
@@ -46,11 +46,13 @@
 						%hr.border.border-black.mb-8
 
 						.flex.flex-col.gap-6
+							- answers = question.question_answers.shuffle
+
 							= form.collection_radio_buttons "responses[quiz_attempts_attributes][#{index + 1}][question_answer_id]",
-							 question.question_answers,
+							 answers,
 							 :id,
 							 :answer,
-							 { checked: question.question_answers.first.id },
+							 { checked: answers.first.id },
 							 { class: '' } do |radio|
 
 								.flex.items-center.mb-4.gap-2

@@ -12,11 +12,19 @@
       Creado•
       %time= course.created_at.strftime("%d-%m-%Y")
 
-    = link_to admins_course_path(course),
-     id: dom_id(course),
-     class: '' do
-      %h3.text-xl.font-medium.text-gray-900.hover:text-purple-600= course.name
+      - if course.visible?
+        %span.inline-flex.items-center.gap-1.rounded-full.bg-purple-50.px-2.py-1.text-xs.font-semibold.text-purple-600.mr-2 Visible
+      - else
+        %span.inline-flex.items-center.gap-1.rounded-full.bg-rose-50.px-2.py-1.text-xs.font-semibold.text-rose-600.mr-2 Invisible
 
-    -# .mt-4.flex.gap-2
-    -#   %span.inline-flex.items-center.gap-1.rounded-full.bg-purple-50.px-2.py-1.text-xs.font-semibold.text-purple-600
-    -#     Educacion
+
+    .flex.items-center.gap-2
+      = link_to admins_course_path(course),
+       id: dom_id(course),
+       class: '' do
+        %h3.text-xl.font-medium.text-gray-900.hover:text-purple-600= course.name
+
+      = link_to edit_admins_course_path(course),
+       class: "text-purple-600 font-bold text-sm hover:text-purple-800",
+       title: 'Editar Curso' do
+        %i.fa-solid.fa-pen-to-square

@@ -9,7 +9,7 @@ class Students::Courses::Quiz::AttemptsController < ApplicationController
 
   def start
     @questions = QuizQuestion.includes(:rich_text_description ,question_answers: :rich_text_answer)
-      .where(module_quiz: @quiz)
+      .where(module_quiz: @quiz).order(:position)
   end
 
   def finish
