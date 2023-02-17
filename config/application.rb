@@ -13,6 +13,8 @@ module MoodleTutorial
     
     config.i18n.default_locale = :'es-VE'
 
+    config.generators.template_engine = :haml
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

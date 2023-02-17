@@ -3,8 +3,6 @@ class ApplicationController < ActionController::Base
 	
 	before_action :configure_permitted_parameters, if: :devise_controller?
 
-	helper ComponentsHelper
-
 	protected
 
 	# Modifica los parametros permitidos por devise

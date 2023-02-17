@@ -98,3 +98,5 @@ gem "requestjs-rails", "~> 0.0.10"
 gem "font-awesome-sass", "~> 6.2"
 
 gem "pagy", "~> 6.0" # Pagination
+# A framework for building reusable, testable & encapsulated view components in Ruby on Rails.
+gem 'view_component', '~> 2.82'

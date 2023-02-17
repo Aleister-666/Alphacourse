@@ -5,12 +5,9 @@
   %hr.border.border-black.mb-4
 
 
-  - unless @articles.size.zero?
+  - if @articles.size >= 15
     .mb-2
-      = build_search_form(url: students_articles_path,
-       content_target: 'articles',
-       input_name: :title,
-       input_placeholder: 'Titulo del articulo...')
+      = render(SearchFormComponent.new(url: students_articles_path, target: 'articles', name: :title, placeholder: 'Titulo del articulo...'))
 
   = turbo_frame_tag 'articles' do
     .flex.flex-col

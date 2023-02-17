@@ -10,12 +10,20 @@
   font-weight: 600;
 }
 
+.trix-editor a {
+  color: #A500D6;
+}
+
+.trix-editor a:hover {
+  color: #760099;
+}
+
 .trix-editor a:not(.no-underline) {
   text-decoration: underline;
 }
 
 .trix-editor a:visited {
-  color: #A500D6;
+  color: #D60052;
 }
 
 .trix-editor ul {

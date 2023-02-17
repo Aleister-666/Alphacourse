@@ -2,7 +2,6 @@
 	= render 'shared/header_simple', text: 'Pagina principal del Curso', url: admins_courses_path
 
 
-
 .mx-auto.w-full{:class => "md:w-2/3"}
 	%h1.font-bold.text-2xl.border-b.border-black= @course.name
 
@@ -55,9 +54,8 @@
 
 			- unless @course.description.blank?
 				.mb-4
-					= build_accordion(active_color: 'text-purple-600', header: "Descripcion") do
+					= render(AccordionComponent.new(header: 'Descripcion')) do
 						= @course.description
-
 
 			.flex.items-center.gap-4
 				%h1.font-bold.text-2xl Secciones
@@ -70,11 +68,26 @@
 
 				= turbo_frame_tag dom_id(Section.new)
 
-			%div{ data: { controller: 'modal-module' } }
+			%div{ data: { controller: 'modal course-module-functions' } }
 				= turbo_frame_tag 'sections' do
 					= render @course.sections
 
-				= render 'components/module_modal'
+				= render(Modal::WindowComponent.new(header: 'Agregar Recurso')) do
+					.p-6.space-y-6
+
+
+						%ul.flex.flex-col.items-start.gap-4
+							%li.w-full
+								= link_to '#',
+								 class: 'flex justify-start items-center gap-4 p-4 bg-purple-600 hover:bg-purple-800 text-white rounded-md', title: 'Agregar Pagina', data: { 'course-module-functions-target': 'linkPage' } do
+									%i.fa-regular.fa-file-lines.text-xl
+									%span.text-xl Agregar Pagina
+
+							%li.w-full
+								= link_to '#',
+								 class: 'flex justify-start items-center gap-4 p-4 bg-rose-600 hover:bg-rose-800 text-white rounded-md', title: 'Agregar Cuestionario', data: { 'course-module-functions-target': 'linkQuiz' } do 
+									%i.fa-solid.fa-file-pen.text-xl
+									%span.text-xl Agregar Cuestionario
 
 
 		-# Tab Panel 2: Participantes/Students

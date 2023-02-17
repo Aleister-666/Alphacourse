@@ -58,6 +58,10 @@ class ModuleQuiz < ApplicationRecord
     self.quiz_attempts.any?
   end
 
+  def students_results
+    QuizAttempt.select("COUNT(user_id) AS attempts, MAX(sum_scores) AS score, user_id").group(:user_id).all
+  end
+
   #################### PRIVATE METHODS ################################
 
   private

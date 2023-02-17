@@ -14,7 +14,7 @@
 
 		- unless @course.description.blank?
 			.mb-4
-				= build_accordion(active_color: 'text-purple-600', header: 'Descripcion') do
+				= render(AccordionComponent.new(header: 'Descripcion')) do
 					= @course.description
 
 		- if current_user.course_inscript?(@course)

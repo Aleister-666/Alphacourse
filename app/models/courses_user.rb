@@ -26,8 +26,6 @@ class CoursesUser < ApplicationRecord
   belongs_to :user
 
   ################## VALIDATIONS ########################
-  validates :course, uniqueness: true
-
   validates :completed, inclusion: { in: [ true, false ] }
 
 

@@ -2,18 +2,15 @@
   %h1.font-bold.text-4xl Cursos
   %hr.border.border-black.mb-4
 
-  - unless @courses.size.zero?
+  - if @courses.size >= 15
     .mb-2
-      = build_search_form(url: students_courses_path,
-       content_target: 'courses',
-       input_name: :name,
-       input_placeholder: 'Nombre del curso...')
+      = render(SearchFormComponent.new(url: students_courses_path, target: 'courses', name: :name, placeholder: 'Nombre del curso...'))
 
-    = turbo_frame_tag 'courses' do
-      .flex.flex-col
-        #courses_content.min-w-full.grid.grid-cols-1.md:grid-cols-3.lg:grid-cols-4.gap-4
-          = render @courses
+  = turbo_frame_tag 'courses' do
+    .flex.flex-col
+      #courses_content.min-w-full.grid.grid-cols-1.md:grid-cols-3.lg:grid-cols-4.gap-4
+        = render @courses
 
-        - if @pagy.pages > 1
-          .self-center.mt-8
-            != pagy_nav(@pagy, link_extra: 'data-turbo-action="advance"')
+      - if @pagy.pages > 1
+        .self-center.mt-8
+          != pagy_nav(@pagy, link_extra: 'data-turbo-action="advance"')

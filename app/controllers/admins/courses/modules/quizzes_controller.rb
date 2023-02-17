@@ -3,6 +3,7 @@ class Admins::Courses::Modules::QuizzesController < ApplicationController
 	before_action :authenticate_admin!
 	before_action :set_section, only: %i[ new create ]
 	before_action :set_quiz, except: %i[ new create ]
+	before_action :lock_for_attempts, only: %i[ edit update ]
 
 	layout 'workstation'
 
@@ -76,6 +77,21 @@ class Admins::Courses::Modules::QuizzesController < ApplicationController
 
 	def set_quiz
 		@quiz = ModuleQuiz.find(params[:id])
+	end
+
+	def lock_for_attempts
+		if @quiz.quiz_attempts.any?
+			respond_to do |format|
+				msg = "No puedes editar un cuestionario que ya ha sido respondido"
+				format.turbo_stream {
+					flash.now[:alert] = msg
+					render turbo_stream: helpers.render_flash_messages
+				}
+
+				format.html { redirect_to admins_course_path(@quiz.course_id), alert: msg }
+			end
+			
+		end
 	end
 
 	def quizzes_params

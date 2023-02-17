@@ -6,8 +6,7 @@ class Students::InscriptionsController < ApplicationController
 
     if course
       course.courses_users.build(user: current_user)
-
-      if course.save
+      if course.save!
         redirect_to students_course_path(course), notice: 'Inscrito en el Curso'
       else
         redirect_to students_course_path(course), alert: 'Inscripcion Fallida'

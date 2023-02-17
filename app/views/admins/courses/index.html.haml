@@ -12,12 +12,9 @@
   .my-4
     = turbo_frame_tag dom_id(Course.new)
 
-  - unless @courses.size.zero?
+  - if @courses.size >= 15
     .mb-2
-      = build_search_form(url: admins_courses_path,
-       content_target: 'courses',
-       input_name: :name,
-       input_placeholder: 'Nombre del curso...')
+      = render(SearchFormComponent.new(url: admins_courses_path, target: 'courses', name: :name, placeholder: 'Nombre del curso...'))
 
   = turbo_frame_tag 'courses' do
     .flex.flex-col

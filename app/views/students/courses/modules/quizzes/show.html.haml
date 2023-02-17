@@ -6,11 +6,11 @@
 	
 	- unless @quiz.description.blank?
 		.mb-4
-			= build_accordion(active_color: 'text-rose-600', header: 'Descripcion') do
+			= render(AccordionComponent.new(header: 'Descripcion', active_color: 'text-rose-600')) do
 				= @quiz.description
 
 	.mb-4
-		= build_accordion(active_color: 'text-rose-600', header: 'Resumen del Cuestionario') do
+		= render(AccordionComponent.new(header: 'Resumen del Cuestionario', active_color: 'text-rose-600')) do
 			.overflow-hidden.bg-white.shadow.sm:rounded-lg
 				.px-4.py-5.sm:px-6
 					%h3.text-lg.font-medium.leading-6.text-gray-900 Informacion del Cuestionario
@@ -48,7 +48,7 @@
 
 	- unless @user_attempts.size.zero?
 		.mb-4
-			= build_accordion(active_color: 'text-rose-600', header: 'Intentos') do
+			= render(AccordionComponent.new(header: 'Intentos', active_color: 'text-rose-600')) do
 				.overflow-x-scroll
 					%table.w-full.rounded-t-lg.text-white.bg-rose-900
 						%thead
