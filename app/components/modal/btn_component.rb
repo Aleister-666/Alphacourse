@@ -6,7 +6,8 @@ class Modal::BtnComponent < ViewComponent::Base
   # @param title [String] Title del Boton
   # @param style [String] Estilos del Boton
   # @param extra_data [Hash] Extra Data Values
-  def initialize(title:, style:, extra_data: {})
+  def initialize(id: '', title:, style:, extra_data: {})
+    @id = id
     @title = title
     @style = style
 

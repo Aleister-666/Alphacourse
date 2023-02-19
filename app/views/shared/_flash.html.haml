@@ -1,7 +1,7 @@
 - if notice
 	.flex.p-4.text-sm.text-green-700.border.border-green-300.rounded-lg.bg-green-50.fixed.z-10{
 		role: "alert",
-		class: 'w-full md:w-3/4',
+		class: 'w-max',
 		data: { controller: 'flash' }
 	}
 		%svg.flex-shrink-0.inline.w-5.h-5.mr-3{"aria-hidden" => "true", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
@@ -13,7 +13,7 @@
 - if alert
 	.flex.p-4.text-sm.text-red-700.border.border-red-300.rounded-lg.bg-red-50.fixed.z-10{
 		role: "alert",
-		class: 'w-full md:w-3/4',
+		class: 'w-max',
 		data: { controller: 'flash' }
 	}
 		%svg.flex-shrink-0.inline.w-5.h-5.mr-3{"aria-hidden" => "true", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}

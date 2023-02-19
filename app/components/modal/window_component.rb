@@ -5,7 +5,8 @@ class Modal::WindowComponent < ViewComponent::Base
   # Inicializa la ventana del Modal, Es necesario un disparador
   # @param header [String] Texto de la cabezera de la ventana del modal
   # @param extra_data [Hash] Extra data values
-  def initialize(header:, extra_data: {})
+  def initialize(id: '', header:, extra_data: {})
+    @id = id
     @header = header
     @data = { 'modal-target': 'modal' }
 

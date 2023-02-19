@@ -1,16 +1,16 @@
 .w-full.flex.flex-col
   .flex.items-center.my-4.gap-2
     %h1.font-bold.text-4xl Cursos
-    = link_to new_admins_course_path,
-     class: 'text-purple-600 cursor-pointer text-3xl',
-     title: 'Crear Curso',
-     data: { turbo_frame: dom_id(Course.new) } do
 
-      %i{ class: 'fa-solid fa-circle-plus' }
+    %div{ data: { controller: 'modal' } }
+      = render(Modal::BtnComponent.new(title: '', style: 'text-purple-600 cursor-pointer text-3xl', extra_data: { title: 'Crear Curso' })) do
+        %i{ class: 'fa-solid fa-circle-plus' }
+
+      = render(Modal::WindowComponent.new(id: 'modal-window', header: 'Registrar Curso')) do
+        .p-6
+          = turbo_frame_tag dom_id(Course.new), src: new_admins_course_path
       
   %hr.border.border-black
-  .my-4
-    = turbo_frame_tag dom_id(Course.new)
 
   - if @courses.size >= 15
     .mb-2
