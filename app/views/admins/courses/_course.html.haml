@@ -1,7 +1,7 @@
 .max-w-md.overflow-hidden.rounded-lg.bg-white.shadow
   - if course.cover.attached?
     = link_to url_for(course.cover), title: 'Ver Imagen', target: '_blank' do
-      = image_tag course.cover, class: 'aspect-video w-full object-cover', alt: course.name, class: 'aspect-video w-full object-cover h-32'
+      = image_tag course.cover, alt: course.name, class: 'aspect-video w-full object-contain hover:object-cover h-32'
   - else
     .bg-slate-900.w-full.h-32.flex.justify-center.items-center.text-5xl{ title: 'Sin Portada' }
       %i.fa-solid.fa-image.text-slate-700
