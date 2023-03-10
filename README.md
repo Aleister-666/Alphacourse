@@ -1,7 +1,6 @@
 # Alphacourse
 
-Sistema tutorial para el aprendizaje del uso educactivo de la plataforma moodle para profesores. Creado con Ruby on Rails + Turbo + Stimulus
-Modalidad Cursos Online
+Sistema De Cursos Online Para El Aprendizaje Educativo Creado Con Ruby On Rails + Turbo + Stimulus
 
 ## Caracteristicas
 * Administrador:
@@ -42,8 +41,7 @@ Para instalar y poner a correr el sistema, debes de tener ruby, postgresql y lib
 
 - Abres una terminal/cmd
 - Te mueves con cd hacia la carpeta del proyecto
-- Instalar gemas necesarias con el comando: bundle install
-- Configuramos la base de datos y corremos las migraciones con el comando: rails db:setup
-- Compilamos el css y corremos la aplicacion con el comando: ./bin/dev O ruby ./bin/dev
+- Corremos el comando: ./bin/setup | ruby ./bin/setup
 
-Nota: En caso de tener error al crear la base de datos, modificar el archivo database.yml ubicado en la carpeta config. y establecer los datos correspondientes a usuario, contraseña y nombre de base de datos de ser necesario 
+
+Nota: En caso de tener error al crear la base de datos, deberas modificar el archivo database.yml ubicado en la carpeta config. Y cambiar el valor de los atributos "database", "username" y "password" a los valores correspondientes para tu usuario posgresql
