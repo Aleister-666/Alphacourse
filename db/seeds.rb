@@ -5,14 +5,8 @@ administrator = {
 	role: :admin
 }
 
-estudiante = {
-	username: 'Estudiante 1',
-	email: 'student@gmail.com',
-	password: '12345678',
-}
 
 User.create!(administrator)
-User.create!(estudiante)
 
 
-puts "Users created: #{User.all.size}"
+puts "Se ha creado un usuario administrator con los siguientes datos:\n#{administrator}"
