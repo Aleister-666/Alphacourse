@@ -35,3 +35,6 @@
 
 # Ignore .ENV
 .env
+
+# Ignore .ruby-version
+.ruby-version
